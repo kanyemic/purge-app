@@ -135,11 +135,14 @@ xcodebuild -exportArchive \
 [ -d "$APP" ] || { echo "没有生成 Purge.app。" >&2; exit 1; }
 
 echo "==> 校验产物"
-VERSION="$(defaults read "$APP/Contents/Info" CFBundleShortVersionString)"
-BUILD="$(defaults read "$APP/Contents/Info" CFBundleVersion)"
+INFO_PLIST="$APP/Contents/Info.plist"
+# 用 plutil 而不是 defaults read：defaults 对含空格的相对路径不可靠，
+# 且读布尔时会归一化成 0/1，plutil raw 保留原语义。
+VERSION="$(plutil -extract CFBundleShortVersionString raw -o - "$INFO_PLIST")"
+BUILD="$(plutil -extract CFBundleVersion raw -o - "$INFO_PLIST")"
 echo "    Purge.app 版本：$VERSION（build $BUILD）"
-echo "    自动更新开关：$(defaults read "$APP/Contents/Info" SUEnableAutomaticChecks 2>/dev/null || echo '未设置')"
-echo "    更新源：$(defaults read "$APP/Contents/Info" SUFeedURL 2>/dev/null | sed 's/^$/<空，已停用>/')"
+echo "    自动更新开关：$(plutil -extract SUEnableAutomaticChecks raw -o - "$INFO_PLIST" 2>/dev/null || echo '未设置')"
+echo "    更新源：$(plutil -extract SUFeedURL raw -o - "$INFO_PLIST" 2>/dev/null | sed 's/^$/<空，已停用>/')"
 
 # ad-hoc 签名在 --deep 校验下应当是有效的；失败说明内嵌 target 没签好。
 codesign --verify --deep --strict "$APP" && echo "    签名校验：通过（ad-hoc）"

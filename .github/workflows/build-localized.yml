@@ -49,22 +49,43 @@ jobs:
 
       - name: 校验汉化与更新隔离
         run: |
+          set -euo pipefail
           APP="build/Build/Products/Release/Purge.app"
           test -d "$APP" || { echo "没有找到 Purge.app"; exit 1; }
-          echo "自动更新开关：$(defaults read "$APP/Contents/Info" SUEnableAutomaticChecks)"
-          echo "更新源：'$(defaults read "$APP/Contents/Info" SUFeedURL)'"
+
+          # 用 plutil 而不是 defaults read：defaults 不接受相对路径，
+          # 相对路径下会报 "domain/default pair does not exist"，读不到键值。
+          INFO="$APP/Contents/Info.plist"
+          AUTO_CHECK="$(plutil -extract SUEnableAutomaticChecks raw -o - "$INFO")"
+          FEED_URL="$(plutil -extract SUFeedURL raw -o - "$INFO" || echo '')"
+          INTERVAL="$(plutil -extract SUScheduledCheckInterval raw -o - "$INFO" || echo 'absent')"
+          echo "自动更新开关：$AUTO_CHECK"
+          echo "更新源：'$FEED_URL'"
+          echo "检查间隔：$INTERVAL"
+
           # 更新必须处于关闭状态，否则中文版会被上游英文版覆盖。
-          test "$(defaults read "$APP/Contents/Info" SUEnableAutomaticChecks)" = "0" \
-            || { echo "自动更新没有被关闭"; exit 1; }
-          # 汉化必须真的落进二进制，抽查一个只出现在中文里的规则名。
-          if ! grep -Rq "可以安全" "$APP/Contents/Resources"; then
-            echo "警告：在 Resources 里没有找到中文文案，请确认 explanations.json 已汉化"
-          fi
+          test "$AUTO_CHECK" = "false" || { echo "自动更新没有被关闭"; exit 1; }
+          test -z "$FEED_URL" || { echo "更新源没有被清空"; exit 1; }
+
+          # 汉化必须真的落进产物：规则库与编译后的二进制各查一处。
+          test -f "$APP/Contents/Resources/explanations.json" \
+            || { echo "explanations.json 没有打进 App bundle"; exit 1; }
+          grep -q "可以安全" "$APP/Contents/Resources/explanations.json" \
+            || { echo "explanations.json 里没有中文文案"; exit 1; }
+          grep -aq "总览" "$APP/Contents/MacOS/purge" \
+            || { echo "二进制里没有找到中文界面文案"; exit 1; }
+          echo "汉化校验：规则库与二进制均已确认中文文案"
 
       - name: 打包 Purge.app
         run: |
+          set -euo pipefail
           APP="build/Build/Products/Release/Purge.app"
-          VERSION="$(defaults read "$APP/Contents/Info" CFBundleShortVersionString)"
+          # 版本由 GENERATE_INFOPLIST_FILE + MARKETING_VERSION 写进构建产物；
+          # 万一该键缺失，回退到工程设置，避免打包步骤因取不到版本而失败。
+          VERSION="$(plutil -extract CFBundleShortVersionString raw -o - "$APP/Contents/Info.plist" 2>/dev/null || true)"
+          [ -n "$VERSION" ] || VERSION="$(sed -n 's/^[[:space:]]*MARKETING_VERSION = \([^;]*\);.*/\1/p' purge.xcodeproj/project.pbxproj | head -1)"
+          [ -n "$VERSION" ] || VERSION="unknown"
+          echo "版本：$VERSION"
           mkdir -p dist
           ditto -c -k --sequesterRsrc --keepParent "$APP" "dist/Purge-汉化版-${VERSION}.zip"
           ls -lh dist
