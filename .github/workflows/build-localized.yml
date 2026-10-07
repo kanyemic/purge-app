@@ -45,7 +45,21 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=YES \
             CODE_SIGN_STYLE=Manual \
-            DEVELOPMENT_TEAM=""
+            DEVELOPMENT_TEAM="" \
+            ENABLE_HARDENED_RUNTIME=NO
+
+      - name: 框架重签与库验证放行
+        run: |
+          set -euo pipefail
+          APP="build/Build/Products/Release/Purge.app"
+          test -d "$APP" || { echo "没有找到 Purge.app"; exit 1; }
+          # 在 ad-hoc 签名且无开发者账号时，Sparkle.framework 与主程序缺乏匹配的 Team ID，
+          # dyld 默认开启的 Library Validation 会抛出 EXC_CRASH 阻止启动。
+          # 先对 Frameworks 做 deep 签名，再为主程序赋予 disable-library-validation 授权。
+          if [ -d "$APP/Contents/Frameworks" ]; then
+            find "$APP/Contents/Frameworks" -type d -name "*.framework" -exec codesign --force --deep -s - {} +
+          fi
+          codesign --force -s - --entitlements scripts/adhoc.entitlements "$APP"
 
       - name: 校验汉化与更新隔离
         run: |
@@ -98,6 +112,11 @@ jobs:
           test "$FOUND" = "1" \
             || { echo "二进制里没有找到中文界面文案"; exit 1; }
           echo "汉化校验：规则库与二进制均已确认中文文案"
+
+          # 校验 entitlements 确保已放行库验证，避免运行时 dyld 因缺少 Team ID 崩溃
+          codesign -d --entitlements :- "$APP" 2>&1 | grep -q "disable-library-validation" \
+            || { echo "缺少 disable-library-validation entitlement"; exit 1; }
+          echo "签名校验：已确认注入库验证放行授权"
 
       - name: 打包 Purge.app
         run: |

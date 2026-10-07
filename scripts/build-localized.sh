@@ -95,7 +95,8 @@ xcodebuild archive \
   CODE_SIGNING_REQUIRED=NO \
   CODE_SIGNING_ALLOWED=YES \
   CODE_SIGN_STYLE=Manual \
-  DEVELOPMENT_TEAM=""
+  DEVELOPMENT_TEAM="" \
+  ENABLE_HARDENED_RUNTIME=NO
 
 echo "==> 导出 Purge.app"
 # 用 -exportArchive 而不是直接拷 archive 里的 .app：这样能保证
@@ -133,6 +134,15 @@ xcodebuild -exportArchive \
   }
 
 [ -d "$APP" ] || { echo "没有生成 Purge.app。" >&2; exit 1; }
+
+echo "==> 重新为嵌入框架与主程序注入 ad-hoc 签名及库验证放行"
+# 在 ad-hoc 签名下，主程序与 Sparkle 均无统一 Team ID。macOS dyld 会因为
+# Library Validation 阻止加载 Sparkle.framework 从而触发 EXC_CRASH。
+# 必须先对 Frameworks 进行 deep 签名，再对主程序注入 disable-library-validation entitlements。
+if [ -d "$APP/Contents/Frameworks" ]; then
+  find "$APP/Contents/Frameworks" -type d -name "*.framework" -exec codesign --force --deep -s - {} +
+fi
+codesign --force -s - --entitlements "$REPO_ROOT/scripts/adhoc.entitlements" "$APP"
 
 echo "==> 校验产物"
 INFO_PLIST="$APP/Contents/Info.plist"
