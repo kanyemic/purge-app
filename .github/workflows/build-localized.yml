@@ -67,12 +67,35 @@ jobs:
           test "$AUTO_CHECK" = "false" || { echo "自动更新没有被关闭"; exit 1; }
           test -z "$FEED_URL" || { echo "更新源没有被清空"; exit 1; }
 
-          # 汉化必须真的落进产物：规则库与编译后的二进制各查一处。
+          # 汉化必须真的落进产物。
           test -f "$APP/Contents/Resources/explanations.json" \
             || { echo "explanations.json 没有打进 App bundle"; exit 1; }
           grep -q "可以安全" "$APP/Contents/Resources/explanations.json" \
             || { echo "explanations.json 里没有中文文案"; exit 1; }
-          grep -aq "总览" "$APP/Contents/MacOS/purge" \
+
+          # 二进制里查中文界面文案。注意：Swift 会把 ≤ 15 字节的字符串
+          # 内联进指令流做小字符串优化，不会以连续 UTF-8 落在常量区，
+          # 所以这里用长文案（均 > 15 字节），命中任一即可。
+          # 可执行文件名由 CFBundleExecutable 决定，不要硬编码。
+          EXEC_NAME="$(plutil -extract CFBundleExecutable raw -o - "$INFO" 2>/dev/null || true)"
+          [ -n "$EXEC_NAME" ] || EXEC_NAME="Purge"
+          EXEC="$APP/Contents/MacOS/$EXEC_NAME"
+          test -f "$EXEC" || { echo "找不到可执行文件：$EXEC"; exit 1; }
+
+          FOUND=0
+          PROBES=(
+            "在这段时间内没有动过的项目会出现在开发者项目中供清理"
+            "清空废纸篓即可释放这部分空间"
+            "扫描会跳过这些文件和文件夹及其中的所有内容"
+          )
+          for probe in "${PROBES[@]}"; do
+            if LC_ALL=C grep -aqF "$probe" "$EXEC"; then
+              echo "二进制汉化文案命中：$probe"
+              FOUND=1
+              break
+            fi
+          done
+          test "$FOUND" = "1" \
             || { echo "二进制里没有找到中文界面文案"; exit 1; }
           echo "汉化校验：规则库与二进制均已确认中文文案"
 
