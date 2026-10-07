@@ -12,17 +12,17 @@ struct LockedFeatureView: View {
 
         var title: String {
             switch self {
-            case .largeFiles: return "Large Files needs a look inside your folders"
-            case .uninstaller: return "The uninstaller needs full access"
+            case .largeFiles: return "「大文件」需要查看你的文件夹内部"
+            case .uninstaller: return "卸载器需要完整访问权限"
             }
         }
 
         var message: String {
             switch self {
             case .largeFiles:
-                return "Big files tend to live in Downloads, Documents and Desktop, and macOS keeps those locked until you say Purge can look. Purge only ever shows them to you. It never cleans them on its own."
+                return "大文件往往位于「下载」「文稿」和「桌面」中，在你允许 Purge 查看之前，macOS 会一直锁定这些位置。Purge 只会把它们展示给你，绝不会自行清理。"
             case .uninstaller:
-                return "Apps leave settings and caches in folders macOS keeps locked. Without access, Purge would remove the app and leave all of that behind, so it waits until it can do the whole job."
+                return "应用会在 macOS 锁定的文件夹里留下设置和缓存。没有访问权限时，Purge 只能删除应用，却把这些残留留下来，因此它会等到能完整处理时再动手。"
             }
         }
 
@@ -59,7 +59,7 @@ struct LockedFeatureView: View {
             Button {
                 store.isLookDeeperPresented = true
             } label: {
-                Label("Look deeper", systemImage: "lock.open")
+                Label("深入查看", systemImage: "lock.open")
             }
             .buttonStyle(.purge(.primary))
         }
@@ -78,10 +78,10 @@ struct LookDeeperHeaderButton: View {
         Button {
             store.isLookDeeperPresented = true
         } label: {
-            Label("Look deeper", systemImage: "lock.open")
+            Label("深入查看", systemImage: "lock.open")
         }
         .buttonStyle(.purge(.secondary))
-        .help("Some places are still locked. Let Purge look deeper.")
+        .help("有些位置仍被锁定。让 Purge 深入查看。")
     }
 }
 
@@ -103,10 +103,10 @@ struct LimitedScanNotice: View {
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 1) {
-                    Text("Limited scan")
+                    Text("受限扫描")
                         .font(AppStyle.Typography.callout.weight(.semibold))
                         .foregroundStyle(AppColors.textPrimary)
-                    Text("Let Purge look deeper")
+                    Text("让 Purge 深入查看")
                         .font(AppStyle.Typography.metadataEmphasis)
                         .foregroundStyle(AppColors.textSecondary)
                 }
@@ -127,7 +127,7 @@ struct LimitedScanNotice: View {
             .contentShape(RoundedRectangle(cornerRadius: AppStyle.Radius.lg, style: .continuous))
         }
         .buttonStyle(LimitedScanNoticeButtonStyle())
-        .accessibilityLabel("Limited scan. Let Purge look deeper.")
+        .accessibilityLabel("受限扫描。让 Purge 深入查看。")
         .transition(.opacity)
     }
 }

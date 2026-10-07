@@ -196,7 +196,7 @@ struct ScanResultRow: View {
         var entries: [ScanRowMenuEntry] = []
 
         if let onExcludeFromScans {
-            entries.append(.action(title: "Exclude from scans", handler: onExcludeFromScans))
+            entries.append(.action(title: "从扫描中排除", handler: onExcludeFromScans))
         }
 
         let finderEntries = FinderReveal.menuEntries(for: revealLocations?() ?? [])
@@ -402,15 +402,15 @@ struct ScanResultRow: View {
         if let reinstallSafety {
             switch reinstallSafety {
             case .reinstallable:
-                AppBadge(text: "Can be rebuilt", tone: .safe)
+                AppBadge(text: "可重新构建", tone: .safe)
             case .missingLockfile:
-                AppBadge(text: "Check support files", tone: .warning)
+                AppBadge(text: "请检查支持文件", tone: .warning)
             case .notApplicable:
                 EmptyView()
             }
         }
         if showUncommittedRepoChanges {
-            AppBadge(text: "Local changes nearby", tone: .warning)
+            AppBadge(text: "附近有本地改动", tone: .warning)
         }
     }
 
@@ -420,12 +420,12 @@ struct ScanResultRow: View {
             Button {
                 onResetToAutomatic()
             } label: {
-                AppBadge(text: "Manual category", tone: .accent)
+                AppBadge(text: "手动分类", tone: .accent)
             }
             .buttonStyle(.plain)
-            .help("Reset to automatic")
+            .help("恢复为自动分类")
         } else {
-            AppBadge(text: "Manual category", tone: .accent)
+            AppBadge(text: "手动分类", tone: .accent)
         }
     }
 }
@@ -447,9 +447,9 @@ struct ScanRowAccessibilityActions: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .modifier(OptionalAction(name: "Exclude from scans", handler: onExcludeFromScans))
-            .modifier(OptionalAction(name: "Show in Finder", handler: revealHandler))
-            .modifier(OptionalAction(name: "Copy Path", handler: copyPathsHandler))
+            .modifier(OptionalAction(name: "从扫描中排除", handler: onExcludeFromScans))
+            .modifier(OptionalAction(name: "在访达中显示", handler: revealHandler))
+            .modifier(OptionalAction(name: "拷贝路径", handler: copyPathsHandler))
     }
 
     private var revealHandler: (() -> Void)? {

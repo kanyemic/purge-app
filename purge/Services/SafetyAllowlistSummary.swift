@@ -41,29 +41,29 @@ enum SafetyAllowlistSummary {
             Category(
                 id: CategoryID.appCaches,
                 icon: "app.badge",
-                title: "App caches",
-                description: "Regenerable cache folders under ~/Library/Caches and Application Support",
+                title: "应用缓存",
+                description: "~/Library/Caches 与 Application Support 下可重新生成的缓存文件夹",
                 backingCount: appSupportCacheCount + libraryCachesIncluded
             ),
             Category(
                 id: CategoryID.browserCaches,
                 icon: "globe",
-                title: "Browser caches per profile",
-                description: "Chromium profile caches and service worker stores, per browser profile",
+                title: "各配置文件的浏览器缓存",
+                description: "按浏览器配置文件区分的 Chromium 配置缓存与 Service Worker 存储",
                 backingCount: browserCacheCount
             ),
             Category(
                 id: CategoryID.devCaches,
                 icon: "hammer",
-                title: "Common dev caches",
-                description: "Rebuildable project artifacts like node_modules, DerivedData, and build output",
+                title: "常见开发缓存",
+                description: "可重新构建的项目产物，例如 node_modules、DerivedData 与构建输出",
                 backingCount: devCacheCount
             ),
             Category(
                 id: CategoryID.systemJunk,
                 icon: "doc.text",
-                title: "Logs and crash reports",
-                description: "User logs and diagnostic reports under ~/Library/Logs",
+                title: "日志与崩溃报告",
+                description: "~/Library/Logs 下的用户日志与诊断报告",
                 backingCount: systemJunkCount
             )
         ]
@@ -73,7 +73,7 @@ enum SafetyAllowlistSummary {
         var parts: [String] = []
 
         if !DeletionSafetyPolicy.systemCacheDeletionPrefixes.isEmpty {
-            parts.append("anything requiring admin privileges")
+            parts.append("任何需要管理员权限的内容")
         }
 
         let protectedContainerCount =
@@ -81,19 +81,19 @@ enum SafetyAllowlistSummary {
             + DeletionSafetyPolicy.protectedSystemCacheFolderNames.count
             + DeletionSafetyPolicy.protectedLogFolderNames.count
         if protectedContainerCount > 0 {
-            parts.append("protected containers")
+            parts.append("受保护的容器")
         }
 
         let personalLabels = personalFileBoundaryLabels
         if !personalLabels.isEmpty {
-            parts.append("personal files (\(personalLabels.joined(separator: ", ")))")
+            parts.append("个人文件（\(personalLabels.joined(separator: "、"))）")
         }
 
         guard !parts.isEmpty else {
-            return "What Purge never touches: paths outside the allowlist"
+            return "Purge 绝不触碰：白名单以外的路径"
         }
 
-        return "What Purge never touches: \(parts.joined(separator: ", "))"
+        return "Purge 绝不触碰：\(parts.joined(separator: "、"))"
     }
 
     /// Friendly labels for user-content roots pulled from never-delete policy paths.
@@ -105,19 +105,19 @@ enum SafetyAllowlistSummary {
             let relative = String(path.dropFirst(home.count + 1))
             let top = relative.split(separator: "/").first.map(String.init) ?? relative
             switch top {
-            case "Documents": return "documents"
-            case "Desktop": return "desktop"
-            case "Downloads": return "downloads"
-            case "Pictures": return "pictures"
-            case "Music": return "music"
-            case "Movies": return "movies"
+            case "Documents": return "文稿"
+            case "Desktop": return "桌面"
+            case "Downloads": return "下载"
+            case "Pictures": return "图片"
+            case "Music": return "音乐"
+            case "Movies": return "影片"
             case "Library":
                 let sub = relative.split(separator: "/").dropFirst().first.map(String.init) ?? ""
                 switch sub {
-                case "Keychains": return "keychains"
-                case "Preferences": return "preferences"
-                case "Mail": return "mail"
-                case "Application Support": return "application support"
+                case "Keychains": return "钥匙串"
+                case "Preferences": return "偏好设置"
+                case "Mail": return "邮件"
+                case "Application Support": return "应用支持"
                 default: return nil
                 }
             default:

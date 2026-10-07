@@ -227,7 +227,7 @@ enum ExplanationDatabase {
     }
 
     /// Unknown bundled keys: conservative copy for dev-tool-only local path.
-    nonisolated static let unsureExplanation = "We are not sure what this is. We recommend leaving it alone."
+    nonisolated static let unsureExplanation = "我们无法确定这是什么。建议保持原样。"
 
     nonisolated static func safetyInfoForUnknownBundledLookup(friendlyFallback: String) -> SafetyInfo {
         SafetyInfo(

@@ -15,14 +15,14 @@ nonisolated enum LargeFileCategory: String, CaseIterable, Identifiable, Hashable
 
     var displayName: String {
         switch self {
-        case .video: return "Videos"
-        case .audio: return "Audio"
-        case .image: return "Images"
-        case .pdf: return "PDFs"
-        case .archive: return "Archives"
-        case .document: return "Documents"
-        case .aiModel: return "AI Models"
-        case .other: return "Other"
+        case .video: return "视频"
+        case .audio: return "音频"
+        case .image: return "图片"
+        case .pdf: return "PDF"
+        case .archive: return "压缩包"
+        case .document: return "文档"
+        case .aiModel: return "AI 模型"
+        case .other: return "其他"
         }
     }
 
@@ -297,7 +297,7 @@ enum LargeFileSizeThreshold: Int, CaseIterable, Identifiable {
     }
 
     var menuButtonLabel: String {
-        "Larger than \(label)"
+        "大于 \(label)"
     }
 
     static func current(userDefaults: UserDefaults = .standard) -> LargeFileSizeThreshold {
@@ -320,16 +320,16 @@ enum LargeFileAgeThreshold: Int, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .anyTime: return "Any time"
-        case .oneMonth: return "Over 1 month ago"
-        case .months3: return "Over 3 months ago"
-        case .months6: return "Over 6 months ago"
-        case .year1: return "Over 1 year ago"
+        case .anyTime: return "不限时间"
+        case .oneMonth: return "1 个月以前"
+        case .months3: return "3 个月以前"
+        case .months6: return "6 个月以前"
+        case .year1: return "1 年以前"
         }
     }
 
     var menuButtonLabel: String {
-        "Last used: \(label)"
+        "最后使用：\(label)"
     }
 
     static func current(userDefaults: UserDefaults = .standard) -> LargeFileAgeThreshold {

@@ -40,11 +40,11 @@ struct CustomCleaningIntervalSheet: View {
     var body: some View {
         VStack(alignment: .leading, spacing: AppStyle.Spacing.large) {
             VStack(alignment: .leading, spacing: AppStyle.Spacing.xSmall) {
-                Text("Custom cleaning schedule")
+                Text("自定义清理计划")
                     .font(AppStyle.Typography.pageTitle)
                     .foregroundStyle(AppColors.textPrimary)
 
-                Text("Pick your own interval. Purge will quietly clean the same safe items on that rhythm.")
+                Text("选择你自己的间隔。Purge 会按这个节奏静默清理同样的安全项目。")
                     .font(AppStyle.Typography.callout)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -70,13 +70,13 @@ struct CustomCleaningIntervalSheet: View {
                                 lineWidth: amountFieldFocused ? 1 : 0.5
                             )
                     }
-                    .accessibilityLabel("Every")
+                    .accessibilityLabel("每")
 
                 SettingsMenuPicker(
                     selection: $unit,
                     options: CustomCleaningIntervalUnit.allCases,
                     optionLabel: { $0.displayName },
-                    accessibilityTitle: "Unit"
+                    accessibilityTitle: "单位"
                 )
 
                 Spacer()
@@ -100,17 +100,17 @@ struct CustomCleaningIntervalSheet: View {
 
     private var footer: some View {
         HStack(spacing: AppStyle.Spacing.small) {
-            Text("Every \(intervalPhrase)")
+            Text("每 \(intervalPhrase)")
                 .font(AppStyle.Typography.metadataEmphasis)
                 .foregroundStyle(AppColors.textSecondary)
 
             Spacer()
 
-            Button("Cancel", action: onCancel)
+            Button("取消", action: onCancel)
                 .buttonStyle(.purge(.secondary))
                 .keyboardShortcut(.cancelAction)
 
-            Button("Save") {
+            Button("存储") {
                 if let amount = parsedAmount {
                     onConfirm(amount, unit)
                 }

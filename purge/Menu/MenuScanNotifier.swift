@@ -14,7 +14,7 @@ enum MenuScanNotifier {
     static func configure() {
         let clean = UNNotificationAction(
             identifier: cleanActionIdentifier,
-            title: "Clean Safe Files",
+            title: "清理安全项目",
             options: []
         )
         let category = UNNotificationCategory(
@@ -29,12 +29,12 @@ enum MenuScanNotifier {
     static func notifyScanResult(readyBytes bytes: Int64) async {
         guard await ScheduledCleanupNotifier.requestAuthorizationIfNeeded() else { return }
         let content = UNMutableNotificationContent()
-        content.title = "Scan complete"
+        content.title = "扫描完成"
         if bytes > 0 {
-            content.body = "\(formatBytes(bytes)) ready to clean."
+            content.body = "\(formatBytes(bytes)) 可清理。"
             content.categoryIdentifier = categoryIdentifier
         } else {
-            content.body = "You're all clear."
+            content.body = "没有可清理的内容。"
         }
         content.sound = .default
         await deliver(content)
@@ -43,8 +43,8 @@ enum MenuScanNotifier {
     static func notifyCleaned(bytesMovedToTrash bytes: Int64) async {
         guard await ScheduledCleanupNotifier.requestAuthorizationIfNeeded() else { return }
         let content = UNMutableNotificationContent()
-        content.title = "Moved \(formatBytes(bytes)) to Trash"
-        content.body = "Empty the trash to reclaim the space."
+        content.title = "已将 \(formatBytes(bytes)) 移入废纸篓"
+        content.body = "清空废纸篓即可释放空间。"
         content.sound = .default
         await deliver(content)
     }

@@ -91,26 +91,26 @@ enum SupportNudge {
 
     static func lines(for facts: CleanFacts) -> [Line] {
         var lines = [
-            Line(id: "free", prefix: "Purge is free. ", linkText: "Buy me a coffee"),
-            Line(id: "noAds", prefix: "No ads, no subscription. ", linkText: "Buy me a coffee"),
+            Line(id: "free", prefix: "Purge 是免费的，", linkText: "请我喝杯咖啡"),
+            Line(id: "noAds", prefix: "没有广告，没有订阅，", linkText: "请我喝杯咖啡"),
         ]
         if facts.itemCount >= 2 {
             lines.append(Line(
                 id: "items",
-                prefix: "\(facts.itemCount.formatted()) items cleaned up, on the house. ",
-                linkText: "Buy me a coffee"
+                prefix: "已清理 \(facts.itemCount.formatted()) 个项目，免费奉上，",
+                linkText: "请我喝杯咖啡"
             ))
         }
         // Only once there is history beyond this clean, or it just repeats the big number.
         if facts.lifetimeBytes > facts.bytes {
             lines.append(Line(
                 id: "lifetime",
-                prefix: "\(formatBytesRoundedDown(facts.lifetimeBytes)) cleaned up with Purge so far. ",
-                linkText: "Buy me a coffee"
+                prefix: "至今已用 Purge 清理 \(formatBytesRoundedDown(facts.lifetimeBytes))，",
+                linkText: "请我喝杯咖啡"
             ))
         }
         if facts.bytes >= bigCleanBytes {
-            lines.append(Line(id: "big", prefix: "That was a big one. If it helped, ", linkText: "buy me a coffee"))
+            lines.append(Line(id: "big", prefix: "这次清得不少。如果它帮到了你，", linkText: "请我喝杯咖啡"))
         }
         return lines
     }

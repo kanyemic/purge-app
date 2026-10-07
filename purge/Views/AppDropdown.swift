@@ -130,7 +130,7 @@ private struct AppDropdownRow: View {
         .onHover { isHovered = $0 }
         .accessibilityLabel(label)
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
-        .accessibilityHint(isEnabled ? "" : "Available after the scan finishes")
+        .accessibilityHint(isEnabled ? "" : "扫描完成后可用")
     }
 }
 

@@ -20,7 +20,7 @@ struct AboutView: View {
             } else {
                 VStack(spacing: 0) {
                     if showsPageHeader {
-                        AppSectionPageHeader(title: "About")
+                        AppSectionPageHeader(title: "关于")
                     }
 
                     ScrollView {
@@ -76,7 +76,7 @@ struct AboutView: View {
                     .font(AppStyle.Typography.callout.weight(.medium))
                     .foregroundStyle(AppColors.textSecondary)
             } else {
-                Text("Version \(appVersion)")
+                Text("版本 \(appVersion)")
                     .font(AppStyle.Typography.callout)
                     .foregroundStyle(AppColors.textSecondary)
             }
@@ -84,7 +84,7 @@ struct AboutView: View {
             aboutCard {
                 AboutActionRow(
                     icon: "arrow.triangle.2.circlepath",
-                    label: "Check for updates",
+                    label: "检查更新",
                     isEnabled: updater.canCheckForUpdates
                 ) {
                     updater.checkForUpdates()
@@ -102,8 +102,8 @@ struct AboutView: View {
         iconTapCount = 0
         developerModeEnabled.toggle()
         devModeFlash = developerModeEnabled
-            ? "Developer mode enabled"
-            : "Developer mode disabled"
+            ? "开发者模式已开启"
+            : "开发者模式已关闭"
         let message = devModeFlash
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if devModeFlash == message { devModeFlash = nil }
@@ -137,13 +137,13 @@ struct AboutView: View {
                 .symbolRenderingMode(.hierarchical)
                 .accessibilityHidden(true)
 
-            Text("Nothing cleaned yet")
+            Text("尚未清理任何内容")
                 .font(AppStyle.Typography.title)
                 .foregroundStyle(AppColors.textSecondary)
                 .multilineTextAlignment(.center)
-                .accessibilityLabel("Nothing cleaned yet")
+                .accessibilityLabel("尚未清理任何内容")
 
-            Text("Run your first scan to get started")
+            Text("运行第一次扫描即可开始")
                 .font(AppStyle.Typography.callout)
                 .foregroundStyle(AppColors.textTertiary)
                 .multilineTextAlignment(.center)
@@ -153,7 +153,7 @@ struct AboutView: View {
 
     private var lifetimeStatsContent: some View {
         VStack(spacing: 8) {
-            Text("Lifetime moved to trash")
+            Text("累计移入废纸篓")
                 .font(AppStyle.Typography.metadata.weight(.semibold))
                 .foregroundStyle(AppColors.textSecondary)
                 .textCase(.uppercase)
@@ -164,7 +164,7 @@ struct AboutView: View {
                 .font(AppStyle.Typography.displaySmall)
                 .monospacedDigit()
                 .multilineTextAlignment(.center)
-                .accessibilityLabel("Lifetime moved to trash, \(formatBytes(store.totalMovedToTrashBytes))")
+                .accessibilityLabel("累计移入废纸篓，\(formatBytes(store.totalMovedToTrashBytes))")
 
             if let comparisonItem = LifetimeSizeComparison.item(for: store.totalMovedToTrashBytes) {
                 LifetimeSizeComparisonChip(item: comparisonItem)
@@ -180,32 +180,32 @@ struct AboutView: View {
 
                 AboutActionRow(
                     icon: "chevron.left.forwardslash.chevron.right",
-                    label: "View the full allowlist"
+                    label: "查看完整允许清单"
                 ) {
                     NSWorkspace.shared.open(Self.allowlistPolicyURL)
                 }
 
                 InsetCardDivider()
 
-                AboutActionRow(icon: "ant.fill", label: "Report a bug") {
+                AboutActionRow(icon: "ant.fill", label: "报告问题") {
                     NSWorkspace.shared.open(reportBugURL)
                 }
 
                 InsetCardDivider()
 
-                AboutActionRow(icon: "lightbulb.fill", label: "Request a feature") {
+                AboutActionRow(icon: "lightbulb.fill", label: "请求新功能") {
                     NSWorkspace.shared.open(featureRequestURL)
                 }
 
                 InsetCardDivider()
 
-                AboutActionRow(icon: "arrow.counterclockwise", label: "Replay onboarding") {
+                AboutActionRow(icon: "arrow.counterclockwise", label: "重新播放引导") {
                     hasCompletedOnboarding = false
                 }
 
                 InsetCardDivider()
 
-                AboutActionRow(icon: "cup.and.saucer.fill", label: "Buy me a coffee") {
+                AboutActionRow(icon: "cup.and.saucer.fill", label: "请我喝杯咖啡") {
                     // Counts as having seen the ask, so cleanups stop mentioning it.
                     SupportNudge.recordLinkOpened()
                     NSWorkspace.shared.open(SupportNudge.url)
@@ -217,12 +217,10 @@ struct AboutView: View {
     private var footerSection: some View {
         VStack(spacing: 6) {
             HStack(spacing: 4) {
-                Text("Made with")
+                Text("由")
                     .foregroundStyle(AppColors.textSecondary)
                 Image(systemName: "heart.fill")
                     .foregroundStyle(AppColors.statusDangerText)
-                Text("by")
-                    .foregroundStyle(AppColors.textSecondary)
                 Button {
                     NSWorkspace.shared.open(xProfileURL)
                 } label: {
@@ -231,7 +229,9 @@ struct AboutView: View {
                         .foregroundStyle(AppColors.textPrimary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Jithin on X")
+                .accessibilityLabel("Jithin 的 X 主页")
+                Text("制作")
+                    .foregroundStyle(AppColors.textSecondary)
             }
             .font(AppStyle.Typography.metadata)
 
@@ -246,9 +246,9 @@ struct AboutView: View {
 
     private var footerVersionText: String {
         guard let buildDate = bundleReleaseDate else {
-            return "Version \(appVersion)"
+            return "版本 \(appVersion)"
         }
-        return "Version \(appVersion) · \(Self.buildDateFormatter.string(from: buildDate))"
+        return "版本 \(appVersion) · \(Self.buildDateFormatter.string(from: buildDate))"
     }
 
     private func aboutCard<Content: View>(@ViewBuilder content: () -> Content) -> some View {
@@ -324,7 +324,7 @@ private struct LifetimeSizeComparisonChip: View {
                 .imageScale(.small)
                 .accessibilityHidden(true)
 
-            Text("That's room for \(item.label)")
+            Text("相当于 \(item.label) 的空间")
                 .lineLimit(1)
         }
         .font(AppStyle.Typography.rowTitle)
@@ -339,14 +339,14 @@ private struct LifetimeSizeComparisonChip: View {
             Capsule(style: .continuous)
                 .stroke(AppColors.borderStrong, lineWidth: 1)
         }
-        .accessibilityLabel("That's room for \(item.label)")
+        .accessibilityLabel("相当于 \(item.label) 的空间")
     }
 }
 
 private struct AboutAllowlistSummaryBlock: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("what purge can clean")
+            Text("Purge 可清理的内容")
                 .font(AppStyle.Typography.metadata.weight(.semibold))
                 .foregroundStyle(AppColors.textSecondary)
                 .textCase(.uppercase)

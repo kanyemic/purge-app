@@ -109,8 +109,8 @@ struct OnboardingProgressBar: View {
       }
     }
     .frame(height: 6)
-    .accessibilityLabel("Scan progress")
-    .accessibilityValue("\(Int(progress * 100)) percent")
+    .accessibilityLabel("扫描进度")
+    .accessibilityValue("\(Int(progress * 100))%")
   }
 }
 
@@ -142,7 +142,7 @@ struct OnboardingSizeComparisonLine: View {
   }
 
   private var prefixLabel: some View {
-    Text("That's room for")
+    Text("相当于")
       .font(AppStyle.Typography.sectionTitle.weight(.regular))
       .foregroundStyle(AppColors.textSecondary)
   }
@@ -151,7 +151,7 @@ struct OnboardingSizeComparisonLine: View {
     HStack(alignment: .center, spacing: AppStyle.Spacing.xSmall) {
       ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
         if index > 0 {
-          Text("or")
+          Text("或")
             .font(AppStyle.Typography.sectionTitle.weight(.regular))
             .foregroundStyle(AppColors.textTertiary)
         }
@@ -162,8 +162,8 @@ struct OnboardingSizeComparisonLine: View {
   }
 
   private var accessibilityLabel: String {
-    let body = items.map(\.label).joined(separator: " or ")
-    return "That's room for \(body)"
+    let body = items.map(\.label).joined(separator: " 或 ")
+    return "相当于 \(body)"
   }
 }
 
@@ -223,7 +223,7 @@ struct OnboardingResultsCategoryRow: View {
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .accessibilityElement(children: .combine)
-    .accessibilityLabel("\(title), \(formattedSize)")
+    .accessibilityLabel("\(title)，\(formattedSize)")
   }
 }
 
@@ -252,7 +252,7 @@ struct OnboardingLoadingStepTitle: View {
       .font(AppStyle.Typography.title)
       .multilineTextAlignment(.center)
       .frame(maxWidth: .infinity, alignment: .center)
-      .accessibilityLabel("\(baseText).")
+      .accessibilityLabel("\(baseText)…")
       .onAppear { startDotAnimationIfNeeded() }
       .onDisappear {
         dotAnimationTask?.cancel()
@@ -262,7 +262,7 @@ struct OnboardingLoadingStepTitle: View {
 
   private var displayText: String {
     if reduceMotion {
-      return "\(baseText)."
+      return "\(baseText)…"
     }
     return baseText + String(repeating: ".", count: dotCount)
   }

@@ -14,7 +14,7 @@ struct OnboardingResultsSnapshot {
 }
 
 extension PurgeStore {
-  static let devArtifactCategoryTitle = "Dev tool artifacts"
+  static let devArtifactCategoryTitle = "开发工具产物"
 
   var onboardingResultsCategories: [OnboardingResultsCategory] {
     resultsCategories(for: manualSafeCleanupCandidates())
@@ -43,10 +43,10 @@ extension PurgeStore {
     }
 
     let categories = [
-      OnboardingResultsCategory(title: "App caches", symbol: "internaldrive", bytes: appCacheBytes),
+      OnboardingResultsCategory(title: "应用缓存", symbol: "internaldrive", bytes: appCacheBytes),
       OnboardingResultsCategory(title: Self.devArtifactCategoryTitle, symbol: "hammer", bytes: devArtifactBytes),
-      OnboardingResultsCategory(title: "Browser caches", symbol: "globe", bytes: browserBytes),
-      OnboardingResultsCategory(title: "System junk", symbol: "doc.text", bytes: systemJunkBytes),
+      OnboardingResultsCategory(title: "浏览器缓存", symbol: "globe", bytes: browserBytes),
+      OnboardingResultsCategory(title: "系统垃圾", symbol: "doc.text", bytes: systemJunkBytes),
     ]
 
     return categories
@@ -111,11 +111,25 @@ extension PurgeStore {
     "com.operasoftware.Opera",
   ]
 
+  private static let systemJunkDefinitionKeys: Set<String> = [
+    "applogs",
+    "crashreports",
+    "macos-installer",
+  ]
+
+  private static let systemJunkBundleIDs: Set<String> = [
+    "com.apple.ATS",
+  ]
+
   private static let systemJunkAppNames: Set<String> = [
     "Application Logs",
     "Crash Reports",
     "macOS Installer",
     "Font Cache",
+    "应用日志",
+    "崩溃报告",
+    "macOS 安装器",
+    "字体缓存",
   ]
 
   private static func isBrowserCacheItem(_ item: CacheItem) -> Bool {
@@ -129,11 +143,17 @@ extension PurgeStore {
     }
 
     let name = item.appName.lowercased()
-    return name.contains("browser")
+    return name.contains("browser") || name.contains("浏览器")
   }
 
   private static func isSystemJunkCacheItem(_ item: CacheItem) -> Bool {
-    systemJunkAppNames.contains(item.appName)
+    if let key = item.definitionKey, systemJunkDefinitionKeys.contains(key) {
+      return true
+    }
+    if systemJunkBundleIDs.contains(item.bundleID) {
+      return true
+    }
+    return systemJunkAppNames.contains(item.appName)
   }
 }
 
@@ -161,9 +181,9 @@ struct OnboardingResultsStep: View {
             .font(AppStyle.Typography.display)
             .monospacedDigit()
             .multilineTextAlignment(.center)
-            .accessibilityLabel("\(formatBytes(totalBytes)) ready to clean")
+            .accessibilityLabel("\(formatBytes(totalBytes)) 可清理")
 
-          Text("ready to clean on your Mac")
+          Text("可在你的 Mac 上清理")
             .font(AppStyle.Typography.sectionTitle.weight(.medium))
             .foregroundStyle(AppColors.textSecondary)
             .multilineTextAlignment(.center)

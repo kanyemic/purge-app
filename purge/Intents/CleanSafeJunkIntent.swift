@@ -7,13 +7,13 @@ import AppKit
 /// here; vague ones ("free up space", "clean up my Mac") stay with Scan for
 /// Junk, so a loose request never cleans by accident.
 struct CleanSafeJunkIntent: AppIntent {
-    static let title: LocalizedStringResource = "Clean Safe Junk"
+    static let title: LocalizedStringResource = "清理安全垃圾"
     static let description = IntentDescription(
-        "Scans for junk and moves the Safe items in App Caches and Dev Tools to the Trash, like Clean in Purge's menu bar. Check First items are left alone.",
+        "扫描垃圾，并将应用缓存和开发工具中标记为安全的项目移入废纸篓，与 Purge 菜单栏中的「清理」相同。标为「先确认」的项目不会被处理。",
         searchKeywords: [
-            "clean", "clean junk", "clean safe junk", "clean my mac", "cleanup",
-            "clear junk", "clear cache", "clear caches", "delete junk", "remove junk",
-            "empty caches", "trash junk",
+            "清理", "清理垃圾", "安全清理", "清理缓存", "清理我的 Mac",
+            "清除垃圾", "清除缓存", "删除垃圾", "移除垃圾",
+            "清空缓存", "垃圾清理",
         ]
     )
 
@@ -30,37 +30,37 @@ struct CleanSafeJunkIntent: AppIntent {
 }
 
 extension IntentRouter.CleanOutcome {
-    /// "Moved 1.61 GB of junk to the Trash." with the size in bold.
+    /// 例如「已将 1.61 GB 垃圾移入废纸篓。」，其中体积加粗。
     var styledAnswer: AttributedString {
         guard case .cleaned(let bytes, let failedCount) = self, bytes > 0 else { return AttributedString(dialog) }
         var size = AttributedString(formatBytes(bytes))
         size.inlinePresentationIntent = .stronglyEmphasized
-        return AttributedString("Moved ") + size + AttributedString(" of junk to the Trash.")
+        return AttributedString("已将 ") + size + AttributedString(" 垃圾移入废纸篓。")
             + AttributedString(Self.failureNote(failedCount))
     }
 
     var dialog: String {
         switch self {
         case .needsSetup:
-            return "Finish setting up Purge first."
+            return "请先完成 Purge 的初始设置。"
         case .busyCleaning:
-            return "Purge is already cleaning."
+            return "Purge 正在清理。"
         case .nothingToClean:
-            return "No junk to clean right now."
+            return "目前没有可清理的垃圾。"
         case .stopped:
-            return "The scan stopped before it finished, so nothing was cleaned."
+            return "扫描在完成前停止，因此没有清理任何内容。"
         case .cleaned(let bytes, let failedCount) where bytes > 0:
-            return "Moved \(formatBytes(bytes)) of junk to the Trash." + Self.failureNote(failedCount)
+            return "已将 \(formatBytes(bytes)) 垃圾移入废纸篓。" + Self.failureNote(failedCount)
         case .cleaned:
-            return "Purge couldn't move the junk to the Trash. Open Purge to see why."
+            return "Purge 无法将垃圾移入废纸篓。请打开 Purge 查看原因。"
         }
     }
 
     private static func failureNote(_ failedCount: Int) -> String {
         switch failedCount {
         case 0: return ""
-        case 1: return " 1 item couldn't be moved."
-        default: return " \(failedCount) items couldn't be moved."
+        case 1: return "有 1 个项目无法移动。"
+        default: return "有 \(failedCount) 个项目无法移动。"
         }
     }
 }

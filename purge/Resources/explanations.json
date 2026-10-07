@@ -1,9 +1,9 @@
 [
   {
     "key": "adobe-media-cache-files",
-    "display_name": "Adobe Media Cache Files",
+    "display_name": "Adobe Media Cache 文件",
     "tag": "safe",
-    "explanation": "premiere pro and after effects store rendered previews and conformed audio here. safe to clean. the apps rebuild it on next launch, which can take a few minutes for large projects.",
+    "explanation": "Premiere Pro 和 After Effects 会把渲染预览和符合音频缓存在这里。可以安全清理。应用会在下次启动时重新生成，大型项目可能需要几分钟。",
     "bundle_ids": [],
     "aliases": [
       "Adobe Media Cache Files"
@@ -13,9 +13,9 @@
   },
   {
     "key": "adobe-media-cache",
-    "display_name": "Adobe Media Cache Database",
+    "display_name": "Adobe Media Cache 数据库",
     "tag": "safe",
-    "explanation": "the index adobe uses to track media cache files. safe to clean. rebuilds alongside the cache.",
+    "explanation": "Adobe 用来跟踪媒体缓存文件的索引。可以安全清理。会随缓存一起重建。",
     "bundle_ids": [],
     "aliases": [
       "Adobe Media Cache"
@@ -25,9 +25,9 @@
   },
   {
     "key": "adobe-camera-raw",
-    "display_name": "Adobe Camera Raw Cache",
+    "display_name": "Adobe Camera Raw 缓存",
     "tag": "safe",
-    "explanation": "photoshop, lightroom and bridge cache raw previews here. safe to clean. rebuilds automatically when you open images.",
+    "explanation": "Photoshop、Lightroom 和 Bridge 在这里缓存 RAW 预览。可以安全清理。打开图片时会自动重建。",
     "bundle_ids": [],
     "aliases": [
       "Adobe Camera Raw",
@@ -38,9 +38,9 @@
   },
   {
     "key": "android-sdk",
-    "display_name": "Android Build Cache",
+    "display_name": "Android 构建缓存",
     "tag": "safe",
-    "explanation": "Build caches that Android Studio and Gradle keep in ~/.android. Your emulators, the key your phones trust for debugging, and your debug signing key are left alone. Safe to delete; the next build recreates them.",
+    "explanation": "Android Studio 和 Gradle 存放在 ~/.android 中的构建缓存。你的模拟器、手机调试授权所信任的密钥，以及调试签名密钥都会被保留。可以安全删除；下次构建会重新创建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -48,9 +48,9 @@
   },
   {
     "key": "perplexity-updater",
-    "display_name": "Perplexity App Updater",
+    "display_name": "Perplexity 应用更新器",
     "tag": "safe",
-    "explanation": "These are temporary files used to update the Perplexity AI app. They are regenerated automatically whenever Perplexity checks for a new version.",
+    "explanation": "这些是用于更新 Perplexity AI 应用的临时文件。每当 Perplexity 检查新版本时会自动重新生成。",
     "bundle_ids": [
       "ai.perplexity.CometUpdater"
     ],
@@ -64,9 +64,9 @@
   },
   {
     "key": "blender",
-    "display_name": "Blender 3D App",
+    "display_name": "Blender 3D 应用",
     "tag": "safe",
-    "explanation": "These are temporary files saved by Blender, the 3D design application. Deleting them is safe but Blender may take a little longer to start up the next time you open it.",
+    "explanation": "这些是 3D 设计应用 Blender 保存的临时文件。删除是安全的，但下次打开 Blender 时启动可能会稍慢。",
     "bundle_ids": [
       "org.blenderfoundation.blender"
     ],
@@ -78,9 +78,9 @@
   },
   {
     "key": "checkpoint-nodejs",
-    "display_name": "Node.js Dev Tool",
+    "display_name": "Node.js 开发工具",
     "tag": "safe",
-    "explanation": "This is a temporary storage folder used by a developer tool that runs on your Mac. It is safe to delete and will be recreated automatically.",
+    "explanation": "这是运行在你 Mac 上的某个开发工具使用的临时存储文件夹。可以安全删除，并会自动重建。",
     "bundle_ids": [],
     "aliases": [
       "checkpoint-nodejs"
@@ -90,9 +90,9 @@
   },
   {
     "key": "cloudkit",
-    "display_name": "iCloud Data Sync",
+    "display_name": "iCloud 数据同步",
     "tag": "medium",
-    "explanation": "This holds the data your Mac uses to sync with iCloud. Nothing is lost from iCloud, but apps will need to re-sync their data afterwards, which can take time on a slow connection.",
+    "explanation": "这里保存你的 Mac 用于与 iCloud 同步的数据。iCloud 中的内容不会丢失，但应用之后需要重新同步数据，网络较慢时可能耗时较长。",
     "bundle_ids": [],
     "aliases": [
       "CloudKit"
@@ -102,9 +102,9 @@
   },
   {
     "key": "claude-updater",
-    "display_name": "Claude App Updater",
+    "display_name": "Claude 应用更新器",
     "tag": "safe",
-    "explanation": "These are temporary files used to update the Claude AI desktop app. They are recreated automatically each time Claude checks for updates.",
+    "explanation": "这些是用于更新 Claude AI 桌面应用的临时文件。每当 Claude 检查更新时会自动重建。",
     "bundle_ids": [
       "com.anthropic.claudefordesktop.ShipIt"
     ],
@@ -116,9 +116,9 @@
   },
   {
     "key": "accountsd",
-    "display_name": "Apple Accounts Service",
+    "display_name": "Apple 账户服务",
     "tag": "medium",
-    "explanation": "This supports the system service that manages your Apple ID and connected accounts. Deleting it can sign accounts out and ask you to sign in again.",
+    "explanation": "这里支撑管理你的 Apple ID 和已连接账户的系统服务。删除可能导致账户退出登录，并要求你重新登录。",
     "bundle_ids": [
       "com.apple.accountsd"
     ],
@@ -130,9 +130,9 @@
   },
   {
     "key": "akd",
-    "display_name": "Apple Key Service",
+    "display_name": "Apple 密钥服务",
     "tag": "medium",
-    "explanation": "This is used by the Apple background service that handles authentication and security keys. Deleting it can prompt you to re-authenticate.",
+    "explanation": "这里由处理身份验证和安全密钥的 Apple 后台服务使用。删除可能会要求你重新验证身份。",
     "bundle_ids": [
       "com.apple.akd"
     ],
@@ -144,9 +144,9 @@
   },
   {
     "key": "amp-library-agent",
-    "display_name": "Apple Music Library",
+    "display_name": "Apple Music 资料库",
     "tag": "medium",
-    "explanation": "Temporary data for your Apple Music library. Nothing is lost, but Apple Music may take a while to rebuild your library view.",
+    "explanation": "Apple Music 资料库的临时数据。内容不会丢失，但 Apple Music 重建资料库视图可能需要一段时间。",
     "bundle_ids": [
       "com.apple.AMPLibraryAgent"
     ],
@@ -158,9 +158,9 @@
   },
   {
     "key": "amsaccountsd",
-    "display_name": "App Store Accounts",
+    "display_name": "App Store 账户",
     "tag": "medium",
-    "explanation": "This supports the App Store's sign-in and account system. Deleting it can prompt you to sign in to the App Store again.",
+    "explanation": "这里支撑 App Store 的登录和账户系统。删除可能会要求你重新登录 App Store。",
     "bundle_ids": [
       "com.apple.amsaccountsd"
     ],
@@ -172,9 +172,9 @@
   },
   {
     "key": "amsengagementd",
-    "display_name": "App Store Notifications",
+    "display_name": "App Store 通知",
     "tag": "safe",
-    "explanation": "This folder stores temporary data related to App Store recommendations and notifications. It is completely safe to delete and will be rebuilt automatically.",
+    "explanation": "此文件夹存储与 App Store 推荐和通知相关的临时数据。可以完全安全地删除，并会自动重建。",
     "bundle_ids": [
       "com.apple.amsengagementd"
     ],
@@ -186,9 +186,9 @@
   },
   {
     "key": "adprivacyd",
-    "display_name": "Apple Ad Privacy",
+    "display_name": "Apple 广告隐私",
     "tag": "safe",
-    "explanation": "This is temporary data used by Apple's privacy-focused advertising system. Deleting it is safe and has no effect on your apps or personal data.",
+    "explanation": "这是 Apple 注重隐私的广告系统使用的临时数据。删除是安全的，不会影响你的应用或个人数据。",
     "bundle_ids": [
       "com.apple.ap.adprivacyd"
     ],
@@ -200,9 +200,9 @@
   },
   {
     "key": "appleaccountd",
-    "display_name": "Apple ID Service",
+    "display_name": "Apple ID 服务",
     "tag": "medium",
-    "explanation": "This is used by the service that manages your Apple ID on your Mac. Deleting it can prompt you to sign in to your Apple ID again.",
+    "explanation": "这里由在你的 Mac 上管理 Apple ID 的服务使用。删除可能会要求你重新登录 Apple ID。",
     "bundle_ids": [
       "com.apple.appleaccountd"
     ],
@@ -214,9 +214,9 @@
   },
   {
     "key": "apple-media-services",
-    "display_name": "Apple Media Services",
+    "display_name": "Apple 媒体服务",
     "tag": "safe",
-    "explanation": "This stores temporary data for Apple's media services including the App Store, Apple TV, and Apple Music. Deleting it is safe and these services will rebuild it as needed.",
+    "explanation": "这里存储 Apple 媒体服务（包括 App Store、Apple TV 和 Apple Music）的临时数据。删除是安全的，这些服务会在需要时重建。",
     "bundle_ids": [
       "com.apple.AppleMediaServices"
     ],
@@ -228,9 +228,9 @@
   },
   {
     "key": "appstoreagent",
-    "display_name": "App Store Agent",
+    "display_name": "App Store 代理",
     "tag": "safe",
-    "explanation": "This contains temporary files used by the App Store to manage downloads and updates in the background. It is safe to delete and will be recreated automatically.",
+    "explanation": "这里包含 App Store 在后台管理下载和更新所用的临时文件。可以安全删除，并会自动重建。",
     "bundle_ids": [
       "com.apple.appstoreagent"
     ],
@@ -242,9 +242,9 @@
   },
   {
     "key": "assistantd",
-    "display_name": "Siri Assistant",
+    "display_name": "Siri 助手",
     "tag": "safe",
-    "explanation": "This folder holds temporary data for Siri on your Mac. Deleting it is completely safe and Siri will rebuild it automatically.",
+    "explanation": "此文件夹保存你 Mac 上 Siri 的临时数据。可以完全安全地删除，Siri 会自动重建。",
     "bundle_ids": [
       "com.apple.assistantd",
       "com.apple.AssistantServices"
@@ -258,9 +258,9 @@
   },
   {
     "key": "authentication-services",
-    "display_name": "Sign In with Apple",
+    "display_name": "通过 Apple 登录",
     "tag": "medium",
-    "explanation": "This supports the 'Sign in with Apple' feature used by apps and websites. Deleting it can sign you out and require signing in again.",
+    "explanation": "这里支撑应用和网站使用的“通过 Apple 登录”功能。删除可能会让你退出登录，并要求重新登录。",
     "bundle_ids": [
       "com.apple.AuthenticationServicesCore.AuthenticationServicesAgent"
     ],
@@ -272,9 +272,9 @@
   },
   {
     "key": "beta-enrollment",
-    "display_name": "Apple Beta Program",
+    "display_name": "Apple Beta 计划",
     "tag": "safe",
-    "explanation": "This is temporary data related to Apple's beta software programme. It is safe to delete and will be recreated if you are enrolled in the beta programme.",
+    "explanation": "这是与 Apple Beta 版软件计划相关的临时数据。可以安全删除；如果你已加入 Beta 计划，它会被重新创建。",
     "bundle_ids": [
       "com.apple.betaenrollmentagent"
     ],
@@ -286,9 +286,9 @@
   },
   {
     "key": "bird",
-    "display_name": "iCloud Drive Sync",
+    "display_name": "iCloud 云盘同步",
     "tag": "medium",
-    "explanation": "This is used by the service that keeps iCloud Drive in sync with your Mac. Nothing is lost from iCloud, but your Mac will re-check and re-download file state afterwards.",
+    "explanation": "这里由保持 iCloud 云盘与你的 Mac 同步的服务使用。iCloud 中的内容不会丢失，但你的 Mac 之后会重新检查并重新下载文件状态。",
     "bundle_ids": [
       "com.apple.bird"
     ],
@@ -300,9 +300,9 @@
   },
   {
     "key": "businessservicesd",
-    "display_name": "Apple Business Services",
+    "display_name": "Apple 商务服务",
     "tag": "safe",
-    "explanation": "This holds temporary data for Apple's business and organisation account features. It is safe to delete and will be regenerated automatically.",
+    "explanation": "这里保存 Apple 商务和组织账户功能的临时数据。可以安全删除，并会自动重新生成。",
     "bundle_ids": [
       "com.apple.businessservicesd"
     ],
@@ -314,9 +314,9 @@
   },
   {
     "key": "cache-delete",
-    "display_name": "System Cache Manager",
+    "display_name": "系统缓存管理器",
     "tag": "safe",
-    "explanation": "This is a folder used by macOS itself to manage and clean up other temporary files. It is safe to delete.",
+    "explanation": "这是 macOS 自身用于管理并清理其他临时文件的文件夹。可以安全删除。",
     "bundle_ids": [
       "com.apple.cache_delete"
     ],
@@ -328,9 +328,9 @@
   },
   {
     "key": "cloudd",
-    "display_name": "iCloud Background Service",
+    "display_name": "iCloud 后台服务",
     "tag": "medium",
-    "explanation": "This is used by the background service that handles iCloud data on your Mac. Nothing is lost from iCloud, but your Mac will need to re-sync afterwards.",
+    "explanation": "这里由处理你 Mac 上 iCloud 数据的后台服务使用。iCloud 中的内容不会丢失，但你的 Mac 之后需要重新同步。",
     "bundle_ids": [
       "com.apple.cloudd"
     ],
@@ -342,9 +342,9 @@
   },
   {
     "key": "cloud-telemetry",
-    "display_name": "Apple Usage Reports",
+    "display_name": "Apple 使用情况报告",
     "tag": "safe",
-    "explanation": "This stores temporary data that Apple uses for anonymous usage analytics. Deleting it is completely safe and causes no issues.",
+    "explanation": "这里存储 Apple 用于匿名使用情况分析的临时数据。可以完全安全地删除，不会造成任何问题。",
     "bundle_ids": [
       "com.apple.CloudTelemetry"
     ],
@@ -356,9 +356,9 @@
   },
   {
     "key": "ctcategories",
-    "display_name": "Content Type Service",
+    "display_name": "内容类型服务",
     "tag": "safe",
-    "explanation": "This is a temporary folder used by a macOS service that categorises content for features like Screen Time and parental controls. It is safe to delete.",
+    "explanation": "这是一个 macOS 服务使用的临时文件夹，该服务为“屏幕使用时间”和家长控制等功能对内容进行分类。可以安全删除。",
     "bundle_ids": [
       "com.apple.ctcategories.service"
     ],
@@ -370,9 +370,9 @@
   },
   {
     "key": "dataaccessd",
-    "display_name": "Contacts & Calendar Sync",
+    "display_name": "通讯录与日历同步",
     "tag": "medium",
-    "explanation": "This is used by the service that syncs your contacts and calendars. Nothing is lost from your accounts, but your Mac re-downloads them, and they may be briefly missing while it does.",
+    "explanation": "这里由同步你的通讯录和日历的服务使用。账户中的内容不会丢失，但你的 Mac 会重新下载它们，期间它们可能会短暂缺失。",
     "bundle_ids": [
       "com.apple.dataaccess.dataaccessd"
     ],
@@ -384,9 +384,9 @@
   },
   {
     "key": "donotdisturbd",
-    "display_name": "Focus Mode Service",
+    "display_name": "专注模式服务",
     "tag": "safe",
-    "explanation": "This is temporary data for your Mac's Focus and Do Not Disturb settings. It is safe to delete and will be recreated automatically.",
+    "explanation": "这是你 Mac 的“专注模式”和“勿扰模式”设置的临时数据。可以安全删除，并会自动重建。",
     "bundle_ids": [
       "com.apple.donotdisturbd"
     ],
@@ -398,9 +398,9 @@
   },
   {
     "key": "duetexpertd",
-    "display_name": "Siri Intelligence Engine",
+    "display_name": "Siri 智能引擎",
     "tag": "medium",
-    "explanation": "Apple's on-device intelligence that powers Siri Suggestions and app predictions. Deleting it resets what it has learned about how you use your Mac.",
+    "explanation": "Apple 的端侧智能，为 Siri 建议和应用预测提供支持。删除会重置它对你使用 Mac 习惯的学习结果。",
     "bundle_ids": [
       "com.apple.duetexpertd"
     ],
@@ -412,9 +412,9 @@
   },
   {
     "key": "e5bundlecache",
-    "display_name": "Apple ML Model Cache",
+    "display_name": "Apple 机器学习模型缓存",
     "tag": "safe",
-    "explanation": "Compiled copies of the machine learning models that macOS features such as Photos and Live Text use. Safe to delete; macOS compiles them again when they are next needed, which takes some processor time.",
+    "explanation": "照片、“实况文本”等 macOS 功能所用机器学习模型的编译副本。可以安全删除；macOS 会在下次需要时重新编译，这会消耗一些处理器时间。",
     "bundle_ids": [
       "com.apple.e5rt.e5bundlecache"
     ],
@@ -426,9 +426,9 @@
   },
   {
     "key": "feature-access-agent",
-    "display_name": "Feature Permissions",
+    "display_name": "功能权限",
     "tag": "safe",
-    "explanation": "This temporary folder helps macOS manage which features and capabilities apps are allowed to use. It is safe to delete and will be rebuilt automatically.",
+    "explanation": "此临时文件夹帮助 macOS 管理允许应用使用哪些功能和能力。可以安全删除，并会自动重建。",
     "bundle_ids": [
       "com.apple.FeatureAccessAgent"
     ],
@@ -440,9 +440,9 @@
   },
   {
     "key": "feedbacklogger",
-    "display_name": "Apple Feedback Logger",
+    "display_name": "Apple 反馈日志",
     "tag": "safe",
-    "explanation": "This stores temporary logs that are sent to Apple as diagnostic feedback. Deleting it is completely safe.",
+    "explanation": "这里存储作为诊断反馈发送给 Apple 的临时日志。可以完全安全地删除。",
     "bundle_ids": [
       "com.apple.feedbacklogger"
     ],
@@ -454,9 +454,9 @@
   },
   {
     "key": "fileprovider-appstore",
-    "display_name": "App Store File Service",
+    "display_name": "App Store 文件服务",
     "tag": "safe",
-    "explanation": "This is used by a background service that helps the App Store manage files on your Mac. It is safe to delete.",
+    "explanation": "这里由帮助 App Store 管理你 Mac 上文件的后台服务使用。可以安全删除。",
     "bundle_ids": [
       "com.apple.FileProviderDaemon.AppStoreService"
     ],
@@ -468,9 +468,9 @@
   },
   {
     "key": "findmy",
-    "display_name": "Find My Service",
+    "display_name": "查找服务",
     "tag": "medium",
-    "explanation": "Temporary data used by Find My to track your Apple devices. Nothing is lost, but device locations may take a while to reappear.",
+    "explanation": "“查找”用于跟踪你 Apple 设备的临时数据。内容不会丢失，但设备位置可能需要一段时间才会重新出现。",
     "bundle_ids": [
       "com.apple.findmy.fmipcore"
     ],
@@ -482,9 +482,9 @@
   },
   {
     "key": "geoanalyticsd",
-    "display_name": "Location Analytics",
+    "display_name": "位置分析",
     "tag": "safe",
-    "explanation": "This is temporary data used by Apple's location analytics system. Deleting it is completely safe and has no effect on Maps or other apps.",
+    "explanation": "这是 Apple 位置分析系统使用的临时数据。可以完全安全地删除，不会影响“地图”或其他应用。",
     "bundle_ids": [
       "com.apple.geoanalyticsd"
     ],
@@ -496,9 +496,9 @@
   },
   {
     "key": "maps-tile-cache",
-    "display_name": "Apple Maps Tile Cache",
+    "display_name": "Apple 地图瓦片缓存",
     "tag": "medium",
-    "explanation": "Map tiles and place data that Apple Maps has downloaded. Nothing is lost, but Maps downloads them again as you browse, which is slower and uses data.",
+    "explanation": "Apple 地图已下载的地图瓦片和地点数据。内容不会丢失，但“地图”会在你浏览时重新下载，速度更慢且消耗流量。",
     "bundle_ids": [],
     "aliases": [
       "GeoServices"
@@ -508,9 +508,9 @@
   },
   {
     "key": "helpd",
-    "display_name": "macOS Help System",
+    "display_name": "macOS 帮助系统",
     "tag": "safe",
-    "explanation": "This stores temporary data for the built-in macOS Help viewer. It is safe to delete and the Help system will rebuild it when next opened.",
+    "explanation": "这里存储 macOS 内置“帮助”查看器的临时数据。可以安全删除，帮助系统会在下次打开时重建。",
     "bundle_ids": [
       "com.apple.helpd"
     ],
@@ -522,9 +522,9 @@
   },
   {
     "key": "homed",
-    "display_name": "Apple Home & HomeKit",
+    "display_name": "Apple 家庭与 HomeKit",
     "tag": "medium",
-    "explanation": "Temporary data for the Home app and your connected smart home devices. Nothing is unpaired, but the Home app may be slow or incomplete until it re-syncs.",
+    "explanation": "“家庭”App 及你连接的智能家居设备的临时数据。不会有设备被解除配对，但在重新同步完成前，“家庭”App 可能响应缓慢或显示不全。",
     "bundle_ids": [
       "com.apple.homed",
       "com.apple.HomeKit"
@@ -538,9 +538,9 @@
   },
   {
     "key": "icloud-notification-agent",
-    "display_name": "iCloud Notifications",
+    "display_name": "iCloud 通知",
     "tag": "medium",
-    "explanation": "Temporary data for iCloud notifications. It is rebuilt automatically, but iCloud notifications can be delayed until it is.",
+    "explanation": "iCloud 通知的临时数据。它会自动重建，但在重建完成前 iCloud 通知可能会延迟。",
     "bundle_ids": [
       "com.apple.iCloudNotificationAgent"
     ],
@@ -552,9 +552,9 @@
   },
   {
     "key": "itunes",
-    "display_name": "iTunes & Apple Music",
+    "display_name": "iTunes 与 Apple Music",
     "tag": "medium",
-    "explanation": "Temporary data from iTunes and Apple Music, including artwork and media previews. Nothing is lost, but artwork is re-downloaded as you browse.",
+    "explanation": "来自 iTunes 和 Apple Music 的临时数据，包括封面图和媒体预览。内容不会丢失，但封面图会在你浏览时重新下载。",
     "bundle_ids": [
       "com.apple.iTunes",
       "com.apple.itunescloudd"
@@ -568,9 +568,9 @@
   },
   {
     "key": "managedappdistribution",
-    "display_name": "Managed App Service",
+    "display_name": "受管理应用服务",
     "tag": "safe",
-    "explanation": "This is used by a background service that helps distribute and manage apps, typically in business or school environments. It is safe to delete.",
+    "explanation": "这里由帮助分发和管理应用的后台服务使用，通常用于企业或学校环境。可以安全删除。",
     "bundle_ids": [
       "com.apple.managedappdistributionagent"
     ],
@@ -582,9 +582,9 @@
   },
   {
     "key": "nsurlsessiond",
-    "display_name": "Background Downloads",
+    "display_name": "后台下载",
     "tag": "medium",
-    "explanation": "This holds state for apps that download content in the background. Deleting it can interrupt downloads in progress, which then have to start over.",
+    "explanation": "这里保存后台下载内容的应用的状态。删除可能会中断正在进行的下载，之后必须重新开始。",
     "bundle_ids": [
       "com.apple.nsurlsessiond"
     ],
@@ -596,9 +596,9 @@
   },
   {
     "key": "parsecd",
-    "display_name": "Siri Knowledge Engine",
+    "display_name": "Siri 知识引擎",
     "tag": "safe",
-    "explanation": "This is used by a background Apple service that helps Siri and Spotlight understand natural language queries. It is safe to delete and will be rebuilt automatically.",
+    "explanation": "这里由帮助 Siri 和 Spotlight 理解自然语言查询的 Apple 后台服务使用。可以安全删除，并会自动重建。",
     "bundle_ids": [
       "com.apple.parsecd"
     ],
@@ -610,9 +610,9 @@
   },
   {
     "key": "passd",
-    "display_name": "Apple Wallet Passes",
+    "display_name": "Apple 钱包凭证",
     "tag": "medium",
-    "explanation": "This stores temporary data for passes in your Apple Wallet, such as boarding passes and loyalty cards. Deleting it is safe but your Wallet may need to re-sync pass data.",
+    "explanation": "这里存储你 Apple 钱包中凭证（如登机牌和会员卡）的临时数据。删除是安全的，但你的钱包可能需要重新同步凭证数据。",
     "bundle_ids": [
       "com.apple.passd"
     ],
@@ -625,9 +625,9 @@
   },
   {
     "key": "proactive-eventtracker",
-    "display_name": "Siri Suggestions Data",
+    "display_name": "Siri 建议数据",
     "tag": "medium",
-    "explanation": "This is what Siri Suggestions has learned about your habits and routines. Deleting it resets those personalised suggestions until Siri learns them again.",
+    "explanation": "这是 Siri 建议对你习惯和日常规律的学习结果。删除会重置这些个性化建议，直到 Siri 重新学会。",
     "bundle_ids": [
       "com.apple.proactive.eventtracker"
     ],
@@ -639,9 +639,9 @@
   },
   {
     "key": "remindd",
-    "display_name": "Reminders Service",
+    "display_name": "提醒事项服务",
     "tag": "safe",
-    "explanation": "This is temporary data used by the Reminders app in the background. Deleting it is safe but the Reminders app may need a moment to reload when next opened.",
+    "explanation": "这是“提醒事项”App 在后台使用的临时数据。删除是安全的，但“提醒事项”App 下次打开时可能需要一点时间重新加载。",
     "bundle_ids": [
       "com.apple.remindd"
     ],
@@ -653,9 +653,9 @@
   },
   {
     "key": "safari",
-    "display_name": "Safari Browser",
+    "display_name": "Safari 浏览器",
     "tag": "safe",
-    "explanation": "This contains Safari's temporary browsing data, including website previews and recently visited page data. Deleting it is safe but websites may load slightly slower until the data rebuilds.",
+    "explanation": "这里包含 Safari 的临时浏览数据，包括网站预览和最近访问页面数据。删除是安全的，但在数据重建之前网站加载可能会稍慢。",
     "bundle_ids": [
       "com.apple.Safari",
       "com.apple.Safari.SafeBrowsing"
@@ -669,9 +669,9 @@
   },
   {
     "key": "shazam",
-    "display_name": "Shazam Music ID",
+    "display_name": "Shazam 音乐识别",
     "tag": "safe",
-    "explanation": "This stores temporary data downloaded by Shazam to help identify music. It is completely safe to delete and Shazam will re-download what it needs.",
+    "explanation": "这里存储 Shazam 下载用于帮助识别音乐的临时数据。可以完全安全地删除，Shazam 会重新下载所需内容。",
     "bundle_ids": [
       "com.apple.shazamlibrary.cloud"
     ],
@@ -683,9 +683,9 @@
   },
   {
     "key": "siri-tts",
-    "display_name": "Siri Voice Data",
+    "display_name": "Siri 语音数据",
     "tag": "safe",
-    "explanation": "This stores temporary voice and speech data used by Siri to speak responses. It is safe to delete and Siri will rebuild it automatically.",
+    "explanation": "这里存储 Siri 用于朗读回复的临时语音数据。可以安全删除，Siri 会自动重建。",
     "bundle_ids": [
       "com.apple.sirittsd"
     ],
@@ -698,9 +698,9 @@
   },
   {
     "key": "spotlight",
-    "display_name": "Spotlight Search",
+    "display_name": "Spotlight 搜索",
     "tag": "medium",
-    "explanation": "This is the data Spotlight uses to search your Mac. Nothing is lost, but search results will be slow or incomplete until macOS finishes rebuilding the index, which can take a while.",
+    "explanation": "这是 Spotlight 用于搜索你 Mac 的数据。内容不会丢失，但在 macOS 完成索引重建之前（可能需要一段时间），搜索结果会变慢或不完整。",
     "bundle_ids": [
       "com.apple.Spotlight"
     ],
@@ -712,9 +712,9 @@
   },
   {
     "key": "tipsd",
-    "display_name": "macOS Tips App",
+    "display_name": "macOS“提示”App",
     "tag": "safe",
-    "explanation": "This stores temporary data for the Tips app that shows you helpful macOS features. It is completely safe to delete.",
+    "explanation": "这里存储向你介绍实用 macOS 功能的“提示”App 的临时数据。可以完全安全地删除。",
     "bundle_ids": [
       "com.apple.tipsd"
     ],
@@ -726,9 +726,9 @@
   },
   {
     "key": "videoconference",
-    "display_name": "FaceTime & Video Calls",
+    "display_name": "FaceTime 与视频通话",
     "tag": "safe",
-    "explanation": "This is temporary data used by FaceTime and other Apple video calling features. It is safe to delete and will be recreated as needed.",
+    "explanation": "这是 FaceTime 和其他 Apple 视频通话功能使用的临时数据。可以安全删除，并会在需要时重新创建。",
     "bundle_ids": [
       "com.apple.VideoConference"
     ],
@@ -740,9 +740,9 @@
   },
   {
     "key": "datadog",
-    "display_name": "Datadog Monitoring",
+    "display_name": "Datadog 监控",
     "tag": "safe",
-    "explanation": "This stores temporary data for Datadog, a developer monitoring and analytics tool. It is safe to delete and will be recreated if Datadog is running.",
+    "explanation": "这里存储 Datadog（一款开发者监控与分析工具）的临时数据。可以安全删除；如果 Datadog 正在运行，它会重新创建。",
     "bundle_ids": [
       "com.datadoghq"
     ],
@@ -754,9 +754,9 @@
   },
   {
     "key": "google-updater",
-    "display_name": "Google App Updater",
+    "display_name": "Google 应用更新器",
     "tag": "safe",
-    "explanation": "This stores temporary files used by Google's automatic updater to keep Google apps like Chrome up to date. It is safe to delete and will be recreated at the next update check.",
+    "explanation": "这里存储 Google 自动更新器用于让 Chrome 等 Google 应用保持最新的临时文件。可以安全删除，并会在下次检查更新时重新创建。",
     "bundle_ids": [
       "com.google.antigravity.ShipIt",
       "com.google.GoogleUpdater"
@@ -771,9 +771,9 @@
   },
   {
     "key": "microsoft-autoupdate",
-    "display_name": "Microsoft Auto-Updater",
+    "display_name": "Microsoft 自动更新器",
     "tag": "safe",
-    "explanation": "This holds temporary files used by Microsoft AutoUpdate to keep apps like Word and Excel up to date. It is safe to delete and will be recreated automatically.",
+    "explanation": "这里保存 Microsoft AutoUpdate 用于让 Word、Excel 等应用保持最新的临时文件。可以安全删除，并会自动重建。",
     "bundle_ids": [
       "com.microsoft.autoupdate.fba"
     ],
@@ -785,9 +785,9 @@
   },
   {
     "key": "microsoft-edge-updater",
-    "display_name": "Edge Browser Updater",
+    "display_name": "Edge 浏览器更新器",
     "tag": "safe",
-    "explanation": "These are temporary files used to update the Microsoft Edge browser. They are safe to delete and will be recreated when Edge next checks for updates.",
+    "explanation": "这些是用于更新 Microsoft Edge 浏览器的临时文件。可以安全删除，并会在 Edge 下次检查更新时重新创建。",
     "bundle_ids": [
       "com.microsoft.EdgeUpdater"
     ],
@@ -799,9 +799,9 @@
   },
   {
     "key": "nt-ware-smartclient",
-    "display_name": "NT-ware Print Client",
+    "display_name": "NT-ware 打印客户端",
     "tag": "medium",
-    "explanation": "This is used by NT-ware's SmartClient, a print management tool commonly found in offices and universities. Deleting it is generally safe but the print client may need to re-configure itself.",
+    "explanation": "这里由 NT-ware 的 SmartClient 使用，这是一款常见于办公室和大学的打印管理工具。删除通常是安全的，但打印客户端可能需要重新配置。",
     "bundle_ids": [
       "com.nt-ware.SmartClient"
     ],
@@ -813,9 +813,9 @@
   },
   {
     "key": "openai-codex",
-    "display_name": "OpenAI Codex Tool",
+    "display_name": "OpenAI Codex 工具",
     "tag": "safe",
-    "explanation": "This stores temporary data for OpenAI's Codex coding assistant tool. It is safe to delete and will be rebuilt automatically.",
+    "explanation": "这里存储 OpenAI 的 Codex 编码助手工具的临时数据。可以安全删除，并会自动重建。",
     "bundle_ids": [
       "com.openai.codex"
     ],
@@ -827,9 +827,9 @@
   },
   {
     "key": "todesktop-shipit",
-    "display_name": "ToDesktop App Updater",
+    "display_name": "ToDesktop 应用更新器",
     "tag": "safe",
-    "explanation": "This stores temporary files used by apps built with ToDesktop to deliver updates. It is safe to delete.",
+    "explanation": "这里存储用 ToDesktop 构建的应用用于分发更新的临时文件。可以安全删除。",
     "bundle_ids": [
       "com.todesktop.230313mzl4w4u92.ShipIt"
     ],
@@ -841,9 +841,9 @@
   },
   {
     "key": "arc-browser",
-    "display_name": "Arc / Dia Browser",
+    "display_name": "Arc / Dia 浏览器",
     "tag": "safe",
-    "explanation": "This stores temporary data for the Arc or Dia web browser. Deleting it is safe but the browser may reload some website data more slowly on next launch.",
+    "explanation": "这里存储 Arc 或 Dia 网页浏览器的临时数据。删除是安全的，但浏览器下次启动时重新加载某些网站数据可能会更慢。",
     "bundle_ids": [
       "company.thebrowser.browser.helper",
       "company.thebrowser.dia"
@@ -859,9 +859,9 @@
   },
   {
     "key": "family-circle",
-    "display_name": "Family Sharing Service",
+    "display_name": "家人共享服务",
     "tag": "medium",
-    "explanation": "Temporary data for Family Sharing. Nothing is lost, but family and sharing settings may take a moment to re-sync.",
+    "explanation": "“家人共享”的临时数据。内容不会丢失，但家庭和共享设置可能需要一点时间重新同步。",
     "bundle_ids": [],
     "aliases": [
       "FamilyCircle"
@@ -871,9 +871,9 @@
   },
   {
     "key": "purge-app",
-    "display_name": "Purge App",
+    "display_name": "Purge 应用",
     "tag": "safe",
-    "explanation": "This is temporary data created by the Purge app itself. It is safe to delete.",
+    "explanation": "这是 Purge 应用自身创建的临时数据。可以安全删除。",
     "bundle_ids": [
       "io.getpurge.app"
     ],
@@ -885,9 +885,9 @@
   },
   {
     "key": "sentry",
-    "display_name": "Sentry Error Reports",
+    "display_name": "Sentry 错误报告",
     "tag": "safe",
-    "explanation": "This stores temporary error and crash reports collected by Sentry, a tool used by developers to track app issues. It is safe to delete.",
+    "explanation": "这里存储 Sentry（开发者用于跟踪应用问题的工具）收集的临时错误和崩溃报告。可以安全删除。",
     "bundle_ids": [
       "io.sentry"
     ],
@@ -900,9 +900,9 @@
   },
   {
     "key": "ms-playwright",
-    "display_name": "Playwright Browsers",
+    "display_name": "Playwright 浏览器",
     "tag": "medium",
-    "explanation": "Browsers Playwright downloaded for automated website testing. Your tests fail until you run npx playwright install, which downloads them again.",
+    "explanation": "Playwright 为自动化网站测试下载的浏览器。在运行 npx playwright install 之前你的测试会失败，该命令会重新下载它们。",
     "bundle_ids": [],
     "aliases": [
       "ms-playwright-go"
@@ -912,9 +912,9 @@
   },
   {
     "key": "node-modules",
-    "display_name": "Node.js Packages",
+    "display_name": "Node.js 依赖包",
     "tag": "safe",
-    "explanation": "Code libraries installed for developer projects. Safe to remove for stale projects — run npm install to restore them anytime.",
+    "explanation": "为开发项目安装的代码库。对于已搁置的项目可以安全移除——随时运行 npm install 即可恢复。",
     "bundle_ids": [],
     "aliases": [
       "node_modules"
@@ -924,9 +924,9 @@
   },
   {
     "key": "prisma-nodejs",
-    "display_name": "Prisma Database Tool",
+    "display_name": "Prisma 数据库工具",
     "tag": "safe",
-    "explanation": "This stores temporary files used by Prisma, a developer database tool. It is safe to delete and will be regenerated when Prisma is next used.",
+    "explanation": "这里存储 Prisma（一款开发者数据库工具）使用的临时文件。可以安全删除，并会在下次使用 Prisma 时重新生成。",
     "bundle_ids": [],
     "aliases": [
       "prisma-nodejs"
@@ -936,9 +936,9 @@
   },
   {
     "key": "segment",
-    "display_name": "Segment Analytics",
+    "display_name": "Segment 分析",
     "tag": "safe",
-    "explanation": "This stores temporary data for Segment, a tool developers use to collect usage analytics. It is safe to delete.",
+    "explanation": "这里存储 Segment（开发者用于收集使用情况分析的工具）的临时数据。可以安全删除。",
     "bundle_ids": [],
     "aliases": [
       "segment"
@@ -948,9 +948,9 @@
   },
   {
     "key": "ssu",
-    "display_name": "Apple Software Update",
+    "display_name": "Apple 软件更新",
     "tag": "safe",
-    "explanation": "This is temporary data used by Apple's software update system. It is safe to delete and will be recreated when your Mac next checks for updates.",
+    "explanation": "这是 Apple 软件更新系统使用的临时数据。可以安全删除，并会在你的 Mac 下次检查更新时重新创建。",
     "bundle_ids": [],
     "aliases": [
       "ssu"
@@ -960,9 +960,9 @@
   },
   {
     "key": "macos-installer",
-    "display_name": "macOS Installer",
+    "display_name": "macOS 安装器",
     "tag": "medium",
-    "explanation": "A full macOS installer downloaded from the App Store or Software Update, usually 12 to 15 GB. macOS does not need it once it is installed. Keep it if you use it to make a bootable USB installer; otherwise you can download it again from the App Store.",
+    "explanation": "从 App Store 或“软件更新”下载的完整 macOS 安装器，通常为 12 到 15 GB。安装完成后 macOS 不再需要它。如果你用它制作可启动 USB 安装盘，请保留；否则可以随时从 App Store 重新下载。",
     "bundle_ids": [],
     "aliases": [
       "macOS Installer"
@@ -972,9 +972,9 @@
   },
   {
     "key": "dart-tool",
-    "display_name": "Flutter Dev Tool",
+    "display_name": "Flutter 开发工具",
     "tag": "safe",
-    "explanation": "A temporary folder used by the Dart and Flutter development tools. Safe to delete and will be recreated automatically the next time you run a Flutter project.",
+    "explanation": "Dart 和 Flutter 开发工具使用的临时文件夹。可以安全删除，并会在下次运行 Flutter 项目时自动重建。",
     "bundle_ids": [],
     "aliases": [
       ".dart_tool"
@@ -984,9 +984,9 @@
   },
   {
     "key": "ams-migrator",
-    "display_name": "App Store Migration Tool",
+    "display_name": "App Store 迁移工具",
     "tag": "safe",
-    "explanation": "This is a temporary folder used by Apple's App Store services to migrate account or media data. It is safe to delete.",
+    "explanation": "这是 Apple App Store 服务用于迁移账户或媒体数据的临时文件夹。可以安全删除。",
     "bundle_ids": [],
     "aliases": [
       "AMSDataMigratorTool"
@@ -996,9 +996,9 @@
   },
   {
     "key": "spokenly",
-    "display_name": "Spokenly App",
+    "display_name": "Spokenly 应用",
     "tag": "safe",
-    "explanation": "This stores temporary data for the Spokenly app. It is safe to delete and will be recreated when the app is next used.",
+    "explanation": "这里存储 Spokenly 应用的临时数据。可以安全删除，并会在下次使用该应用时重新创建。",
     "bundle_ids": [
       "app.spokenly",
       "app.spokenly.revenuecat"
@@ -1012,9 +1012,9 @@
   },
   {
     "key": "archives",
-    "display_name": "App Archives",
+    "display_name": "应用构建归档",
     "tag": "medium",
-    "explanation": "Archived builds created by development tools. Check contents before deleting — may contain important project archives.",
+    "explanation": "开发工具创建的构建归档。删除前请检查内容——可能包含重要的项目归档。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -1022,9 +1022,9 @@
   },
   {
     "key": "container-managerd",
-    "display_name": "App Sandbox Manager",
+    "display_name": "应用沙盒管理器",
     "tag": "safe",
-    "explanation": "This is used by the macOS service that manages isolated storage areas for apps. Deleting it is generally safe but some apps may need to re-establish their storage areas.",
+    "explanation": "这里由管理应用隔离存储区域的 macOS 服务使用。删除通常是安全的，但一些应用可能需要重新建立它们的存储区域。",
     "bundle_ids": [
       "com.apple.containermanagerd"
     ],
@@ -1036,9 +1036,9 @@
   },
   {
     "key": "storekitagent",
-    "display_name": "In-App Purchase Service",
+    "display_name": "App 内购买服务",
     "tag": "medium",
-    "explanation": "Temporary data for in-app purchases and App Store transactions. Nothing is lost, but apps may ask you to restore purchases or sign in again.",
+    "explanation": "App 内购买和 App Store 交易的临时数据。内容不会丢失，但应用可能会要求你恢复购买或重新登录。",
     "bundle_ids": [
       "com.apple.storekitagent"
     ],
@@ -1050,9 +1050,9 @@
   },
   {
     "key": "docker",
-    "display_name": "Docker Containers",
+    "display_name": "Docker 容器",
     "tag": "medium",
-    "explanation": "This is Docker Desktop's virtual disk. It holds every image, container, and volume you have. Images can be pulled again, but volumes often hold database data that exists nowhere else. To free space and keep your volumes, run docker --context desktop-linux system prune while Docker Desktop is running. Quit Docker Desktop before deleting this folder.",
+    "explanation": "这是 Docker Desktop 的虚拟磁盘。它保存你拥有的所有镜像、容器和卷。镜像可以重新拉取，但卷通常保存着别处没有的数据库数据。若要释放空间并保留卷，请在 Docker Desktop 运行时执行 docker --context desktop-linux system prune。删除此文件夹前请先退出 Docker Desktop。",
     "bundle_ids": [
       "com.docker.docker"
     ],
@@ -1064,9 +1064,9 @@
   },
   {
     "key": "raycast",
-    "display_name": "Raycast Launcher",
+    "display_name": "Raycast 启动器",
     "tag": "safe",
-    "explanation": "This stores temporary data for Raycast, a productivity launcher app. It is safe to delete and Raycast will rebuild it automatically.",
+    "explanation": "这里存储 Raycast（一款效率启动器应用）的临时数据。可以安全删除，Raycast 会自动重建。",
     "bundle_ids": [
       "com.raycast.macos"
     ],
@@ -1078,13 +1078,13 @@
   },
   {
     "key": "DerivedData",
-    "display_name": "Xcode Build Files",
+    "display_name": "Xcode 构建文件",
     "tag": "safe",
     "aliases": [
       "DerivedData",
       "deriveddata"
     ],
-    "explanation": "Temporary files Xcode creates while building apps. Always safe to delete — your next build will just take a little longer.",
+    "explanation": "Xcode 在构建应用时创建的临时文件。始终可以安全删除——只是下次构建会稍慢。",
     "scope": "dev_tools",
     "kind": "build"
   },
@@ -1092,7 +1092,7 @@
     "key": "swiftpm",
     "display_name": "Swift Package Manager",
     "tag": "safe",
-    "explanation": "This stores downloaded Swift code libraries used by developer projects. Deleting it is safe but your projects will need to re-download their dependencies next time they are built.",
+    "explanation": "这里存储开发项目使用的已下载 Swift 代码库。删除是安全的，但你的项目下次构建时需要重新下载依赖。",
     "bundle_ids": [
       "org.swift.swiftpm"
     ],
@@ -1104,9 +1104,9 @@
   },
   {
     "key": "zen",
-    "display_name": "Zen Browser",
+    "display_name": "Zen 浏览器",
     "tag": "safe",
-    "explanation": "This stores temporary data for the Zen web browser. Deleting it is safe but the browser may reload some website data more slowly on next launch.",
+    "explanation": "这里存储 Zen 网页浏览器的临时数据。删除是安全的，但浏览器下次启动时重新加载某些网站数据可能会更慢。",
     "bundle_ids": [],
     "aliases": [
       "zen"
@@ -1116,9 +1116,9 @@
   },
   {
     "key": "xcode-itunes-service",
-    "display_name": "Xcode Device Support",
+    "display_name": "Xcode 设备支持",
     "tag": "medium",
-    "explanation": "This stores temporary files used by Xcode when installing or testing apps on connected Apple devices. Deleting it is safe but Xcode may need to re-download device support files.",
+    "explanation": "这里存储 Xcode 在连接的 Apple 设备上安装或测试应用时使用的临时文件。删除是安全的，但 Xcode 可能需要重新下载设备支持文件。",
     "bundle_ids": [
       "com.apple.dt.Xcode.ITunesSoftwareService"
     ],
@@ -1130,9 +1130,9 @@
   },
   {
     "key": "gamed",
-    "display_name": "Game Center Service",
+    "display_name": "Game Center 服务",
     "tag": "safe",
-    "explanation": "This stores temporary data for Apple's Game Center, which manages game scores and achievements. It is safe to delete and will be rebuilt automatically.",
+    "explanation": "这里存储 Apple Game Center（管理游戏分数和成就）的临时数据。可以安全删除，并会自动重建。",
     "bundle_ids": [
       "com.apple.gamed"
     ],
@@ -1144,9 +1144,9 @@
   },
   {
     "key": "chrono",
-    "display_name": "Widgets Cache",
+    "display_name": "小组件缓存",
     "tag": "safe",
-    "explanation": "Saved snapshots of your desktop and Notification Center widgets. Safe to delete; widgets draw themselves again and may look blank for a moment until they do.",
+    "explanation": "桌面和“通知中心”小组件已保存的快照。可以安全删除；小组件会重新绘制，在此之前可能短暂显示为空白。",
     "bundle_ids": [
       "com.apple.chrono"
     ],
@@ -1158,9 +1158,9 @@
   },
   {
     "key": "translation",
-    "display_name": "Translation Service",
+    "display_name": "翻译服务",
     "tag": "safe",
-    "explanation": "This stores temporary data used by macOS's built-in translation feature. It is safe to delete and the translation service will rebuild it as needed.",
+    "explanation": "这里存储 macOS 内置翻译功能使用的临时数据。可以安全删除，翻译服务会在需要时重建。",
     "bundle_ids": [
       "com.apple.translationd"
     ],
@@ -1172,9 +1172,9 @@
   },
   {
     "key": "figma-agent",
-    "display_name": "Figma Desktop Agent",
+    "display_name": "Figma 桌面代理",
     "tag": "safe",
-    "explanation": "This stores temporary data for Figma's background helper that enables font access and desktop features. It is safe to delete.",
+    "explanation": "这里存储 Figma 后台辅助程序（用于提供字体访问和桌面功能）的临时数据。可以安全删除。",
     "bundle_ids": [
       "com.figma.agent"
     ],
@@ -1186,9 +1186,9 @@
   },
   {
     "key": "gamekit",
-    "display_name": "GameKit Framework",
+    "display_name": "GameKit 框架",
     "tag": "safe",
-    "explanation": "This stores temporary data for Apple's gaming framework used by game apps. It is safe to delete and will be rebuilt when a game app is next opened.",
+    "explanation": "这里存储游戏应用使用的 Apple 游戏框架的临时数据。可以安全删除，并会在下次打开游戏应用时重建。",
     "bundle_ids": [],
     "aliases": [
       "GameKit"
@@ -1198,9 +1198,9 @@
   },
   {
     "key": "image-cache",
-    "display_name": "Image Thumbnail Cache",
+    "display_name": "图像缩略图缓存",
     "tag": "safe",
-    "explanation": "This stores saved image previews and thumbnails to speed up display in apps. It is safe to delete and the images will simply load a little slower until the previews rebuild.",
+    "explanation": "这里存储已保存的图像预览和缩略图，以加快应用中的显示。可以安全删除，只是在预览重建之前图像加载会稍慢。",
     "bundle_ids": [],
     "aliases": [
       "ImageCache"
@@ -1210,9 +1210,9 @@
   },
   {
     "key": "revenuecat",
-    "display_name": "RevenueCat Purchases",
+    "display_name": "RevenueCat 购买",
     "tag": "safe",
-    "explanation": "This stores temporary data for RevenueCat, a tool that apps use to manage in-app subscriptions and purchases. It is safe to delete.",
+    "explanation": "这里存储 RevenueCat（应用用于管理应用内订阅和购买的工具）的临时数据。可以安全删除。",
     "bundle_ids": [],
     "aliases": [
       "RevenueCat",
@@ -1223,9 +1223,9 @@
   },
   {
     "key": "gitworktrees",
-    "display_name": "Git Worktree Checkouts",
+    "display_name": "Git Worktree 检出",
     "tag": "medium",
-    "explanation": "Forgotten branch checkouts created by Git. Safe to remove if you are no longer working on those branches, but check first that you have no unsaved work.",
+    "explanation": "Git 创建的、已被遗忘的分支检出。如果你已不再处理那些分支，可以安全移除，但请先确认没有未保存的工作。",
     "bundle_ids": [],
     "aliases": [
       "worktrees",
@@ -1236,9 +1236,9 @@
   },
   {
     "key": "vscode",
-    "display_name": "VS Code Cache",
+    "display_name": "VS Code 缓存",
     "tag": "safe",
-    "explanation": "Temporary files stored by Visual Studio Code. Safe to delete and will be recreated when you open VS Code again.",
+    "explanation": "Visual Studio Code 存储的临时文件。可以安全删除，并会在你再次打开 VS Code 时重新创建。",
     "bundle_ids": [],
     "aliases": [
       "Code",
@@ -1250,9 +1250,9 @@
   },
   {
     "key": "cursor",
-    "display_name": "Cursor Cache",
+    "display_name": "Cursor 缓存",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Cursor code editor. Safe to delete and will be recreated when you open Cursor again.",
+    "explanation": "Cursor 代码编辑器存储的临时文件。可以安全删除，并会在你再次打开 Cursor 时重新创建。",
     "bundle_ids": [],
     "aliases": [
       "Cursor"
@@ -1262,9 +1262,9 @@
   },
   {
     "key": "jetbrains",
-    "display_name": "JetBrains IDE Cache",
+    "display_name": "JetBrains IDE 缓存",
     "tag": "safe",
-    "explanation": "Indexes and caches that JetBrains IDEs such as IntelliJ, WebStorm and PyCharm rebuild on their own. Local History is left alone. The IDE re-indexes your projects the next time you open them, which takes a few minutes.",
+    "explanation": "IntelliJ、WebStorm、PyCharm 等 JetBrains IDE 会自行重建的索引和缓存。本地历史记录会被保留。IDE 下次打开项目时会重新建立索引，需要几分钟。",
     "bundle_ids": [],
     "aliases": [
       "JetBrains",
@@ -1275,9 +1275,9 @@
   },
   {
     "key": "zed",
-    "display_name": "Zed Editor Cache",
+    "display_name": "Zed 编辑器缓存",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Zed code editor. Safe to delete and will be recreated when you open Zed again.",
+    "explanation": "Zed 代码编辑器存储的临时文件。可以安全删除，并会在你再次打开 Zed 时重新创建。",
     "bundle_ids": [],
     "aliases": [
       "zed",
@@ -1288,9 +1288,9 @@
   },
   {
     "key": "go",
-    "display_name": "Go Module Cache",
+    "display_name": "Go 模块缓存",
     "tag": "safe",
-    "explanation": "Cached Go packages and build outputs. Safe to delete and will be re-downloaded when you build your Go projects again.",
+    "explanation": "已缓存的 Go 包和构建产物。可以安全删除，并会在你再次构建 Go 项目时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "go/pkg/mod",
@@ -1301,9 +1301,9 @@
   },
   {
     "key": "maven",
-    "display_name": "Maven Package Cache",
+    "display_name": "Maven 包缓存",
     "tag": "medium",
-    "explanation": "Java libraries downloaded by Maven, plus anything you built and installed locally with mvn install. Downloaded libraries come back on your next build, which can take a long time. Your own installed builds only come back if you build them again.",
+    "explanation": "Maven 下载的 Java 库，以及你用 mvn install 在本地构建并安装的所有内容。下载的库会在下次构建时恢复，可能耗时很长。你自己安装的构建产物只有在重新构建时才会恢复。",
     "bundle_ids": [],
     "aliases": [
       "maven",
@@ -1314,9 +1314,9 @@
   },
   {
     "key": "sbt",
-    "display_name": "Ivy Dependency Cache",
+    "display_name": "Ivy 依赖缓存",
     "tag": "medium",
-    "explanation": "Java and Scala libraries downloaded by sbt and Ivy. Nothing is lost, but your next build downloads all of them again, which can take a long time and does not work offline.",
+    "explanation": "sbt 和 Ivy 下载的 Java 与 Scala 库。内容不会丢失，但下次构建会重新下载全部依赖，可能耗时很长，且无法离线工作。",
     "bundle_ids": [],
     "aliases": [
       "sbt",
@@ -1327,9 +1327,9 @@
   },
   {
     "key": "rubygems",
-    "display_name": "Ruby Gem Downloads",
+    "display_name": "Ruby Gem 下载缓存",
     "tag": "safe",
-    "explanation": "Downloaded .gem files and the gem spec index that RubyGems keeps after installing. Your installed gems and their commands stay. Safe to delete; RubyGems downloads them again when it needs them.",
+    "explanation": "已下载的 .gem 文件，以及 RubyGems 在安装后保留的 gem spec 索引。你已安装的 gem 及其命令会保留。可以安全删除；RubyGems 会在需要时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "rubygems",
@@ -1340,9 +1340,9 @@
   },
   {
     "key": "bundler",
-    "display_name": "Bundler Cache",
+    "display_name": "Bundler 缓存",
     "tag": "safe",
-    "explanation": "Cached Ruby gems downloaded by Bundler. Safe to delete and will be re-downloaded when you run bundle install.",
+    "explanation": "Bundler 下载并缓存的 Ruby gem。可以安全删除，并会在你运行 bundle install 时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "bundler",
@@ -1353,9 +1353,9 @@
   },
   {
     "key": "composer",
-    "display_name": "Composer Cache",
+    "display_name": "Composer 缓存",
     "tag": "safe",
-    "explanation": "Cached PHP packages downloaded by Composer. Safe to delete and will be re-downloaded when you run composer install.",
+    "explanation": "Composer 下载并缓存的 PHP 包。可以安全删除，并会在你运行 composer install 时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "composer",
@@ -1366,9 +1366,9 @@
   },
   {
     "key": "cargo",
-    "display_name": "Rust Package Cache",
+    "display_name": "Rust 包缓存",
     "tag": "safe",
-    "explanation": "Cached Rust packages and compiled dependencies. Safe to delete and will be re-downloaded when you build your Rust projects.",
+    "explanation": "已缓存的 Rust 包和已编译依赖。可以安全删除，并会在你构建 Rust 项目时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "cargo",
@@ -1379,9 +1379,9 @@
   },
   {
     "key": "terraform",
-    "display_name": "Terraform Plugin Cache",
+    "display_name": "Terraform 插件缓存",
     "tag": "safe",
-    "explanation": "Cached Terraform provider plugins. Safe to delete and will be re-downloaded when you run terraform init.",
+    "explanation": "已缓存的 Terraform 提供商插件。可以安全删除，并会在你运行 terraform init 时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "terraform",
@@ -1392,9 +1392,9 @@
   },
   {
     "key": "githubactions",
-    "display_name": "GitHub Actions Cache",
+    "display_name": "GitHub Actions 缓存",
     "tag": "safe",
-    "explanation": "Cached files used when running GitHub Actions locally. Safe to delete and will be recreated automatically.",
+    "explanation": "在本地运行 GitHub Actions 时使用的缓存文件。可以安全删除，并会自动重建。",
     "bundle_ids": [],
     "aliases": [
       "act",
@@ -1405,9 +1405,9 @@
   },
   {
     "key": "vagrant",
-    "display_name": "Vagrant Box Cache",
+    "display_name": "Vagrant Box 缓存",
     "tag": "medium",
-    "explanation": "Virtual machine images used by Vagrant. Safe to delete if unused — re-downloading takes a while.",
+    "explanation": "Vagrant 使用的虚拟机镜像。若不再使用可以安全删除——重新下载需要一段时间。",
     "bundle_ids": [],
     "aliases": [
       "vagrant",
@@ -1418,9 +1418,9 @@
   },
   {
     "key": "zsh",
-    "display_name": "Zsh Session Cache",
+    "display_name": "Zsh 会话缓存",
     "tag": "safe",
-    "explanation": "Temporary files created by your terminal shell. Safe to delete and will be recreated automatically when you open a new terminal window.",
+    "explanation": "你的终端 shell 创建的临时文件。可以安全删除，并会在你打开新终端窗口时自动重建。",
     "bundle_ids": [],
     "aliases": [
       "zsh_sessions",
@@ -1432,9 +1432,9 @@
   },
   {
     "key": "electron",
-    "display_name": "Electron App Cache",
+    "display_name": "Electron 应用缓存",
     "tag": "safe",
-    "explanation": "Temporary files stored by apps built with Electron like Slack, Discord, and Notion. Safe to delete and will be recreated automatically.",
+    "explanation": "Slack、Discord、Notion 等用 Electron 构建的应用存储的临时文件。可以安全删除，并会自动重建。",
     "bundle_ids": [],
     "aliases": [
       "electron",
@@ -1445,9 +1445,9 @@
   },
   {
     "key": "applogs",
-    "display_name": "Application Logs",
+    "display_name": "应用日志",
     "tag": "safe",
-    "explanation": "Log files created by apps to record what they are doing. Safe to delete. Apps will create new log files automatically.",
+    "explanation": "应用为记录自身运行情况而创建的日志文件。可以安全删除。应用会自动创建新的日志文件。",
     "bundle_ids": [],
     "aliases": [
       "Logs",
@@ -1458,9 +1458,9 @@
   },
   {
     "key": "crashreports",
-    "display_name": "Crash Reports",
+    "display_name": "崩溃报告",
     "tag": "safe",
-    "explanation": "Records of app crashes saved by macOS. Safe to delete. These are only useful if you are reporting a bug to an app developer.",
+    "explanation": "macOS 保存的应用崩溃记录。可以安全删除。只有当你需要向应用开发者报告问题时它们才有用。",
     "bundle_ids": [],
     "aliases": [
       "DiagnosticReports",
@@ -1471,21 +1471,21 @@
   },
   {
     "key": "iossimulators",
-    "display_name": "iOS Simulators",
+    "display_name": "iOS 模拟器",
     "aliases": [
       "CoreSimulator",
       "iossimulators"
     ],
     "tag": "medium",
-    "explanation": "Virtual iPhone and iPad devices that Xcode uses to test apps. Deleting one also deletes the apps and data installed on it. Xcode can create a new one whenever you need it.",
+    "explanation": "Xcode 用来测试应用的虚拟 iPhone 和 iPad 设备。删除一个模拟器也会删除其上安装的应用和数据。需要时你可以随时让 Xcode 重新创建一个。",
     "scope": "dev_tools",
     "kind": "devices"
   },
   {
     "key": "bun-cache",
-    "display_name": "Bun Package Cache",
+    "display_name": "Bun 包缓存",
     "tag": "safe",
-    "explanation": "Cached packages downloaded by Bun, a fast JavaScript runtime and package manager. Safe to delete and will be re-downloaded the next time you run bun install.",
+    "explanation": "Bun（一款快速的 JavaScript 运行时和包管理器）下载并缓存的包。可以安全删除，并会在你下次运行 bun install 时重新下载。",
     "bundle_ids": [],
     "aliases": [
       ".bun",
@@ -1496,9 +1496,9 @@
   },
   {
     "key": "deno-cache",
-    "display_name": "Deno Module Cache",
+    "display_name": "Deno 模块缓存",
     "tag": "safe",
-    "explanation": "Cached modules downloaded by Deno, a JavaScript and TypeScript runtime. Safe to delete and will be re-downloaded when you next run a Deno project.",
+    "explanation": "Deno（一款 JavaScript 和 TypeScript 运行时）下载并缓存的模块。可以安全删除，并会在你下次运行 Deno 项目时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "deno",
@@ -1509,9 +1509,9 @@
   },
   {
     "key": "turbo-cache",
-    "display_name": "Turborepo Build Cache",
+    "display_name": "Turborepo 构建缓存",
     "tag": "safe",
-    "explanation": "Saved build outputs from Turborepo, a build tool for JavaScript monorepos. Safe to delete. Your next build will simply take a little longer as it rebuilds from scratch.",
+    "explanation": "Turborepo（一款用于 JavaScript monorepo 的构建工具）保存的构建产物。可以安全删除。下次构建会从零重新构建，只是稍慢一些。",
     "bundle_ids": [],
     "aliases": [
       ".turbo",
@@ -1522,9 +1522,9 @@
   },
   {
     "key": "mise-cache",
-    "display_name": "Mise Tool Version Cache",
+    "display_name": "Mise 工具版本缓存",
     "tag": "safe",
-    "explanation": "Cached runtime versions managed by Mise (formerly rtx), a tool version manager. Safe to delete but Mise will need to re-download any tools you use next time.",
+    "explanation": "由 Mise（原名 rtx，一款工具版本管理器）管理的已缓存运行时版本。可以安全删除，但 Mise 下次需要重新下载你使用的任何工具。",
     "bundle_ids": [],
     "aliases": [
       "mise",
@@ -1535,9 +1535,9 @@
   },
   {
     "key": "nextjs-cache",
-    "display_name": "Next.js Build Cache",
+    "display_name": "Next.js 构建缓存",
     "tag": "safe",
-    "explanation": "Temporary build files created by Next.js. Safe to delete and will be recreated the next time you build or run your Next.js project.",
+    "explanation": "Next.js 创建的临时构建文件。可以安全删除，并会在你下次构建或运行 Next.js 项目时重新创建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -1545,9 +1545,9 @@
   },
   {
     "key": "vite-cache",
-    "display_name": "Vite Build Cache",
+    "display_name": "Vite 构建缓存",
     "tag": "safe",
-    "explanation": "Temporary files created by Vite, a fast frontend build tool. Safe to delete and will be regenerated when you next start your project.",
+    "explanation": "Vite（一款快速前端构建工具）创建的临时文件。可以安全删除，并会在你下次启动项目时重新生成。",
     "bundle_ids": [],
     "aliases": [
       ".vite",
@@ -1558,9 +1558,9 @@
   },
   {
     "key": "parcel-cache",
-    "display_name": "Parcel Build Cache",
+    "display_name": "Parcel 构建缓存",
     "tag": "safe",
-    "explanation": "Saved build outputs from the Parcel bundler. Safe to delete and will be rebuilt next time you run a Parcel build.",
+    "explanation": "Parcel 打包器保存的构建产物。可以安全删除，并会在你下次运行 Parcel 构建时重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".parcel-cache",
@@ -1571,9 +1571,9 @@
   },
   {
     "key": "eslint-cache",
-    "display_name": "ESLint Cache",
+    "display_name": "ESLint 缓存",
     "tag": "safe",
-    "explanation": "Saved results from ESLint, a JavaScript code checker. Safe to delete. ESLint will simply re-check all your files on the next run.",
+    "explanation": "ESLint（一款 JavaScript 代码检查工具）保存的结果。可以安全删除。ESLint 只会在下次运行时重新检查你所有的文件。",
     "bundle_ids": [],
     "aliases": [
       ".eslintcache"
@@ -1583,9 +1583,9 @@
   },
   {
     "key": "jest-cache",
-    "display_name": "Jest Test Cache",
+    "display_name": "Jest 测试缓存",
     "tag": "safe",
-    "explanation": "Temporary files saved by Jest, a JavaScript testing tool, to make tests run faster. Safe to delete and will be recreated on the next test run.",
+    "explanation": "Jest（一款 JavaScript 测试工具）为加快测试运行而保存的临时文件。可以安全删除，并会在下次测试运行时重新创建。",
     "bundle_ids": [],
     "aliases": [
       "jest-cache",
@@ -1597,9 +1597,9 @@
   },
   {
     "key": "vitest-cache",
-    "display_name": "Vitest Test Cache",
+    "display_name": "Vitest 测试缓存",
     "tag": "safe",
-    "explanation": "Temporary files saved by Vitest to speed up test runs. Safe to delete and will be recreated automatically.",
+    "explanation": "Vitest 为加快测试运行而保存的临时文件。可以安全删除，并会自动重建。",
     "bundle_ids": [],
     "aliases": [
       ".vitest-cache",
@@ -1610,9 +1610,9 @@
   },
   {
     "key": "cypress-cache",
-    "display_name": "Cypress Test Binaries",
+    "display_name": "Cypress 测试二进制文件",
     "tag": "medium",
-    "explanation": "Downloaded browser binaries used by Cypress for end-to-end testing. Safe to delete but Cypress will need to re-download them before your next test run, which can take a few minutes.",
+    "explanation": "Cypress 用于端到端测试的已下载浏览器二进制文件。可以安全删除，但 Cypress 下次测试运行前需要重新下载它们，可能需要几分钟。",
     "bundle_ids": [],
     "aliases": [
       "Cypress",
@@ -1624,9 +1624,9 @@
   },
   {
     "key": "python-cache",
-    "display_name": "Python Bytecode Cache",
+    "display_name": "Python 字节码缓存",
     "tag": "safe",
-    "explanation": "Compiled Python files that make your code run faster. Safe to delete and Python will recreate them automatically when your code runs again.",
+    "explanation": "让你的代码运行更快的已编译 Python 文件。可以安全删除，Python 会在代码再次运行时自动重新创建。",
     "bundle_ids": [],
     "aliases": [
       "__pycache__",
@@ -1639,9 +1639,9 @@
   },
   {
     "key": "uv-cache",
-    "display_name": "uv Package Cache",
+    "display_name": "uv 包缓存",
     "tag": "safe",
-    "explanation": "Cached Python packages downloaded by uv, a fast Python package manager. Safe to delete and will be re-downloaded when you next install packages.",
+    "explanation": "uv（一款快速的 Python 包管理器）下载并缓存的 Python 包。可以安全删除，并会在你下次安装包时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "uv",
@@ -1653,9 +1653,9 @@
   },
   {
     "key": "ruff-cache",
-    "display_name": "Ruff Linter Cache",
+    "display_name": "Ruff 代码检查缓存",
     "tag": "safe",
-    "explanation": "Saved results from Ruff, a fast Python code checker. Safe to delete and will be recreated on the next run.",
+    "explanation": "Ruff（一款快速的 Python 代码检查工具）保存的结果。可以安全删除，并会在下次运行时重新创建。",
     "bundle_ids": [],
     "aliases": [
       ".ruff_cache",
@@ -1666,9 +1666,9 @@
   },
   {
     "key": "mypy-cache",
-    "display_name": "Mypy Type Check Cache",
+    "display_name": "Mypy 类型检查缓存",
     "tag": "safe",
-    "explanation": "Saved results from Mypy, a Python type checker. Safe to delete and will be rebuilt next time Mypy runs.",
+    "explanation": "Mypy（一款 Python 类型检查工具）保存的结果。可以安全删除，并会在 Mypy 下次运行时重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".mypy_cache",
@@ -1679,9 +1679,9 @@
   },
   {
     "key": "kotlin-build",
-    "display_name": "Kotlin Build Cache",
+    "display_name": "Kotlin 构建缓存",
     "tag": "safe",
-    "explanation": "Compiled Kotlin build files. Safe to delete and will be rebuilt the next time you build your Kotlin project.",
+    "explanation": "已编译的 Kotlin 构建文件。可以安全删除，并会在你下次构建 Kotlin 项目时重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".kotlin",
@@ -1693,9 +1693,9 @@
   },
   {
     "key": "android-build",
-    "display_name": "Android Build Output",
+    "display_name": "Android 构建产物",
     "tag": "safe",
-    "explanation": "Compiled Android app files. Safe to delete — your project will rebuild automatically next time.",
+    "explanation": "已编译的 Android 应用文件。可以安全删除——你的项目下次会自动重新构建。",
     "bundle_ids": [],
     "aliases": [
       "build/intermediates",
@@ -1708,9 +1708,9 @@
   },
   {
     "key": "gradle-cache",
-    "display_name": "Gradle Build Cache",
+    "display_name": "Gradle 构建缓存",
     "tag": "safe",
-    "explanation": "Cached build files and downloaded dependencies used by Gradle, a build tool for Java and Android projects. Safe to delete and will be re-downloaded on your next build.",
+    "explanation": "Gradle（一款用于 Java 和 Android 项目的构建工具）使用的已缓存构建文件和已下载依赖。可以安全删除，并会在你下次构建时重新下载。",
     "bundle_ids": [],
     "aliases": [
       ".gradle",
@@ -1723,9 +1723,9 @@
   },
   {
     "key": "gradle-global-cache",
-    "display_name": "Gradle Dependency Cache",
+    "display_name": "Gradle 依赖缓存",
     "tag": "medium",
-    "explanation": "Libraries and build caches Gradle downloads for Java, Kotlin and Android projects. Nothing is lost, but your next build downloads everything again, which can take a long time and does not work offline.",
+    "explanation": "Gradle 为 Java、Kotlin 和 Android 项目下载的库和构建缓存。内容不会丢失，但下次构建会重新下载全部内容，可能耗时很长，且无法离线工作。",
     "bundle_ids": [],
     "aliases": [
       "Gradle Dependency Cache"
@@ -1735,9 +1735,9 @@
   },
   {
     "key": "cocoapods-cache",
-    "display_name": "CocoaPods Cache",
+    "display_name": "CocoaPods 缓存",
     "tag": "safe",
-    "explanation": "Cached iOS and macOS library files downloaded by CocoaPods. Safe to delete and will be re-downloaded when you run pod install.",
+    "explanation": "CocoaPods 下载并缓存的 iOS 和 macOS 库文件。可以安全删除，并会在你运行 pod install 时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "CocoaPods",
@@ -1749,9 +1749,9 @@
   },
   {
     "key": "cocoapods-spec-repos",
-    "display_name": "CocoaPods Spec Repos",
+    "display_name": "CocoaPods 规格仓库",
     "tag": "medium",
-    "explanation": "The spec repositories CocoaPods uses to look up libraries. The public one is set up again on your next pod install. Private spec repos you added with pod repo add have to be added again.",
+    "explanation": "CocoaPods 用于查找库的规格仓库。公开仓库会在你下次 pod install 时重新设置。你用 pod repo add 添加的私有规格仓库必须重新添加。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -1759,9 +1759,9 @@
   },
   {
     "key": "swift-build",
-    "display_name": "Swift Build Artifacts",
+    "display_name": "Swift 构建产物",
     "tag": "safe",
-    "explanation": "Compiled Swift build files. Safe to delete and will be rebuilt the next time you build your Swift project.",
+    "explanation": "已编译的 Swift 构建文件。可以安全删除，并会在你下次构建 Swift 项目时重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".build",
@@ -1773,9 +1773,9 @@
   },
   {
     "key": "rust-target",
-    "display_name": "Rust Build Output",
+    "display_name": "Rust 构建产物",
     "tag": "safe",
-    "explanation": "Compiled Rust project files. Safe to delete — your project will recompile automatically on the next build.",
+    "explanation": "已编译的 Rust 项目文件。可以安全删除——你的项目会在下次构建时自动重新编译。",
     "bundle_ids": [],
     "aliases": [
       "target",
@@ -1787,9 +1787,9 @@
   },
   {
     "key": "flutter-cache",
-    "display_name": "Flutter Build Cache",
+    "display_name": "Flutter 构建缓存",
     "tag": "safe",
-    "explanation": "Temporary build files created by Flutter. Safe to delete and will be recreated the next time you build your Flutter app.",
+    "explanation": "Flutter 创建的临时构建文件。可以安全删除，并会在你下次构建 Flutter 应用时重新创建。",
     "bundle_ids": [],
     "aliases": [
       ".flutter-plugins",
@@ -1802,9 +1802,9 @@
   },
   {
     "key": "pub-cache",
-    "display_name": "Dart Pub Cache",
+    "display_name": "Dart Pub 缓存",
     "tag": "safe",
-    "explanation": "Dart and Flutter packages downloaded by pub. Tools you installed with dart pub global activate are left alone. Safe to delete; packages download again on your next flutter pub get.",
+    "explanation": "pub 下载的 Dart 和 Flutter 包。你用 dart pub global activate 安装的工具会被保留。可以安全删除；包会在你下次 flutter pub get 时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "pub-cache",
@@ -1815,9 +1815,9 @@
   },
   {
     "key": "xcode-archives",
-    "display_name": "Xcode App Archives",
+    "display_name": "Xcode 应用归档",
     "tag": "medium",
-    "explanation": "Archived Xcode builds for App Store submission. Cannot be recovered once deleted — only remove if you no longer need them.",
+    "explanation": "用于提交 App Store 的已归档 Xcode 构建。一旦删除无法恢复——仅在你不再需要它们时才移除。",
     "bundle_ids": [],
     "aliases": [
       "xcarchive"
@@ -1827,9 +1827,9 @@
   },
   {
     "key": "xcode-device-support",
-    "display_name": "Xcode iOS Device Support",
+    "display_name": "Xcode iOS 设备支持",
     "tag": "medium",
-    "explanation": "Files Xcode copies from your iPhone, Apple Watch, Apple TV or Vision Pro to debug apps on it. Nothing is lost, but Xcode copies them again the next time you connect that device, which takes a few minutes.",
+    "explanation": "Xcode 从你的 iPhone、Apple Watch、Apple TV 或 Vision Pro 复制过来、用于在其上调试应用的文件。内容不会丢失，但 Xcode 会在你下次连接该设备时再次复制，需要几分钟。",
     "bundle_ids": [],
     "aliases": [
       "iOS DeviceSupport",
@@ -1842,9 +1842,9 @@
   },
   {
     "key": "homebrew-cache",
-    "display_name": "Homebrew Package Cache",
+    "display_name": "Homebrew 包缓存",
     "tag": "safe",
-    "explanation": "Downloaded installation files for Homebrew packages. Safe to delete and Homebrew will simply re-download them if you reinstall any packages.",
+    "explanation": "Homebrew 包的已下载安装文件。可以安全删除，如果你重新安装任何包，Homebrew 会直接重新下载。",
     "bundle_ids": [],
     "aliases": [
       "Homebrew",
@@ -1856,9 +1856,9 @@
   },
   {
     "key": "nvm-cache",
-    "display_name": "nvm Node.js Versions",
+    "display_name": "nvm Node.js 版本",
     "tag": "medium",
-    "explanation": "Node.js versions managed by nvm. Safe to delete unused versions — avoid removing versions your projects depend on.",
+    "explanation": "由 nvm 管理的 Node.js 版本。可以安全删除未使用的版本——但请避免移除你的项目所依赖的版本。",
     "bundle_ids": [],
     "aliases": [
       ".nvm",
@@ -1869,9 +1869,9 @@
   },
   {
     "key": "volta-cache",
-    "display_name": "Volta Tool Cache",
+    "display_name": "Volta 工具缓存",
     "tag": "safe",
-    "explanation": "Cached Node.js and package manager versions managed by Volta. Safe to delete and Volta will re-download versions as needed.",
+    "explanation": "由 Volta 管理的已缓存 Node.js 和包管理器版本。可以安全删除，Volta 会按需重新下载版本。",
     "bundle_ids": [],
     "aliases": [
       "volta"
@@ -1881,9 +1881,9 @@
   },
   {
     "key": "pnpm-store",
-    "display_name": "pnpm Package Store",
+    "display_name": "pnpm 包存储",
     "tag": "safe",
-    "explanation": "The central package store used by pnpm to save disk space across projects. Safe to delete and packages will be re-downloaded when you run pnpm install.",
+    "explanation": "pnpm 用于在多个项目间节省磁盘空间的中心包存储。可以安全删除，包会在你运行 pnpm install 时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "pnpm-store",
@@ -1895,9 +1895,9 @@
   },
   {
     "key": "yarn-cache",
-    "display_name": "Yarn Package Cache",
+    "display_name": "Yarn 包缓存",
     "tag": "safe",
-    "explanation": "Cached packages downloaded by Yarn. Safe to delete and will be re-downloaded when you run yarn install.",
+    "explanation": "Yarn 下载并缓存的包。可以安全删除，并会在你运行 yarn install 时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "yarn-cache",
@@ -1909,9 +1909,9 @@
   },
   {
     "key": "npm-cache",
-    "display_name": "npm Package Cache",
+    "display_name": "npm 包缓存",
     "tag": "safe",
-    "explanation": "Cached packages downloaded by npm. Safe to delete and will be re-downloaded when you run npm install.",
+    "explanation": "npm 下载的缓存包。可以安全删除，下次运行 npm install 时会重新下载。",
     "bundle_ids": [],
     "aliases": [
       "npm-cache",
@@ -1922,9 +1922,9 @@
   },
   {
     "key": "husky-cache",
-    "display_name": "Husky Git Hooks",
+    "display_name": "Husky Git 钩子",
     "tag": "safe",
-    "explanation": "Temporary files used by Husky to manage Git hooks in your projects. Safe to delete and will be regenerated automatically.",
+    "explanation": "Husky 用于管理项目 Git 钩子的临时文件。可以安全删除，会自动重新生成。",
     "bundle_ids": [],
     "aliases": [
       "_husky"
@@ -1934,9 +1934,9 @@
   },
   {
     "key": "storybook-cache",
-    "display_name": "Storybook Cache",
+    "display_name": "Storybook 缓存",
     "tag": "safe",
-    "explanation": "Temporary build files created by Storybook, a UI component development tool. Safe to delete and will be rebuilt the next time you start Storybook.",
+    "explanation": "UI 组件开发工具 Storybook 生成的临时构建文件。可以安全删除，下次启动 Storybook 时会重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".storybook-cache",
@@ -1947,9 +1947,9 @@
   },
   {
     "key": "nx-cache",
-    "display_name": "Nx Monorepo Cache",
+    "display_name": "Nx Monorepo 缓存",
     "tag": "safe",
-    "explanation": "Saved build and test results from Nx, a monorepo build tool. Safe to delete. Your next build will take a little longer as it rebuilds from scratch.",
+    "explanation": "monorepo 构建工具 Nx 保存的构建与测试结果。可以安全删除。下次构建会从头开始，因此会稍微慢一些。",
     "bundle_ids": [],
     "aliases": [
       ".nx",
@@ -1960,9 +1960,9 @@
   },
   {
     "key": "moon-cache",
-    "display_name": "Moon Build Cache",
+    "display_name": "Moon 构建缓存",
     "tag": "safe",
-    "explanation": "Saved build outputs from Moon, a build and task runner for monorepos. Safe to delete and will be regenerated on the next run.",
+    "explanation": "面向 monorepo 的构建与任务运行器 Moon 保存的构建产物。可以安全删除，下次运行时会重新生成。",
     "bundle_ids": [],
     "aliases": [
       ".moon",
@@ -1973,9 +1973,9 @@
   },
   {
     "key": "warp-terminal",
-    "display_name": "Warp Terminal",
+    "display_name": "Warp 终端",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Warp terminal app. Safe to delete and Warp will recreate them automatically.",
+    "explanation": "Warp 终端应用存储的临时文件。可以安全删除，Warp 会自动重新创建。",
     "bundle_ids": [
       "dev.warp.Warp-Stable"
     ],
@@ -1988,9 +1988,9 @@
   },
   {
     "key": "iterm2",
-    "display_name": "iTerm2 Terminal",
+    "display_name": "iTerm2 终端",
     "tag": "safe",
-    "explanation": "Temporary files stored by the iTerm2 terminal app. Safe to delete and iTerm2 will recreate them automatically.",
+    "explanation": "iTerm2 终端应用存储的临时文件。可以安全删除，iTerm2 会自动重新创建。",
     "bundle_ids": [
       "com.googlecode.iterm2"
     ],
@@ -2004,9 +2004,9 @@
   },
   {
     "key": "ghostty",
-    "display_name": "Ghostty Terminal",
+    "display_name": "Ghostty 终端",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Ghostty terminal app. Safe to delete and will be recreated when you next open Ghostty.",
+    "explanation": "Ghostty 终端应用存储的临时文件。可以安全删除，下次打开 Ghostty 时会重新创建。",
     "bundle_ids": [
       "com.mitchellh.ghostty"
     ],
@@ -2021,7 +2021,7 @@
     "key": "chrome",
     "display_name": "Google Chrome",
     "tag": "safe",
-    "explanation": "Temporary browsing data stored by Google Chrome including website caches and previews. Deleting it is safe but websites may load a little slower until Chrome rebuilds the cache.",
+    "explanation": "Google Chrome 存储的临时浏览数据，包括网站缓存和预览。删除是安全的，但在 Chrome 重建缓存之前，网站加载会稍慢。",
     "bundle_ids": [
       "com.google.Chrome"
     ],
@@ -2035,9 +2035,9 @@
   },
   {
     "key": "firefox",
-    "display_name": "Firefox Browser",
+    "display_name": "Firefox 浏览器",
     "tag": "safe",
-    "explanation": "Temporary browsing data stored by Firefox. Deleting it is safe but websites may load a little slower until Firefox rebuilds the cache.",
+    "explanation": "Firefox 存储的临时浏览数据。删除是安全的，但在 Firefox 重建缓存之前，网站加载会稍慢。",
     "bundle_ids": [
       "org.mozilla.firefox"
     ],
@@ -2050,9 +2050,9 @@
   },
   {
     "key": "brave",
-    "display_name": "Brave Browser",
+    "display_name": "Brave 浏览器",
     "tag": "safe",
-    "explanation": "Temporary browsing data stored by the Brave browser. Deleting it is safe but websites may load a little slower until Brave rebuilds the cache.",
+    "explanation": "Brave 浏览器存储的临时浏览数据。删除是安全的，但在 Brave 重建缓存之前，网站加载会稍慢。",
     "bundle_ids": [
       "com.brave.Browser"
     ],
@@ -2065,9 +2065,9 @@
   },
   {
     "key": "opera",
-    "display_name": "Opera Browser",
+    "display_name": "Opera 浏览器",
     "tag": "safe",
-    "explanation": "Temporary browsing data stored by Opera. Deleting it is safe but websites may load a little slower until Opera rebuilds the cache.",
+    "explanation": "Opera 存储的临时浏览数据。删除是安全的，但在 Opera 重建缓存之前，网站加载会稍慢。",
     "bundle_ids": [
       "com.operasoftware.Opera"
     ],
@@ -2082,7 +2082,7 @@
     "key": "slack",
     "display_name": "Slack",
     "tag": "safe",
-    "explanation": "Temporary files stored by Slack including message thumbnails and previews. Safe to delete and Slack will rebuild them automatically.",
+    "explanation": "Slack 存储的临时文件，包括消息缩略图和预览。可以安全删除，Slack 会自动重建它们。",
     "bundle_ids": [
       "com.tinyspeck.slackmacgap"
     ],
@@ -2097,7 +2097,7 @@
     "key": "discord",
     "display_name": "Discord",
     "tag": "safe",
-    "explanation": "Temporary files stored by Discord. Safe to delete and Discord will rebuild them automatically when you next open it.",
+    "explanation": "Discord 存储的临时文件。可以安全删除，下次打开 Discord 时会自动重建。",
     "bundle_ids": [
       "com.hnc.Discord"
     ],
@@ -2112,7 +2112,7 @@
     "key": "zoom",
     "display_name": "Zoom",
     "tag": "safe",
-    "explanation": "Temporary files stored by Zoom. Safe to delete and Zoom will recreate them automatically.",
+    "explanation": "Zoom 存储的临时文件。可以安全删除，Zoom 会自动重新创建。",
     "bundle_ids": [
       "us.zoom.xos"
     ],
@@ -2127,7 +2127,7 @@
     "key": "notion",
     "display_name": "Notion",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Notion app. Safe to delete and Notion will rebuild them when you next open it.",
+    "explanation": "Notion 应用存储的临时文件。可以安全删除，下次打开 Notion 时会重建。",
     "bundle_ids": [
       "notion.id"
     ],
@@ -2142,7 +2142,7 @@
     "key": "spotify",
     "display_name": "Spotify",
     "tag": "safe",
-    "explanation": "Songs and artwork Spotify saved while you listened. Only shown when you have nothing downloaded for offline listening, since Spotify keeps those downloads close by. Safe to delete; Spotify streams and saves them again as you listen.",
+    "explanation": "Spotify 在你收听时保存的歌曲和封面图。仅当你没有下载任何供离线收听的内容时才会显示，因为这些下载会被 Spotify 保留在别处。可以安全删除；Spotify 会在你收听时重新流式播放并再次保存。",
     "bundle_ids": [
       "com.spotify.client"
     ],
@@ -2157,7 +2157,7 @@
     "key": "whatsapp",
     "display_name": "WhatsApp",
     "tag": "safe",
-    "explanation": "Temporary files stored by WhatsApp on your Mac. Safe to delete and WhatsApp will rebuild them automatically.",
+    "explanation": "WhatsApp 在你的 Mac 上存储的临时文件。可以安全删除，WhatsApp 会自动重建。",
     "bundle_ids": [
       "net.whatsapp.WhatsApp"
     ],
@@ -2172,7 +2172,7 @@
     "key": "telegram",
     "display_name": "Telegram",
     "tag": "safe",
-    "explanation": "Temporary files stored by Telegram including media previews. Safe to delete and Telegram will reload them as needed.",
+    "explanation": "Telegram 存储的临时文件，包括媒体预览。可以安全删除，Telegram 会按需重新加载。",
     "bundle_ids": [
       "ru.keepcoder.Telegram"
     ],
@@ -2185,9 +2185,9 @@
   },
   {
     "key": "telegram-media-cache",
-    "display_name": "Telegram Media Cache",
+    "display_name": "Telegram 媒体缓存",
     "tag": "medium",
-    "explanation": "Telegram stores auto-downloaded photos, videos and files here. It re-downloads them from the cloud as needed, but secret-chat media may exist only on this Mac.",
+    "explanation": "Telegram 把自动下载的照片、视频和文件存放在这里。它会按需从云端重新下载，但私密聊天的媒体可能只存在于这台 Mac 上。",
     "bundle_ids": [],
     "aliases": [
       "Telegram Media Cache"
@@ -2199,7 +2199,7 @@
     "key": "linear",
     "display_name": "Linear",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Linear project management app. Safe to delete and Linear will rebuild them when you next open it.",
+    "explanation": "Linear 项目管理应用存储的临时文件。可以安全删除，下次打开 Linear 时会重建。",
     "bundle_ids": [
       "com.linear"
     ],
@@ -2214,7 +2214,7 @@
     "key": "figma",
     "display_name": "Figma",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Figma design app. Safe to delete and Figma will rebuild them when you next open it.",
+    "explanation": "Figma 设计应用存储的临时文件。可以安全删除，下次打开 Figma 时会重建。",
     "bundle_ids": [
       "com.figma.Desktop"
     ],
@@ -2227,9 +2227,9 @@
   },
   {
     "key": "loom",
-    "display_name": "Loom Screen Recorder",
+    "display_name": "Loom 录屏工具",
     "tag": "safe",
-    "explanation": "Temporary files stored by Loom. Safe to delete and Loom will recreate them automatically.",
+    "explanation": "Loom 存储的临时文件。可以安全删除，Loom 会自动重新创建。",
     "bundle_ids": [
       "com.loom.desktop"
     ],
@@ -2244,7 +2244,7 @@
     "key": "grammarly",
     "display_name": "Grammarly",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Grammarly writing assistant. Safe to delete and Grammarly will rebuild them automatically.",
+    "explanation": "Grammarly 写作助手存储的临时文件。可以安全删除，Grammarly 会自动重建。",
     "bundle_ids": [
       "com.grammarly.ProjectLlama"
     ],
@@ -2257,9 +2257,9 @@
   },
   {
     "key": "alfred",
-    "display_name": "Alfred Launcher",
+    "display_name": "Alfred 启动器",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Alfred productivity launcher. Safe to delete and Alfred will rebuild them automatically.",
+    "explanation": "Alfred 效率启动器存储的临时文件。可以安全删除，Alfred 会自动重建。",
     "bundle_ids": [
       "com.runningwithcrayons.Alfred"
     ],
@@ -2274,7 +2274,7 @@
     "key": "1password",
     "display_name": "1Password",
     "tag": "medium",
-    "explanation": "Temporary data stored by 1Password. Your vaults are safe, but 1Password may need to re-sync and ask you to unlock again.",
+    "explanation": "1Password 存储的临时数据。你的保险库是安全的，但 1Password 可能需要重新同步，并要求你再次解锁。",
     "bundle_ids": [
       "com.1password.1password"
     ],
@@ -2290,7 +2290,7 @@
     "key": "dropbox",
     "display_name": "Dropbox",
     "tag": "medium",
-    "explanation": "Temporary sync data stored by Dropbox. Your files are safe, but Dropbox will re-verify your whole synced folder afterwards, which can take a long time on large accounts.",
+    "explanation": "Dropbox 存储的临时同步数据。你的文件是安全的，但 Dropbox 之后会重新校验整个同步文件夹，在大型账户上这可能耗时很久。",
     "bundle_ids": [
       "com.dropbox.DropboxMacFileHelper"
     ],
@@ -2305,7 +2305,7 @@
     "key": "google-drive",
     "display_name": "Google Drive",
     "tag": "medium",
-    "explanation": "Temporary sync data stored by Google Drive. Your files are safe, but Drive will re-check your synced content afterwards and may re-download parts of it.",
+    "explanation": "Google Drive 存储的临时同步数据。你的文件是安全的，但 Drive 之后会重新检查已同步的内容，并可能重新下载其中一部分。",
     "bundle_ids": [
       "com.google.GoogleDrive"
     ],
@@ -2320,7 +2320,7 @@
     "key": "onedrive",
     "display_name": "Microsoft OneDrive",
     "tag": "medium",
-    "explanation": "Temporary sync data stored by OneDrive. Your files are safe, but OneDrive will re-verify your synced folder afterwards, which can take a while.",
+    "explanation": "OneDrive 存储的临时同步数据。你的文件是安全的，但 OneDrive 之后会重新校验同步文件夹，这可能需要一段时间。",
     "bundle_ids": [
       "com.microsoft.OneDrive"
     ],
@@ -2335,7 +2335,7 @@
     "key": "microsoft-teams",
     "display_name": "Microsoft Teams",
     "tag": "safe",
-    "explanation": "Temporary files stored by Microsoft Teams. Safe to delete and Teams will rebuild them when you next open it.",
+    "explanation": "Microsoft Teams 存储的临时文件。可以安全删除，下次打开 Teams 时会重建。",
     "bundle_ids": [
       "com.microsoft.teams2"
     ],
@@ -2351,7 +2351,7 @@
     "key": "microsoft-word",
     "display_name": "Microsoft Word",
     "tag": "safe",
-    "explanation": "Temporary files stored by Microsoft Word. Safe to delete and Word will recreate them automatically.",
+    "explanation": "Microsoft Word 存储的临时文件。可以安全删除，Word 会自动重新创建。",
     "bundle_ids": [
       "com.microsoft.Word"
     ],
@@ -2366,7 +2366,7 @@
     "key": "microsoft-excel",
     "display_name": "Microsoft Excel",
     "tag": "safe",
-    "explanation": "Temporary files stored by Microsoft Excel. Safe to delete and Excel will recreate them automatically.",
+    "explanation": "Microsoft Excel 存储的临时文件。可以安全删除，Excel 会自动重新创建。",
     "bundle_ids": [
       "com.microsoft.Excel"
     ],
@@ -2379,9 +2379,9 @@
   },
   {
     "key": "granola",
-    "display_name": "Granola AI Notes",
+    "display_name": "Granola AI 笔记",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Granola AI meeting notes app. Safe to delete and Granola will rebuild them when you next open it.",
+    "explanation": "Granola AI 会议笔记应用存储的临时文件。可以安全删除，下次打开 Granola 时会重建。",
     "bundle_ids": [
       "com.granola.app"
     ],
@@ -2394,9 +2394,9 @@
   },
   {
     "key": "claude-app",
-    "display_name": "Claude AI App",
+    "display_name": "Claude AI 应用",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Claude AI desktop app. Safe to delete and Claude will rebuild them automatically.",
+    "explanation": "Claude AI 桌面应用存储的临时文件。可以安全删除，Claude 会自动重建。",
     "bundle_ids": [
       "com.anthropic.claudefordesktop"
     ],
@@ -2409,9 +2409,9 @@
   },
   {
     "key": "chatgpt-app",
-    "display_name": "ChatGPT App",
+    "display_name": "ChatGPT 应用",
     "tag": "safe",
-    "explanation": "Temporary files stored by the ChatGPT desktop app. Safe to delete and the app will rebuild them when you next open it.",
+    "explanation": "ChatGPT 桌面应用存储的临时文件。可以安全删除，下次打开应用时会重建。",
     "bundle_ids": [
       "com.openai.chat"
     ],
@@ -2424,9 +2424,9 @@
   },
   {
     "key": "ollama",
-    "display_name": "Ollama AI Models",
+    "display_name": "Ollama AI 模型",
     "tag": "medium",
-    "explanation": "Temporary data stored by Ollama, a tool for running AI models locally. Deleting it is safe but Ollama may need to reload model data next time it runs.",
+    "explanation": "Ollama（用于在本地运行 AI 模型的工具）存储的临时数据。删除是安全的，但 Ollama 下次运行时可能需要重新加载模型数据。",
     "bundle_ids": [
       "com.ollama.Ollama"
     ],
@@ -2441,7 +2441,7 @@
     "key": "sketch",
     "display_name": "Sketch",
     "tag": "safe",
-    "explanation": "Temporary files stored by the Sketch design app. Safe to delete and Sketch will rebuild them automatically.",
+    "explanation": "Sketch 设计应用存储的临时文件。可以安全删除，Sketch 会自动重建。",
     "bundle_ids": [
       "com.bohemiancoding.sketch3"
     ],
@@ -2456,7 +2456,7 @@
     "key": "affinity-designer",
     "display_name": "Affinity Designer",
     "tag": "safe",
-    "explanation": "Temporary files stored by Affinity Designer. Safe to delete and Affinity will rebuild them when you next open it.",
+    "explanation": "Affinity Designer 存储的临时文件。可以安全删除，下次打开 Affinity 时会重建。",
     "bundle_ids": [
       "com.seriflabs.affinitydesigner2"
     ],
@@ -2471,7 +2471,7 @@
     "key": "affinity-photo",
     "display_name": "Affinity Photo",
     "tag": "safe",
-    "explanation": "Temporary files stored by Affinity Photo. Safe to delete and Affinity will rebuild them when you next open it.",
+    "explanation": "Affinity Photo 存储的临时文件。可以安全删除，下次打开 Affinity 时会重建。",
     "bundle_ids": [
       "com.seriflabs.affinityphoto2"
     ],
@@ -2486,7 +2486,7 @@
     "key": "xcode-app",
     "display_name": "Xcode",
     "tag": "safe",
-    "explanation": "Temporary files stored by Xcode, Apple's developer tool. Safe to delete and Xcode will rebuild them the next time it runs.",
+    "explanation": "Apple 开发者工具 Xcode 存储的临时文件。可以安全删除，下次运行 Xcode 时会重建。",
     "bundle_ids": [
       "com.apple.dt.Xcode"
     ],
@@ -2499,9 +2499,9 @@
   },
   {
     "key": "simulator-cache",
-    "display_name": "iOS Simulator Cache",
+    "display_name": "iOS 模拟器缓存",
     "tag": "safe",
-    "explanation": "Temporary files created by the iOS Simulator while testing apps. Safe to delete and the Simulator will recreate them when next launched.",
+    "explanation": "iOS 模拟器在测试应用时创建的临时文件。可以安全删除，下次启动模拟器时会重新创建。",
     "bundle_ids": [
       "com.apple.iphonesimulator"
     ],
@@ -2516,7 +2516,7 @@
     "key": "android-studio",
     "display_name": "Android Studio",
     "tag": "safe",
-    "explanation": "Temporary files stored by Android Studio. Safe to delete and Android Studio will rebuild them when you next open it.",
+    "explanation": "Android Studio 存储的临时文件。可以安全删除，下次打开 Android Studio 时会重建。",
     "bundle_ids": [
       "com.google.android.studio"
     ],
@@ -2530,9 +2530,9 @@
   },
   {
     "key": "proxyman",
-    "display_name": "Proxyman Network Tool",
+    "display_name": "Proxyman 网络工具",
     "tag": "safe",
-    "explanation": "Temporary files stored by Proxyman, a network debugging tool. Safe to delete and Proxyman will rebuild them automatically.",
+    "explanation": "网络调试工具 Proxyman 存储的临时文件。可以安全删除，Proxyman 会自动重建。",
     "bundle_ids": [
       "com.proxyman.NSProxy"
     ],
@@ -2545,9 +2545,9 @@
   },
   {
     "key": "tableplus",
-    "display_name": "TablePlus Database Tool",
+    "display_name": "TablePlus 数据库工具",
     "tag": "safe",
-    "explanation": "Temporary files stored by TablePlus, a database management app. Safe to delete and TablePlus will rebuild them when you next open it.",
+    "explanation": "数据库管理应用 TablePlus 存储的临时文件。可以安全删除，下次打开 TablePlus 时会重建。",
     "bundle_ids": [
       "com.tinyapp.TablePlus"
     ],
@@ -2560,9 +2560,9 @@
   },
   {
     "key": "postico",
-    "display_name": "Postico Database Tool",
+    "display_name": "Postico 数据库工具",
     "tag": "safe",
-    "explanation": "Temporary files stored by Postico, a PostgreSQL database app. Safe to delete and Postico will rebuild them automatically.",
+    "explanation": "PostgreSQL 数据库应用 Postico 存储的临时文件。可以安全删除，Postico 会自动重建。",
     "bundle_ids": [
       "at.eggerapps.Postico"
     ],
@@ -2575,9 +2575,9 @@
   },
   {
     "key": "insomnia",
-    "display_name": "Insomnia API Tool",
+    "display_name": "Insomnia API 工具",
     "tag": "safe",
-    "explanation": "Temporary files stored by Insomnia, an API testing tool. Safe to delete and Insomnia will rebuild them when you next open it.",
+    "explanation": "API 测试工具 Insomnia 存储的临时文件。可以安全删除，下次打开 Insomnia 时会重建。",
     "bundle_ids": [
       "com.insomnia.app"
     ],
@@ -2592,7 +2592,7 @@
     "key": "paw-rapi",
     "display_name": "RapidAPI / Paw",
     "tag": "safe",
-    "explanation": "Temporary files stored by Paw or RapidAPI, API development tools. Safe to delete and they will be rebuilt when you next open the app.",
+    "explanation": "API 开发工具 Paw 或 RapidAPI 存储的临时文件。可以安全删除，下次打开应用时会重建。",
     "bundle_ids": [
       "com.luckymarmot.Paw"
     ],
@@ -2606,9 +2606,9 @@
   },
   {
     "key": "fork-git",
-    "display_name": "Fork Git Client",
+    "display_name": "Fork Git 客户端",
     "tag": "safe",
-    "explanation": "Temporary files stored by Fork, a Git client for Mac. Safe to delete and Fork will rebuild them automatically.",
+    "explanation": "Mac 上的 Git 客户端 Fork 存储的临时文件。可以安全删除，Fork 会自动重建。",
     "bundle_ids": [
       "com.DanPristupov.Fork"
     ],
@@ -2621,9 +2621,9 @@
   },
   {
     "key": "sourcetree",
-    "display_name": "Sourcetree Git Client",
+    "display_name": "Sourcetree Git 客户端",
     "tag": "safe",
-    "explanation": "Temporary files stored by Sourcetree, a Git client. Safe to delete and Sourcetree will rebuild them when you next open it.",
+    "explanation": "Git 客户端 Sourcetree 存储的临时文件。可以安全删除，下次打开 Sourcetree 时会重建。",
     "bundle_ids": [
       "com.torusknot.SourceTreeNotMAS"
     ],
@@ -2636,9 +2636,9 @@
   },
   {
     "key": "tower-git",
-    "display_name": "Tower Git Client",
+    "display_name": "Tower Git 客户端",
     "tag": "safe",
-    "explanation": "Temporary files stored by Tower, a Git client for Mac. Safe to delete and Tower will rebuild them automatically.",
+    "explanation": "Mac 上的 Git 客户端 Tower 存储的临时文件。可以安全删除，Tower 会自动重建。",
     "bundle_ids": [
       "com.fournova.Tower3"
     ],
@@ -2651,9 +2651,9 @@
   },
   {
     "key": "screenflow",
-    "display_name": "ScreenFlow Screen Recorder",
+    "display_name": "ScreenFlow 录屏工具",
     "tag": "safe",
-    "explanation": "Temporary files stored by ScreenFlow. Safe to delete and ScreenFlow will rebuild them when you next open it.",
+    "explanation": "ScreenFlow 存储的临时文件。可以安全删除，下次打开 ScreenFlow 时会重建。",
     "bundle_ids": [
       "net.telestream.screenflow"
     ],
@@ -2668,7 +2668,7 @@
     "key": "cleanmymac",
     "display_name": "CleanMyMac",
     "tag": "safe",
-    "explanation": "Temporary files stored by CleanMyMac itself. Safe to delete and CleanMyMac will rebuild them automatically.",
+    "explanation": "CleanMyMac 自身存储的临时文件。可以安全删除，CleanMyMac 会自动重建。",
     "bundle_ids": [
       "com.macpaw.CleanMyMac4"
     ],
@@ -2681,9 +2681,9 @@
   },
   {
     "key": "lungo",
-    "display_name": "Lungo Keep-Awake App",
+    "display_name": "Lungo 防休眠应用",
     "tag": "safe",
-    "explanation": "Temporary files stored by Lungo, an app that keeps your Mac awake. Safe to delete.",
+    "explanation": "Lungo（让 Mac 保持唤醒的应用）存储的临时文件。可以安全删除。",
     "bundle_ids": [
       "com.sindresorhus.Lungo"
     ],
@@ -2696,9 +2696,9 @@
   },
   {
     "key": "bartender",
-    "display_name": "Bartender Menu Bar Tool",
+    "display_name": "Bartender 菜单栏工具",
     "tag": "safe",
-    "explanation": "Temporary files stored by Bartender, a menu bar organiser. Safe to delete and Bartender will rebuild them automatically.",
+    "explanation": "菜单栏整理工具 Bartender 存储的临时文件。可以安全删除，Bartender 会自动重建。",
     "bundle_ids": [
       "com.surteesstudios.Bartender"
     ],
@@ -2711,9 +2711,9 @@
   },
   {
     "key": "cleanshot",
-    "display_name": "CleanShot X Screenshot Tool",
+    "display_name": "CleanShot X 截图工具",
     "tag": "safe",
-    "explanation": "Temporary files stored by CleanShot X. Safe to delete and CleanShot will rebuild them automatically.",
+    "explanation": "CleanShot X 存储的临时文件。可以安全删除，CleanShot 会自动重建。",
     "bundle_ids": [
       "pl.maketheweb.cleanshotx"
     ],
@@ -2726,9 +2726,9 @@
   },
   {
     "key": "screenshot-app",
-    "display_name": "Screenshots",
+    "display_name": "截图",
     "tag": "safe",
-    "explanation": "Temporary files created by macOS's built-in screenshot tool. Safe to delete.",
+    "explanation": "macOS 内置截图工具创建的临时文件。可以安全删除。",
     "bundle_ids": [
       "com.apple.screencaptureui"
     ],
@@ -2741,9 +2741,9 @@
   },
   {
     "key": "xnapper",
-    "display_name": "Xnapper Screenshot Tool",
+    "display_name": "Xnapper 截图工具",
     "tag": "safe",
-    "explanation": "Temporary files stored by Xnapper, a screenshot tool. Safe to delete and Xnapper will rebuild them automatically.",
+    "explanation": "截图工具 Xnapper 存储的临时文件。可以安全删除，Xnapper 会自动重建。",
     "bundle_ids": [
       "com.xnapper.xnapper"
     ],
@@ -2756,9 +2756,9 @@
   },
   {
     "key": "apple-maps",
-    "display_name": "Apple Maps",
+    "display_name": "Apple 地图",
     "tag": "medium",
-    "explanation": "Downloaded map tiles and location data stored by Apple Maps. Nothing is lost, but Maps re-downloads tiles as you use it and any offline maps need downloading again.",
+    "explanation": "Apple 地图存储的已下载地图瓦片和位置数据。不会丢失任何内容，但地图会在你使用时重新下载瓦片，任何离线地图都需要重新下载。",
     "bundle_ids": [
       "com.apple.Maps"
     ],
@@ -2771,9 +2771,9 @@
   },
   {
     "key": "apple-photos",
-    "display_name": "Apple Photos",
+    "display_name": "Apple 照片",
     "tag": "medium",
-    "explanation": "Thumbnail and preview data stored by Apple Photos. No photos are deleted, but Photos has to regenerate every thumbnail, which can take a long time on a large library.",
+    "explanation": "Apple 照片存储的缩略图和预览数据。不会删除任何照片，但照片需要重新生成每一张缩略图，在大型图库上这可能耗时很久。",
     "bundle_ids": [
       "com.apple.Photos"
     ],
@@ -2786,9 +2786,9 @@
   },
   {
     "key": "apple-mail",
-    "display_name": "Apple Mail",
+    "display_name": "Apple 邮件",
     "tag": "medium",
-    "explanation": "Temporary files and message previews stored by Apple Mail. No mail is deleted, but Mail re-indexes afterwards and search can be incomplete until it finishes.",
+    "explanation": "Apple 邮件存储的临时文件和邮件预览。不会删除任何邮件，但邮件之后会重新建立索引，在索引完成前搜索可能不完整。",
     "bundle_ids": [
       "com.apple.mail"
     ],
@@ -2801,9 +2801,9 @@
   },
   {
     "key": "apple-music-app",
-    "display_name": "Apple Music App",
+    "display_name": "Apple Music 应用",
     "tag": "medium",
-    "explanation": "Temporary files stored by the Apple Music app. Nothing is lost, but artwork and library data are rebuilt as you use the app.",
+    "explanation": "Apple Music 应用存储的临时文件。不会丢失任何内容，但封面图和资料库数据会在你使用应用时重建。",
     "bundle_ids": [
       "com.apple.Music"
     ],
@@ -2816,9 +2816,9 @@
   },
   {
     "key": "network-cache",
-    "display_name": "Network Data Cache",
+    "display_name": "网络数据缓存",
     "tag": "safe",
-    "explanation": "Temporary files used by macOS to cache network responses and speed up connections. Safe to delete and will be rebuilt automatically.",
+    "explanation": "macOS 用于缓存网络响应、加快连接速度的临时文件。可以安全删除，会自动重建。",
     "bundle_ids": [],
     "aliases": [
       "NetworkCache",
@@ -2829,9 +2829,9 @@
   },
   {
     "key": "screen-time",
-    "display_name": "Screen Time",
+    "display_name": "屏幕使用时间",
     "tag": "medium",
-    "explanation": "The data Screen Time uses to track app usage. Deleting it clears usage history and reports, and they do not come back.",
+    "explanation": "屏幕使用时间用于记录应用使用情况的数据。删除它会清空使用历史和报告，而且无法恢复。",
     "bundle_ids": [
       "com.apple.ScreenTimeAgent"
     ],
@@ -2844,9 +2844,9 @@
   },
   {
     "key": "npm-npx-cache",
-    "display_name": "npm npx Cache",
+    "display_name": "npm npx 缓存",
     "tag": "safe",
-    "explanation": "Temporary packages downloaded when you run npx. Safe to delete; npx will download them again when needed.",
+    "explanation": "运行 npx 时下载的临时包。可以安全删除；npx 需要时会重新下载它们。",
     "bundle_ids": [],
     "aliases": [
       "npm-npx-cache",
@@ -2857,9 +2857,9 @@
   },
   {
     "key": "npm-logs",
-    "display_name": "npm Logs",
+    "display_name": "npm 日志",
     "tag": "safe",
-    "explanation": "Log files written by npm commands. Safe to delete with no effect on installed packages.",
+    "explanation": "npm 命令写入的日志文件。可以安全删除，不影响已安装的包。",
     "bundle_ids": [],
     "aliases": [
       "npm-logs",
@@ -2870,9 +2870,9 @@
   },
   {
     "key": "xcode-docs-cache",
-    "display_name": "Xcode Documentation Cache",
+    "display_name": "Xcode 文档缓存",
     "tag": "safe",
-    "explanation": "Cached Apple developer documentation used by Xcode. Safe to delete; Xcode will re-download docs when you browse them again.",
+    "explanation": "Xcode 缓存的 Apple 开发者文档。可以安全删除；再次浏览文档时 Xcode 会重新下载。",
     "bundle_ids": [],
     "aliases": [
       "xcode-docs-cache",
@@ -2883,9 +2883,9 @@
   },
   {
     "key": "corepack-cache",
-    "display_name": "Corepack Cache",
+    "display_name": "Corepack 缓存",
     "tag": "safe",
-    "explanation": "Cached Node.js package manager shims managed by Corepack. Safe to delete; Corepack will restore them on the next use.",
+    "explanation": "由 Corepack 管理的 Node.js 包管理器 shim 缓存。可以安全删除；Corepack 会在下次使用时恢复。",
     "bundle_ids": [],
     "aliases": [
       "corepack-cache",
@@ -2896,9 +2896,9 @@
   },
   {
     "key": "cursor-agent-leftover",
-    "display_name": "Cursor Agent Leftovers",
+    "display_name": "Cursor Agent 残留",
     "tag": "medium",
-    "explanation": "Folders from Cursor temp workspaces and empty windows that are now closed.",
+    "explanation": "Cursor 临时工作区和现已关闭的空白窗口留下的文件夹。",
     "bundle_ids": [],
     "aliases": [
       "cursor-agent-leftover"
@@ -2908,9 +2908,9 @@
   },
   {
     "key": "orphaned-git-worktree",
-    "display_name": "Orphaned Git Worktrees",
+    "display_name": "孤立的 Git 工作树",
     "tag": "medium",
-    "explanation": "Agent checkouts Git no longer tracks. Look inside first for uncommitted work.",
+    "explanation": "Agent 检出、但 Git 已不再跟踪的工作树。删除前先查看里面是否有未提交的工作。",
     "bundle_ids": [],
     "aliases": [
       "orphaned-git-worktree"
@@ -2920,9 +2920,9 @@
   },
   {
     "key": "obsolete-cursor-extension",
-    "display_name": "Obsolete Cursor Extension",
+    "display_name": "过时的 Cursor 扩展",
     "tag": "safe",
-    "explanation": "An older version of a Cursor extension superseded by a newer install. Safe to delete.",
+    "explanation": "已被更新安装取代的旧版 Cursor 扩展。可以安全删除。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -2930,9 +2930,9 @@
   },
   {
     "key": "obsolete-vscode-extension",
-    "display_name": "Obsolete VS Code Extension",
+    "display_name": "过时的 VS Code 扩展",
     "tag": "safe",
-    "explanation": "An older version of a VS Code extension superseded by a newer install. Safe to delete.",
+    "explanation": "已被更新安装取代的旧版 VS Code 扩展。可以安全删除。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -2940,9 +2940,9 @@
   },
   {
     "key": "orphaned-editor-workspace-storage",
-    "display_name": "Old Editor Workspace Data",
+    "display_name": "旧的编辑器工作区数据",
     "tag": "medium",
-    "explanation": "Saved state for projects that VS Code or Cursor opened from folders that no longer exist, including any AI chat history for those projects. If you moved or renamed a project instead of deleting it, its chats are in here.",
+    "explanation": "VS Code 或 Cursor 从已不存在的文件夹打开项目时保存的状态，包括这些项目的 AI 聊天记录。如果你是移动或重命名了项目而不是删除它，它的聊天记录就在这里。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -2950,9 +2950,9 @@
   },
   {
     "key": "stale-browser-framework",
-    "display_name": "Old Browser Framework",
+    "display_name": "旧的浏览器框架",
     "tag": "medium",
-    "explanation": "A leftover Chromium framework that no running process is using. Quit and relaunch the browser before an older version it is still running from can be cleaned. The browser also deletes leftover versions itself on relaunch.",
+    "explanation": "没有正在运行的进程使用的残留 Chromium 框架。需要先退出并重新启动浏览器，才能清理它当前仍在运行的旧版本。浏览器在重新启动时也会自行删除残留版本。",
     "bundle_ids": [],
     "aliases": [
       "stale-browser-framework"
@@ -2962,9 +2962,9 @@
   },
   {
     "key": "link-thumbnail-cache",
-    "display_name": "Link Thumbnail Cache",
+    "display_name": "链接缩略图缓存",
     "tag": "safe",
-    "explanation": "Cached link preview thumbnails from messaging apps. Regenerated automatically when you open conversations.",
+    "explanation": "即时通讯应用缓存的链接预览缩略图。打开会话时会自动重新生成。",
     "bundle_ids": [],
     "aliases": [
       "LinkThumbnail"
@@ -2974,9 +2974,9 @@
   },
   {
     "key": "chat-media-cache",
-    "display_name": "Chat Media Cache",
+    "display_name": "聊天媒体缓存",
     "tag": "safe",
-    "explanation": "Cached media previews from messaging apps. Not your message history; apps re-fetch media as needed.",
+    "explanation": "即时通讯应用缓存的媒体预览。这不是你的消息记录；应用会按需重新获取媒体。",
     "bundle_ids": [],
     "aliases": [
       "ChatMedia"
@@ -2986,9 +2986,9 @@
   },
   {
     "key": "app-installation-binary-deltas",
-    "display_name": "App Store Binary Deltas",
+    "display_name": "App Store 二进制增量包",
     "tag": "safe",
-    "explanation": "Cached App Store update deltas. macOS re-downloads them on the next app update.",
+    "explanation": "缓存的 App Store 更新增量包。macOS 会在下次应用更新时重新下载。",
     "bundle_ids": [],
     "aliases": [
       "AppInstallationBinaryDeltas"
@@ -2998,9 +2998,9 @@
   },
   {
     "key": "shipit-updater-cache",
-    "display_name": "App Updater Cache",
+    "display_name": "应用更新器缓存",
     "tag": "safe",
-    "explanation": "Temporary files from Squirrel-based app updaters (ShipIt folders). Recreated when apps check for updates.",
+    "explanation": "基于 Squirrel 的应用更新器产生的临时文件（ShipIt 文件夹）。应用检查更新时会重新创建。",
     "bundle_ids": [],
     "aliases": [
       "ShipIt"
@@ -3010,9 +3010,9 @@
   },
   {
     "key": "electron-updater-downloads",
-    "display_name": "App Update Downloads",
+    "display_name": "应用更新下载",
     "tag": "safe",
-    "explanation": "Update packages that apps built on Electron downloaded to install a new version. Once the update is installed they are left behind. Safe to delete; each app downloads its next update when one comes out.",
+    "explanation": "基于 Electron 的应用为安装新版本而下载的更新包。更新安装完成后它们会被遗留在这里。可以安全删除；每个应用在有新版本时会下载下一次更新。",
     "bundle_ids": [],
     "aliases": [
       "Electron Updater Downloads"
@@ -3022,9 +3022,9 @@
   },
   {
     "key": "spotlight-profiles-cache",
-    "display_name": "Spotlight Profile Cache",
+    "display_name": "Spotlight 索引配置缓存",
     "tag": "medium",
-    "explanation": "Spotlight index profile data. Nothing is lost, but Spotlight rebuilds it afterwards and search can be slower or incomplete in the meantime.",
+    "explanation": "Spotlight 索引的配置数据。不会丢失任何内容，但 Spotlight 之后会重建它，期间搜索可能变慢或不完整。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "app_caches",
@@ -3032,9 +3032,9 @@
   },
   {
     "key": "elixir-build",
-    "display_name": "Elixir Build Output",
+    "display_name": "Elixir 构建产物",
     "tag": "safe",
-    "explanation": "Compiled output created by Mix, the build tool for Elixir and Erlang projects. Safe to delete and rebuilt from your own source code the next time you compile.",
+    "explanation": "Mix（Elixir 和 Erlang 项目的构建工具）生成的编译产物。可以安全删除，下次编译时会根据你自己的源代码重新构建。",
     "bundle_ids": [],
     "aliases": [
       "_build",
@@ -3046,9 +3046,9 @@
   },
   {
     "key": "elixir-deps",
-    "display_name": "Elixir Dependencies",
+    "display_name": "Elixir 依赖",
     "tag": "safe",
-    "explanation": "Dependency source code downloaded by Mix for an Elixir or Erlang project. Safe to delete and re-downloaded on your next build, which needs an internet connection.",
+    "explanation": "Mix 为 Elixir 或 Erlang 项目下载的依赖源代码。可以安全删除，下次构建时会重新下载，需要联网。",
     "bundle_ids": [],
     "aliases": [
       "elixir-deps"
@@ -3059,9 +3059,9 @@
   },
   {
     "key": "hex-packages",
-    "display_name": "Hex Package Cache",
+    "display_name": "Hex 包缓存",
     "tag": "safe",
-    "explanation": "Downloaded Elixir and Erlang packages kept by Hex so repeat builds do not re-download them. Safe to delete and re-downloaded on your next build.",
+    "explanation": "Hex 保留的已下载 Elixir 和 Erlang 包，避免重复构建时再次下载。可以安全删除，下次构建时会重新下载。",
     "bundle_ids": [],
     "aliases": [
       "Hex Package Cache",
@@ -3073,9 +3073,9 @@
   },
   {
     "key": "rebar3-cache",
-    "display_name": "Rebar3 Cache",
+    "display_name": "Rebar3 缓存",
     "tag": "safe",
-    "explanation": "Downloaded packages and build plugins kept by Rebar3, the Erlang build tool. Safe to delete and re-downloaded on your next build.",
+    "explanation": "Erlang 构建工具 Rebar3 保留的已下载包和构建插件。可以安全删除，下次构建时会重新下载。",
     "bundle_ids": [],
     "aliases": [
       "Rebar3 Cache",
@@ -3087,9 +3087,9 @@
   },
   {
     "key": "next-build",
-    "display_name": "Next.js Build Output",
+    "display_name": "Next.js 构建产物",
     "tag": "safe",
-    "explanation": "Compiled pages and assets produced by Next.js. Safe to delete and rebuilt the next time you run or build the site.",
+    "explanation": "Next.js 生成的已编译页面和资源。可以安全删除，下次运行或构建站点时会重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".next"
@@ -3100,9 +3100,9 @@
   },
   {
     "key": "nuxt-build",
-    "display_name": "Nuxt Build Cache",
+    "display_name": "Nuxt 构建缓存",
     "tag": "safe",
-    "explanation": "Temporary build files created by Nuxt. Safe to delete and rebuilt the next time you run or build the site.",
+    "explanation": "Nuxt 创建的临时构建文件。可以安全删除，下次运行或构建站点时会重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".nuxt"
@@ -3113,9 +3113,9 @@
   },
   {
     "key": "nuxt-output",
-    "display_name": "Nuxt Output",
+    "display_name": "Nuxt 输出",
     "tag": "safe",
-    "explanation": "The built site Nuxt produces for deployment. Safe to delete and rebuilt on your next build.",
+    "explanation": "Nuxt 生成用于部署的已构建站点。可以安全删除，下次构建时会重新生成。",
     "bundle_ids": [],
     "aliases": [
       ".output"
@@ -3126,9 +3126,9 @@
   },
   {
     "key": "sveltekit-build",
-    "display_name": "SvelteKit Build Cache",
+    "display_name": "SvelteKit 构建缓存",
     "tag": "safe",
-    "explanation": "Generated files SvelteKit keeps between builds. Safe to delete and rebuilt the next time you run the project.",
+    "explanation": "SvelteKit 在多次构建之间保留的生成文件。可以安全删除，下次运行项目时会重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".svelte-kit"
@@ -3139,9 +3139,9 @@
   },
   {
     "key": "astro-build",
-    "display_name": "Astro Build Cache",
+    "display_name": "Astro 构建缓存",
     "tag": "safe",
-    "explanation": "Temporary build files created by Astro. Safe to delete and rebuilt on your next build.",
+    "explanation": "Astro 创建的临时构建文件。可以安全删除，下次构建时会重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".astro"
@@ -3152,9 +3152,9 @@
   },
   {
     "key": "angular-cache",
-    "display_name": "Angular Build Cache",
+    "display_name": "Angular 构建缓存",
     "tag": "safe",
-    "explanation": "Build cache kept by the Angular CLI to make repeat builds faster. Safe to delete and rebuilt automatically.",
+    "explanation": "Angular CLI 保留的构建缓存，用于加快重复构建。可以安全删除，会自动重建。",
     "bundle_ids": [],
     "aliases": [
       ".angular"
@@ -3165,9 +3165,9 @@
   },
   {
     "key": "pytest-cache",
-    "display_name": "pytest Cache",
+    "display_name": "pytest 缓存",
     "tag": "safe",
-    "explanation": "Test results and lookup data cached by pytest. Safe to delete and recreated the next time you run your tests.",
+    "explanation": "pytest 缓存的测试结果和查找数据。可以安全删除，下次运行测试时会重新创建。",
     "bundle_ids": [],
     "aliases": [
       ".pytest_cache"
@@ -3178,9 +3178,9 @@
   },
   {
     "key": "tox-environments",
-    "display_name": "tox Environments",
+    "display_name": "tox 环境",
     "tag": "safe",
-    "explanation": "Throwaway Python environments tox builds to run tests in. Safe to delete and rebuilt on your next tox run, which re-downloads packages.",
+    "explanation": "tox 为运行测试而搭建的一次性 Python 环境。可以安全删除，下次运行 tox 时会重新搭建，并重新下载包。",
     "bundle_ids": [],
     "aliases": [
       ".tox"
@@ -3191,9 +3191,9 @@
   },
   {
     "key": "swiftpm-build",
-    "display_name": "Swift Package Build",
+    "display_name": "Swift 包构建产物",
     "tag": "safe",
-    "explanation": "Compiled output from Swift Package Manager. Safe to delete and rebuilt by your next swift build.",
+    "explanation": "Swift Package Manager 的编译产物。可以安全删除，下次 swift build 时会重新构建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3202,9 +3202,9 @@
   },
   {
     "key": "maven-target",
-    "display_name": "Maven Build Output",
+    "display_name": "Maven 构建产物",
     "tag": "safe",
-    "explanation": "Compiled classes and packaged output produced by Maven. Safe to delete and rebuilt by your next build.",
+    "explanation": "Maven 生成的已编译类和打包产物。可以安全删除，下次构建时会重新构建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3213,9 +3213,9 @@
   },
   {
     "key": "gradle-build",
-    "display_name": "Gradle Build Output",
+    "display_name": "Gradle 构建产物",
     "tag": "safe",
-    "explanation": "Compiled output produced by a Gradle build. Safe to delete and rebuilt by your next build.",
+    "explanation": "Gradle 构建生成的编译产物。可以安全删除，下次构建时会重新构建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3224,9 +3224,9 @@
   },
   {
     "key": "sbt-target",
-    "display_name": "sbt Build Output",
+    "display_name": "sbt 构建产物",
     "tag": "safe",
-    "explanation": "Compiled output produced by sbt for a Scala project. Safe to delete and rebuilt by your next build.",
+    "explanation": "sbt 为 Scala 项目生成的编译产物。可以安全删除，下次构建时会重新构建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3235,9 +3235,9 @@
   },
   {
     "key": "dotnet-bin",
-    "display_name": "NET Build Output",
+    "display_name": ".NET 构建产物",
     "tag": "safe",
-    "explanation": "Compiled programs and libraries produced by a .NET build. Safe to delete and rebuilt by your next dotnet build.",
+    "explanation": ".NET 构建生成的已编译程序和库。可以安全删除，下次 dotnet build 时会重新构建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3246,9 +3246,9 @@
   },
   {
     "key": "dotnet-obj",
-    "display_name": "NET Intermediate Files",
+    "display_name": ".NET 中间文件",
     "tag": "safe",
-    "explanation": "Temporary files .NET creates while compiling. Safe to delete and recreated on your next build.",
+    "explanation": ".NET 编译时创建的临时文件。可以安全删除，下次构建时会重新创建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3257,9 +3257,9 @@
   },
   {
     "key": "composer-vendor",
-    "display_name": "PHP Packages",
+    "display_name": "PHP 依赖包",
     "tag": "safe",
-    "explanation": "Third-party PHP packages downloaded by Composer. Safe to delete and re-downloaded by composer install, which needs an internet connection.",
+    "explanation": "Composer 下载的第三方 PHP 包。可以安全删除，composer install 会重新下载，需要联网。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3270,7 +3270,7 @@
     "key": "bundler-vendor",
     "display_name": "Ruby Gems",
     "tag": "safe",
-    "explanation": "Ruby gems installed into the project by Bundler. Safe to delete and reinstalled by bundle install, which needs an internet connection.",
+    "explanation": "Bundler 安装到项目中的 Ruby gems。可以安全删除，bundle install 会重新安装，需要联网。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3279,9 +3279,9 @@
   },
   {
     "key": "stack-work",
-    "display_name": "Stack Build Output",
+    "display_name": "Stack 构建产物",
     "tag": "safe",
-    "explanation": "Compiled output and dependencies kept by Stack for a Haskell project. Safe to delete and rebuilt by your next build, which can take a while.",
+    "explanation": "Stack 为 Haskell 项目保留的编译产物和依赖。可以安全删除，下次构建时会重新构建，这可能耗时较久。",
     "bundle_ids": [],
     "aliases": [
       ".stack-work"
@@ -3292,9 +3292,9 @@
   },
   {
     "key": "cabal-dist",
-    "display_name": "Cabal Build Output",
+    "display_name": "Cabal 构建产物",
     "tag": "safe",
-    "explanation": "Compiled output produced by Cabal for a Haskell project. Safe to delete and rebuilt by your next build, which can take a while.",
+    "explanation": "Cabal 为 Haskell 项目生成的编译产物。可以安全删除，下次构建时会重新构建，这可能耗时较久。",
     "bundle_ids": [],
     "aliases": [
       "dist-newstyle"
@@ -3305,9 +3305,9 @@
   },
   {
     "key": "zig-cache",
-    "display_name": "Zig Build Cache",
+    "display_name": "Zig 构建缓存",
     "tag": "safe",
-    "explanation": "Compilation cache kept by Zig. Safe to delete and rebuilt on your next build.",
+    "explanation": "Zig 保留的编译缓存。可以安全删除，下次构建时会重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".zig-cache"
@@ -3318,9 +3318,9 @@
   },
   {
     "key": "zig-out",
-    "display_name": "Zig Build Output",
+    "display_name": "Zig 构建产物",
     "tag": "safe",
-    "explanation": "Finished programs and libraries produced by a Zig build. Safe to delete and rebuilt on your next build.",
+    "explanation": "Zig 构建生成的最终程序和库。可以安全删除，下次构建时会重新构建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3329,9 +3329,9 @@
   },
   {
     "key": "dune-build",
-    "display_name": "Dune Build Output",
+    "display_name": "Dune 构建产物",
     "tag": "safe",
-    "explanation": "Compiled output produced by Dune for an OCaml project. Safe to delete and rebuilt by your next build.",
+    "explanation": "Dune 为 OCaml 项目生成的编译产物。可以安全删除，下次构建时会重新构建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3340,9 +3340,9 @@
   },
   {
     "key": "cmake-build",
-    "display_name": "CMake Build Output",
+    "display_name": "CMake 构建产物",
     "tag": "safe",
-    "explanation": "Compiled output and build configuration produced by CMake. Safe to delete, though you will need to configure and build the project again.",
+    "explanation": "CMake 生成的编译产物和构建配置。可以安全删除，但你需要重新配置并构建项目。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3351,9 +3351,9 @@
   },
   {
     "key": "terraform-plugins",
-    "display_name": "Terraform Plugins",
+    "display_name": "Terraform 插件",
     "tag": "safe",
-    "explanation": "Provider plugins and modules Terraform downloads for a workspace. Safe to delete and re-downloaded by terraform init.",
+    "explanation": "Terraform 为某个工作区下载的提供者插件和模块。可以安全删除，terraform init 会重新下载。",
     "bundle_ids": [],
     "aliases": [
       ".terraform"
@@ -3364,9 +3364,9 @@
   },
   {
     "key": "godot-cache",
-    "display_name": "Godot Project Cache",
+    "display_name": "Godot 项目缓存",
     "tag": "safe",
-    "explanation": "Imported assets and editor data Godot keeps for a project. Safe to delete and rebuilt the next time you open the project.",
+    "explanation": "Godot 为项目保留的已导入资源和编辑器数据。可以安全删除，下次打开项目时会重新构建。",
     "bundle_ids": [],
     "aliases": [
       ".godot"
@@ -3377,9 +3377,9 @@
   },
   {
     "key": "unity-library",
-    "display_name": "Unity Library Folder",
+    "display_name": "Unity Library 文件夹",
     "tag": "medium",
-    "explanation": "Unity's imported-asset database for this project. It rebuilds itself, but reimporting a large project can take a long time, so check before removing it.",
+    "explanation": "Unity 为该项目的已导入资源建立的数据库。它会自行重建，但重新导入大型项目可能耗时很久，删除前请先检查。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3388,9 +3388,9 @@
   },
   {
     "key": "unity-temp",
-    "display_name": "Unity Temp Folder",
+    "display_name": "Unity Temp 文件夹",
     "tag": "medium",
-    "explanation": "Scratch files Unity writes while the editor is running. Recreated automatically, but do not remove it while the project is open in Unity.",
+    "explanation": "Unity 在编辑器运行时写入的临时文件。会自动重新创建，但项目在 Unity 中打开时不要删除它。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3399,9 +3399,9 @@
   },
   {
     "key": "unreal-intermediate",
-    "display_name": "Unreal Intermediate Files",
+    "display_name": "Unreal 中间文件",
     "tag": "medium",
-    "explanation": "Generated build files Unreal creates while compiling a project. They come back on the next build, which will take longer than usual.",
+    "explanation": "Unreal 在编译项目时生成的构建文件。下次构建会重新生成，而且会比平时更慢。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3410,9 +3410,9 @@
   },
   {
     "key": "unreal-derived-data",
-    "display_name": "Unreal Derived Data Cache",
+    "display_name": "Unreal 派生数据缓存",
     "tag": "medium",
-    "explanation": "Cooked assets and compiled shaders Unreal caches for a project. Rebuilt automatically, but the first build afterwards can be very slow.",
+    "explanation": "Unreal 为项目缓存的已烘焙资源和已编译着色器。会自动重建，但之后的首次构建可能非常慢。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3421,9 +3421,9 @@
   },
   {
     "key": "nuget-packages",
-    "display_name": "NuGet Package Cache",
+    "display_name": "NuGet 包缓存",
     "tag": "medium",
-    "explanation": "Downloaded .NET packages that NuGet restores your projects from. Nothing is lost, but your next restore downloads them all again, which can take a while and does not work offline.",
+    "explanation": "NuGet 用于还原项目的已下载 .NET 包。不会丢失任何内容，但下次还原会重新下载全部包，这可能需要一段时间，而且无法离线完成。",
     "bundle_ids": [],
     "aliases": [
       "NuGet Packages"
@@ -3434,9 +3434,9 @@
   },
   {
     "key": "stack-global",
-    "display_name": "Stack Global Cache",
+    "display_name": "Stack 全局缓存",
     "tag": "medium",
-    "explanation": "Package downloads and prebuilt libraries that Stack shares between Haskell projects. Your settings and installed compilers are left alone. Nothing is lost, but the next build downloads and rebuilds a lot and can be slow.",
+    "explanation": "Stack 在多个 Haskell 项目间共享的包下载和预编译库。你的设置和已安装的编译器不受影响。不会丢失任何内容，但下次构建会下载并重建大量内容，可能很慢。",
     "bundle_ids": [],
     "aliases": [
       "Stack Cache"
@@ -3447,9 +3447,9 @@
   },
   {
     "key": "cabal-packages",
-    "display_name": "Cabal Package Cache",
+    "display_name": "Cabal 包缓存",
     "tag": "medium",
-    "explanation": "Haskell packages downloaded by Cabal. Nothing is lost, but your next build downloads and rebuilds them, which can take a long time.",
+    "explanation": "Cabal 下载的 Haskell 包。不会丢失任何内容，但下次构建会下载并重新构建它们，这可能需要很久。",
     "bundle_ids": [],
     "aliases": [
       "Cabal Packages"
@@ -3460,9 +3460,9 @@
   },
   {
     "key": "bazel-cache",
-    "display_name": "Bazel Build Cache",
+    "display_name": "Bazel 构建缓存",
     "tag": "medium",
-    "explanation": "Build outputs Bazel caches between builds. Safe to delete, though the next build starts from scratch and can be slow.",
+    "explanation": "Bazel 在多次构建之间缓存的构建产物。可以安全删除，不过下次构建会从头开始，可能很慢。",
     "bundle_ids": [],
     "aliases": [
       "Bazel Cache"
@@ -3473,9 +3473,9 @@
   },
   {
     "key": "swiftpm-cache",
-    "display_name": "Swift Package Cache",
+    "display_name": "Swift 包缓存",
     "tag": "safe",
-    "explanation": "Package checkouts Swift Package Manager shares between projects. Safe to delete and re-downloaded on your next build.",
+    "explanation": "Swift Package Manager 在多个项目间共享的包检出。可以安全删除，下次构建时会重新下载。",
     "bundle_ids": [],
     "aliases": [
       "Swift Package Cache"
@@ -3486,9 +3486,9 @@
   },
   {
     "key": "venv",
-    "display_name": "Python Environment",
+    "display_name": "Python 环境",
     "tag": "safe",
-    "explanation": "A self-contained Python environment holding packages installed for one project. Safe to delete and recreated by reinstalling from requirements.txt or pyproject.toml, which needs an internet connection.",
+    "explanation": "为单个项目安装包的独立 Python 环境。可以安全删除，可通过从 requirements.txt 或 pyproject.toml 重新安装来重建，需要联网。",
     "bundle_ids": [],
     "aliases": [
       "venv",
@@ -3500,9 +3500,9 @@
   },
   {
     "key": "node-gyp-headers",
-    "display_name": "node-gyp Headers",
+    "display_name": "node-gyp 头文件",
     "tag": "safe",
-    "explanation": "Node.js header files that node-gyp downloads to build native add-ons. Safe to delete; it downloads them again on the next native build.",
+    "explanation": "node-gyp 为构建原生插件而下载的 Node.js 头文件。可以安全删除；下次构建原生模块时会重新下载。",
     "bundle_ids": [],
     "aliases": [
       "node-gyp"
@@ -3512,9 +3512,9 @@
   },
   {
     "key": "typescript-type-cache",
-    "display_name": "TypeScript Type Cache",
+    "display_name": "TypeScript 类型缓存",
     "tag": "safe",
-    "explanation": "Type definitions your editor downloaded so plain JavaScript files get autocomplete. Safe to delete; the editor downloads them again as needed.",
+    "explanation": "你的编辑器下载的类型定义，用于让普通 JavaScript 文件获得自动补全。可以安全删除；编辑器会按需重新下载。",
     "bundle_ids": [],
     "aliases": [
       "typescript"
@@ -3524,9 +3524,9 @@
   },
   {
     "key": "cursor-compile-cache",
-    "display_name": "Cursor Startup Cache",
+    "display_name": "Cursor 启动缓存",
     "tag": "safe",
-    "explanation": "Compiled code that Cursor saves so it starts faster. Safe to delete; Cursor rebuilds it the next time it opens.",
+    "explanation": "Cursor 为加快启动而保存的已编译代码。可以安全删除；下次打开 Cursor 时会重新构建。",
     "bundle_ids": [],
     "aliases": [
       "cursor-compile-cache"
@@ -3536,9 +3536,9 @@
   },
   {
     "key": "claude-cli-cache",
-    "display_name": "Claude Code Logs",
+    "display_name": "Claude Code 日志",
     "tag": "safe",
-    "explanation": "Logs that Claude Code writes for its MCP servers, one folder per project. Safe to delete; new logs are written as you use it.",
+    "explanation": "Claude Code 为其 MCP 服务器写入的日志，每个项目一个文件夹。可以安全删除；使用时会写入新日志。",
     "bundle_ids": [],
     "aliases": [
       "claude-cli-nodejs"
@@ -3548,9 +3548,9 @@
   },
   {
     "key": "apple-python-cache",
-    "display_name": "Apple Python Cache",
+    "display_name": "Apple Python 缓存",
     "tag": "safe",
-    "explanation": "Compiled files for the Python that comes with the macOS developer tools. Safe to delete; Python recreates them when it next runs.",
+    "explanation": "macOS 开发者工具自带 Python 的编译文件。可以安全删除；Python 下次运行时会重新创建。",
     "bundle_ids": [],
     "aliases": [
       "com.apple.python"
@@ -3560,9 +3560,9 @@
   },
   {
     "key": "jna-libraries",
-    "display_name": "Java Native Libraries",
+    "display_name": "Java 原生库",
     "tag": "safe",
-    "explanation": "Native libraries that Java apps unpack here when they start. Safe to delete; they are unpacked again on the next launch.",
+    "explanation": "Java 应用启动时解压到这里的原生库。可以安全删除；下次启动时会再次解压。",
     "bundle_ids": [],
     "aliases": [
       "JNA"
@@ -3572,9 +3572,9 @@
   },
   {
     "key": "dictionary-services",
-    "display_name": "Dictionary Cache",
+    "display_name": "词典缓存",
     "tag": "safe",
-    "explanation": "Temporary data for the macOS Dictionary and Look Up. Safe to delete; it is rebuilt the next time you look up a word.",
+    "explanation": "macOS 词典和「查询」功能的临时数据。可以安全删除；下次查词时会重建。",
     "bundle_ids": [],
     "aliases": [
       "com.apple.DictionaryServices"
@@ -3584,9 +3584,9 @@
   },
   {
     "key": "promoted-content",
-    "display_name": "App Store Ads Cache",
+    "display_name": "App Store 广告缓存",
     "tag": "safe",
-    "explanation": "Data for the ads Apple shows in the App Store. Safe to delete; it is downloaded again when needed.",
+    "explanation": "Apple 在 App Store 中展示的广告数据。可以安全删除；需要时会重新下载。",
     "bundle_ids": [],
     "aliases": [
       "com.apple.ap.PromotedContentJetService"
@@ -3596,9 +3596,9 @@
   },
   {
     "key": "device-software-updates",
-    "display_name": "iPhone and iPad Software Updates",
+    "display_name": "iPhone 和 iPad 软件更新",
     "tag": "safe",
-    "explanation": "Full software update files for iPhone, iPad or iPod that Finder downloaded to update or restore a device, often 5 to 8 GB each. Safe to delete; Finder downloads the current one again the next time you update a device.",
+    "explanation": "Finder 为更新或恢复设备而下载的 iPhone、iPad 或 iPod 完整软件更新文件，通常每个 5 到 8 GB。可以安全删除；下次更新设备时 Finder 会重新下载当前版本。",
     "bundle_ids": [],
     "aliases": [
       "Device Software Updates"
@@ -3608,9 +3608,9 @@
   },
   {
     "key": "davinci-cacheclip",
-    "display_name": "DaVinci Resolve Render Cache",
+    "display_name": "DaVinci Resolve 渲染缓存",
     "tag": "safe",
-    "explanation": "Render cache and optimized media that DaVinci Resolve keeps in your Movies folder. Safe to delete; Resolve renders it again as you work, which takes time on large projects.",
+    "explanation": "DaVinci Resolve 保存在你「影片」文件夹中的渲染缓存和优化媒体。可以安全删除；Resolve 会在你工作时重新渲染，在大型项目上这需要时间。",
     "bundle_ids": [],
     "aliases": [
       "CacheClip"
@@ -3620,9 +3620,9 @@
   },
   {
     "key": "aerial-wallpaper-videos",
-    "display_name": "Aerial Wallpaper Videos",
+    "display_name": "航拍壁纸视频",
     "tag": "medium",
-    "explanation": "Videos for the macOS aerial wallpapers and screen savers, often several GB. Nothing is lost, but the aerial you use downloads again, and macOS may download others again on its own.",
+    "explanation": "macOS 航拍壁纸和屏幕保护程序使用的视频，通常有数 GB。不会丢失任何内容，但你正在使用的航拍视频会重新下载，macOS 也可能自行重新下载其他视频。",
     "bundle_ids": [],
     "aliases": [
       "Aerial Wallpaper Videos"
@@ -3632,9 +3632,9 @@
   },
   {
     "key": "messages-previews",
-    "display_name": "Messages Previews",
+    "display_name": "信息预览",
     "tag": "safe",
-    "explanation": "Thumbnail previews of photos, videos and links in Messages. Your messages and attachments are not touched. Safe to delete; previews are made again when you scroll through a conversation.",
+    "explanation": "「信息」中照片、视频和链接的缩略图预览。你的信息和附件不会被改动。可以安全删除；滚动浏览会话时会重新生成预览。",
     "bundle_ids": [],
     "aliases": [
       "Messages Previews"
@@ -3644,9 +3644,9 @@
   },
   {
     "key": "mail-downloads",
-    "display_name": "Mail Attachment Copies",
+    "display_name": "邮件附件副本",
     "tag": "medium",
-    "explanation": "Copies of attachments you opened from Apple Mail. The originals stay in your mail. If you edited an attachment after opening it and never saved it somewhere else, those edits are only here. Held back while Mail is open.",
+    "explanation": "你从 Apple 邮件打开的附件副本。原件仍保留在你的邮件中。如果你打开附件后编辑过它，并且从未保存到其他位置，那些修改只存在于这里。邮件打开时会暂不显示此项。",
     "bundle_ids": [],
     "aliases": [
       "Mail Downloads"
@@ -3656,9 +3656,9 @@
   },
   {
     "key": "unfinished-downloads",
-    "display_name": "Unfinished Downloads",
+    "display_name": "未完成的下载",
     "tag": "medium",
-    "explanation": "Downloads from Safari, Chrome or Firefox that stopped before finishing and have not changed in over a week. A browser can sometimes still resume one, so check before deleting.",
+    "explanation": "Safari、Chrome 或 Firefox 中在完成前中断、且一周以上没有变化的下载。浏览器有时仍能续传其中一个，所以删除前请先检查。",
     "bundle_ids": [],
     "aliases": [
       "Unfinished Downloads"
@@ -3668,9 +3668,9 @@
   },
   {
     "key": "coresimulator-caches",
-    "display_name": "Simulator Caches",
+    "display_name": "模拟器缓存",
     "tag": "safe",
-    "explanation": "Shared system caches the iOS Simulator builds for each runtime. Safe to delete; the Simulator builds them again the next time a device starts, which makes that first launch slower.",
+    "explanation": "iOS 模拟器为每个运行环境构建的共享系统缓存。可以安全删除；下次有设备启动时模拟器会重新构建它们，这会让那次启动变慢。",
     "bundle_ids": [],
     "aliases": [
       "Simulator Caches"
@@ -3680,9 +3680,9 @@
   },
   {
     "key": "xctest-devices",
-    "display_name": "Xcode Test Devices",
+    "display_name": "Xcode 测试设备",
     "tag": "safe",
-    "explanation": "Temporary copies of simulators that Xcode makes to run tests in parallel. Xcode deletes them itself but sometimes leaves them behind. Safe to delete when no tests are running.",
+    "explanation": "Xcode 为并行运行测试而创建的模拟器临时副本。Xcode 会自行删除它们，但有时会遗留。没有测试运行时可以安全删除。",
     "bundle_ids": [],
     "aliases": [
       "Xcode Test Devices"
@@ -3692,9 +3692,9 @@
   },
   {
     "key": "old-cli-versions",
-    "display_name": "Old AI Coding Tool Versions",
+    "display_name": "旧的 AI 编程工具版本",
     "tag": "safe",
-    "explanation": "Earlier versions of Claude Code or Cursor Agent that stayed behind after updates. The version you run and the newest one are kept. Safe to delete.",
+    "explanation": "更新后遗留的旧版 Claude Code 或 Cursor Agent。你正在运行的版本和最新版本会保留。可以安全删除。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3702,9 +3702,9 @@
   },
   {
     "key": "pre-commit-cache",
-    "display_name": "pre-commit Environments",
+    "display_name": "pre-commit 环境",
     "tag": "safe",
-    "explanation": "Tool environments that pre-commit sets up to run your git hooks. Safe to delete; they are set up again on your next commit, which makes that commit slow.",
+    "explanation": "pre-commit 为运行你的 git 钩子而搭建的工具环境。可以安全删除；下次提交时会重新搭建，这会让那次提交变慢。",
     "bundle_ids": [],
     "aliases": [
       "pre-commit"
@@ -3714,9 +3714,9 @@
   },
   {
     "key": "expo-cache",
-    "display_name": "Expo Cache",
+    "display_name": "Expo 缓存",
     "tag": "safe",
-    "explanation": "App builds, templates and SDK data the Expo tools downloaded. Your Expo login is left alone. Safe to delete; Expo downloads what it needs again.",
+    "explanation": "Expo 工具下载的应用构建、模板和 SDK 数据。你的 Expo 登录不受影响。可以安全删除；Expo 会重新下载所需内容。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3724,9 +3724,9 @@
   },
   {
     "key": "version-manager-downloads",
-    "display_name": "pyenv and rbenv Downloads",
+    "display_name": "pyenv 和 rbenv 下载",
     "tag": "safe",
-    "explanation": "Source downloads pyenv and rbenv keep after installing a Python or Ruby version. Installed versions are left alone. Safe to delete.",
+    "explanation": "pyenv 和 rbenv 在安装 Python 或 Ruby 版本后保留的源码下载。已安装的版本不受影响。可以安全删除。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3734,9 +3734,9 @@
   },
   {
     "key": "oh-my-zsh-cache",
-    "display_name": "Oh My Zsh Cache",
+    "display_name": "Oh My Zsh 缓存",
     "tag": "safe",
-    "explanation": "Completion and update-check files that Oh My Zsh keeps. Safe to delete; they are recreated when you open a new terminal window.",
+    "explanation": "Oh My Zsh 保留的补全和更新检查文件。可以安全删除；打开新的终端窗口时会重新创建。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3744,9 +3744,9 @@
   },
   {
     "key": "opam-download-cache",
-    "display_name": "opam Download Cache",
+    "display_name": "opam 下载缓存",
     "tag": "safe",
-    "explanation": "Package downloads opam keeps for OCaml. Installed packages are left alone. Safe to delete; opam downloads them again when needed.",
+    "explanation": "opam 为 OCaml 保留的包下载。已安装的包不受影响。可以安全删除；opam 需要时会重新下载。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",
@@ -3754,9 +3754,9 @@
   },
   {
     "key": "puppeteer-browsers",
-    "display_name": "Puppeteer Browsers",
+    "display_name": "Puppeteer 浏览器",
     "tag": "medium",
-    "explanation": "Browsers Puppeteer downloaded for automated testing. Your scripts fail until the browser is installed again, which happens on your next npm install or with npx puppeteer browsers install.",
+    "explanation": "Puppeteer 为自动化测试下载的浏览器。在浏览器重新安装之前你的脚本会失败；重新安装会在你下次 npm install 时发生，或使用 npx puppeteer browsers install。",
     "bundle_ids": [],
     "aliases": [
       "puppeteer"
@@ -3766,9 +3766,9 @@
   },
   {
     "key": "conda-packages",
-    "display_name": "Conda Package Cache",
+    "display_name": "Conda 包缓存",
     "tag": "medium",
-    "explanation": "Packages conda downloaded and unpacked to build your environments. Your environments keep working because they link to these files, which also means deleting frees less space than shown until those environments are removed. Running conda clean --all does this more carefully.",
+    "explanation": "conda 为构建你的环境而下载并解压的包。你的环境仍能正常工作，因为它们链接到这些文件，这也意味着在这些环境被删除之前，实际释放的空间会比显示的少。运行 conda clean --all 可以更稳妥地完成同样的事。",
     "bundle_ids": [],
     "aliases": [],
     "scope": "dev_tools",

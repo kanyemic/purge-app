@@ -10,22 +10,23 @@ enum ScheduledCleanupNotifier {
     }
 
     static func notifyNothingEligible() async {
-        await deliver(title: "Scheduled clean finished", body: "Nothing matched your safe settings yet. We’ll try again later.")
+        await deliver(title: "计划清理已完成", body: "目前没有符合你安全设置的项目，稍后会再试。")
     }
 
     static func notifyScheduledCleanFinished(bytesMovedToTrash: Int64, deletedCount: Int) async {
         let space = formatBytes(bytesMovedToTrash)
-        let noun = deletedCount == 1 ? "item" : "items"
+        // 中文量词不随数量变化，因此与英文的两个分支等价。
+        let noun = "项"
         await deliver(
-            title: "Scheduled clean finished",
-            body: "Moved \(deletedCount) \(noun) to Trash, about \(space). Empty the trash to reclaim the space."
+            title: "计划清理已完成",
+            body: "已将 \(deletedCount) \(noun)移到废纸篓，约 \(space)。清空废纸篓即可释放这部分空间。"
         )
     }
 
     static func notifyScheduledCleanFailed() async {
         await deliver(
-            title: "Scheduled clean",
-            body: "Something went wrong during the automated clean. Open Purge when you get a chance to try again."
+            title: "计划清理",
+            body: "自动清理过程中出现问题。方便时打开 Purge 重试。"
         )
     }
 

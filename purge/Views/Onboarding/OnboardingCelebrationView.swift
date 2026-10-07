@@ -22,13 +22,13 @@ struct OnboardingCelebrationView: View {
             .font(AppStyle.Typography.display)
             .contentTransition(.numericText())
             .monospacedDigit()
-            .accessibilityLabel("\(formatBytes(bytesMovedToTrash)) moved to trash, not yet reclaimed")
+            .accessibilityLabel("\(formatBytes(bytesMovedToTrash)) 已移入废纸篓，尚未释放")
 
-          Text("moved to trash, not yet reclaimed")
+          Text("已移入废纸篓，尚未释放")
             .font(AppStyle.Typography.sectionTitle)
             .foregroundStyle(AppColors.textSecondary)
         } else {
-          Text("You're all set")
+          Text("一切就绪")
             .font(AppStyle.Typography.displaySmall)
         }
 
@@ -45,13 +45,13 @@ struct OnboardingCelebrationView: View {
 
       VStack(spacing: AppStyle.Spacing.small) {
         if bytesMovedToTrash > 0 {
-          Text("Empty your Trash to reclaim this space.")
+          Text("清空废纸篓即可释放这部分空间。")
             .font(AppStyle.Typography.callout)
             .foregroundStyle(AppColors.textTertiary)
             .multilineTextAlignment(.center)
         }
 
-        OnboardingPrimaryButton(title: "Continue", action: onContinue)
+        OnboardingPrimaryButton(title: "继续", action: onContinue)
       }
       .frame(maxWidth: OnboardingLayout.contentMaxWidth)
     }
@@ -70,8 +70,8 @@ struct OnboardingCelebrationView: View {
 
   private var spaceContextLine: String {
     guard let item = SizeComparisonCatalog.item(for: bytesMovedToTrash) else {
-      return "Your Mac has a little more breathing room."
+      return "你的 Mac 又宽松了一些。"
     }
-    return "That's room for \(item.label)."
+    return "相当于 \(item.label) 的空间。"
   }
 }

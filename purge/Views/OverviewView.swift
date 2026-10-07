@@ -66,16 +66,16 @@ struct OverviewView: View {
 
     private func diskSummary(_ breakdown: OverviewBreakdown) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: AppStyle.Spacing.xSmall) {
-            Text("\(formatStorageBytes(breakdown.usedBytes)) used")
+            Text("已使用 \(formatStorageBytes(breakdown.usedBytes))")
                 .font(AppStyle.Typography.title.weight(.bold))
                 .overviewNumberTransition(breakdown.usedBytes, reduceMotion: reduceMotion)
-            Text("of \(formatStorageBytes(breakdown.totalBytes))")
+            Text("共 \(formatStorageBytes(breakdown.totalBytes))")
                 .font(AppStyle.Typography.rowTitle)
                 .foregroundStyle(AppColors.textSecondary)
                 .overviewNumberTransition(breakdown.totalBytes, reduceMotion: reduceMotion)
             Spacer(minLength: AppStyle.Spacing.small)
             // Right end, above the free part of the bar.
-            Text("\(formatStorageBytes(breakdown.freeBytes)) free")
+            Text("可用 \(formatStorageBytes(breakdown.freeBytes))")
                 .font(AppStyle.Typography.rowTitle)
                 .foregroundStyle(AppColors.textSecondary)
                 .overviewNumberTransition(breakdown.freeBytes, reduceMotion: reduceMotion)
@@ -94,13 +94,13 @@ struct OverviewView: View {
         }
         segments.append(OverviewDiskBar.Segment(
             id: OverviewDiskBar.everythingElseID,
-            label: "Everything else",
+            label: "其他所有内容",
             bytes: breakdown.everythingElseBytes,
             color: AppColors.Chart.everythingElse
         ))
         segments.append(OverviewDiskBar.Segment(
             id: OverviewDiskBar.freeID,
-            label: "Free",
+            label: "可用空间",
             bytes: breakdown.freeBytes,
             color: AppColors.Chart.freeSpace
         ))
@@ -132,8 +132,8 @@ struct OverviewView: View {
             OverviewPlainRow(
                 symbol: "ellipsis",
                 color: AppColors.Chart.everythingElse,
-                title: "Everything else",
-                detail: "macOS, your documents and photos, and files Purge doesn't sort",
+                title: "其他所有内容",
+                detail: "macOS、你的文稿和照片，以及 Purge 未归类的文件",
                 bytes: breakdown.everythingElseBytes,
                 share: breakdown.share(of: breakdown.everythingElseBytes),
                 linkedState: linkedRowState(OverviewDiskBar.everythingElseID)
@@ -151,8 +151,8 @@ struct OverviewView: View {
             InsetCardDivider()
             OverviewPlainRow(
                 color: AppColors.Chart.freeSpace,
-                title: "Free",
-                detail: "Available for new files",
+                title: "可用空间",
+                detail: "可供新文件使用",
                 bytes: breakdown.freeBytes,
                 share: breakdown.share(of: breakdown.freeBytes),
                 linkedState: linkedRowState(OverviewDiskBar.freeID)
@@ -187,15 +187,15 @@ struct OverviewView: View {
         // emptying it would not change anything the page shows.
         if trashStore.access == .readable, trashStore.trashBytes >= Self.trashNoteThresholdBytes {
             lines.append(
-                "\(formatBytes(trashStore.trashBytes)) of the used space is already in the Trash, "
-                    + "including iCloud Drive. Emptying it in Finder frees it."
+                "已用空间中有 \(formatBytes(trashStore.trashBytes)) 已在废纸篓中，"
+                    + "包括 iCloud Drive。在访达中清空废纸篓即可释放。"
             )
         }
         if schedule.isEnabled {
             let next = ScheduledCleaningRegistrar.shared.nextCleanDate(referenceDate: now)
             let day = relativeDateText(for: next, referenceDate: now)
             let time = next.formatted(date: .omitted, time: .shortened)
-            lines.append("Next scheduled clean: \(day) at \(time)")
+            lines.append("下次计划清理：\(day) \(time)")
         }
         return lines
     }
@@ -230,7 +230,7 @@ private struct OverviewCategoryRow: View {
                     Text(OverviewCategoryStyle.name(category))
                         .font(AppStyle.Typography.headline)
                     if OverviewCategoryStyle.isReview(category), showsFigure {
-                        AppBadge(text: "Review first", tone: .warning)
+                        AppBadge(text: "请先检查", tone: .warning)
                     }
                 }
                 statusLine
@@ -273,7 +273,7 @@ private struct OverviewCategoryRow: View {
 
     private var scanTimeHelp: String {
         guard phase == .ready || phase == .notScanned, let record else { return "" }
-        return "Scanned \(compactAgoText(from: record.completedAt, to: now))"
+        return "扫描于 \(compactAgoText(from: record.completedAt, to: now))"
     }
 
     private var showsFigure: Bool {
@@ -303,7 +303,7 @@ private struct OverviewCategoryRow: View {
                 .foregroundStyle(AppColors.textTertiary)
                 .padding(.trailing, 2)
         case .notScanned where !isRecorded:
-            Button("Scan") { store.requestScan(category.step) }
+            Button("扫描") { store.requestScan(category.step) }
                 .buttonStyle(.purge(.secondary))
         case .waiting:
             // About to be measured again: no figure, not even the last one, until it scans.
@@ -326,19 +326,19 @@ private struct OverviewCategoryRow: View {
     private var statusText: String {
         switch phase {
         case .needsAccess:
-            return "Needs Full Disk Access"
+            return "需要完全磁盘访问权限"
         case .scanning:
             if category == .apps, !store.isScanningInstalledApps {
-                return "Measuring each app and its files…"
+                return "正在测量每个应用及其文件…"
             }
-            return "Scanning…"
+            return "正在扫描…"
         case .waiting:
-            return "Up next"
+            return "接下来"
         case .notScanned:
             if let record, isRecorded {
                 return recordedDetail(record)
             }
-            return "Not scanned yet"
+            return "尚未扫描"
         case .ready:
             return liveDetail
         }
@@ -358,20 +358,20 @@ private struct OverviewCategoryRow: View {
                 return now.timeIntervalSince(opened) > 90 * 24 * 60 * 60
             }.count
             return unused > 0
-                ? "\(unused) not opened in 90 days"
-                : "\(totals.count) \(totals.count == 1 ? "app" : "apps")"
+                ? "\(unused) 个应用 90 天内未打开"
+                : "\(totals.count) 个应用"
         case .leftovers:
-            guard totals.count > 0 else { return "Nothing left behind" }
-            return "\(totals.count) \(totals.count == 1 ? "item" : "items")"
+            guard totals.count > 0 else { return "没有残留" }
+            return "\(totals.count) 个项目"
         }
     }
 
     private func largeFilesDetail(count: Int) -> String {
-        "\(count) \(count == 1 ? "file" : "files") over \(LargeFileSizeThreshold.current().label)"
+        "\(count) 个文件超过 \(LargeFileSizeThreshold.current().label)"
     }
 
     private func cacheDetail(safeBytes: Int64) -> String {
-        safeBytes > 0 ? "\(formatBytes(safeBytes)) safe to clean" : "Nothing safe to clean"
+        safeBytes > 0 ? "\(formatBytes(safeBytes)) 可安全清理" : "没有可安全清理的内容"
     }
 
     /// The same fact as the live line, where the record holds it.
@@ -381,14 +381,14 @@ private struct OverviewCategoryRow: View {
             if let safeBytes = record.safeBytes {
                 return cacheDetail(safeBytes: safeBytes)
             }
-            return "\(record.count) \(record.count == 1 ? "item" : "items")"
+            return "\(record.count) 个项目"
         case .leftovers:
-            guard record.count > 0 else { return "Nothing left behind" }
-            return "\(record.count) \(record.count == 1 ? "item" : "items")"
+            guard record.count > 0 else { return "没有残留" }
+            return "\(record.count) 个项目"
         case .largeFiles:
             return largeFilesDetail(count: record.count)
         case .apps:
-            return "\(record.count) \(record.count == 1 ? "app" : "apps")"
+            return "\(record.count) 个应用"
         }
     }
 
@@ -516,9 +516,9 @@ private struct OverviewSnapshotRow: View {
     @State private var isShowingInfo = false
 
     /// What the row is about, for the many people who have never heard of snapshots.
-    private static let info = "Time Machine saves a snapshot every hour so you can get files back without "
-        + "your backup disk. Old ones keep deleted files around and count as System Data. Remove keeps "
-        + "the newest and the one from your last backup, which Time Machine may still need."
+    private static let info = "Time Machine 每小时保存一个快照，让你无需备份磁盘就能找回文件。"
+        + "旧快照会一直保留已删除的文件，并计入「系统数据」。移除会保留最新的快照和上次备份的快照，"
+        + "因为 Time Machine 可能仍需要它们。"
 
     /// Not a bar segment, so the bar never highlights it; it only fades with the rest.
     static let id = "timeMachineSnapshots"
@@ -531,7 +531,7 @@ private struct OverviewSnapshotRow: View {
             OverviewIconTile(symbol: "clock.arrow.circlepath", color: AppColors.Chart.everythingElse)
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 4) {
-                    Text("Time Machine snapshots")
+                    Text("Time Machine 快照")
                         .font(AppStyle.Typography.headline)
                     infoButton
                 }
@@ -558,8 +558,8 @@ private struct OverviewSnapshotRow: View {
                 .foregroundStyle(AppColors.textTertiary)
         }
         .buttonStyle(.plain)
-        .help("What are Time Machine snapshots?")
-        .accessibilityLabel("About Time Machine snapshots")
+        .help("什么是 Time Machine 快照？")
+        .accessibilityLabel("关于 Time Machine 快照")
         .popover(isPresented: $isShowingInfo, arrowEdge: .bottom) {
             Text(Self.info)
                 .font(AppStyle.Typography.callout)
@@ -578,10 +578,10 @@ private struct OverviewSnapshotRow: View {
         if !removable.isEmpty || snapshotStore.isRemoving {
             removeButton
         } else if showsDiskUtility {
-            Button("Open Disk Utility") { Self.openDiskUtility() }
+            Button("打开磁盘工具") { Self.openDiskUtility() }
                 .buttonStyle(.purge(.secondary, size: .small))
-                .help("Purge keeps the newest snapshot, which Time Machine may need. If you're sure you don't, "
-                    + "choose View > Show APFS Snapshots in Disk Utility to delete it.")
+                .help("Purge 会保留最新的快照，因为 Time Machine 可能需要它。如果你确定不需要，"
+                    + "请在「磁盘工具」中选择「显示」>「显示 APFS 快照」来删除它。")
         }
     }
 
@@ -597,14 +597,14 @@ private struct OverviewSnapshotRow: View {
             plan = SnapshotRemovalPlan(snapshots: removable)
         } label: {
             CleaningButtonLabel(
-                title: snapshotStore.isRemoving ? "Removing..." : "Remove",
+                title: snapshotStore.isRemoving ? "正在移除..." : "移除",
                 systemImage: nil,
                 isCleaning: snapshotStore.isRemoving
             )
         }
         .buttonStyle(.purge(.secondary, size: .small))
         .disabled(snapshotStore.isRemoving)
-        .help("Remove the snapshots Time Machine no longer needs")
+        .help("移除 Time Machine 不再需要的快照")
         .popover(item: $plan, arrowEdge: .bottom) { plan in
             OverviewSnapshotConfirmation(
                 count: plan.snapshots.count,
@@ -627,38 +627,38 @@ private struct OverviewSnapshotRow: View {
     private var detail: String {
         switch snapshotStore.currentRemovalOutcome {
         case .removed(let removed, let freedBytes):
-            var text = removed == 1 ? "Removed 1" : "Removed \(removed)"
-            if let freedBytes { text += " and freed \(formatBytes(freedBytes))" }
-            return text + ", kept the newest"
+            var text = removed == 1 ? "已移除 1 个" : "已移除 \(removed) 个"
+            if let freedBytes { text += "，释放了 \(formatBytes(freedBytes))" }
+            return text + "，保留了最新的"
         case .someLeft(let removed, let left):
-            return "Removed \(removed), but \(left) couldn't be removed"
+            return "已移除 \(removed) 个，但有 \(left) 个无法移除"
         case .noneRemoved:
-            return "These couldn't be removed. Try again, or use Disk Utility."
+            return "这些快照无法移除。请重试，或使用「磁盘工具」。"
         case .unverified:
-            return "Couldn't check what was removed. Try again in a moment."
+            return "无法确认移除了什么。请稍后重试。"
         case nil:
             break
         }
         guard let snapshots else {
-            return snapshotStore.hasTriedReading ? "Couldn't check right now" : "Checking..."
+            return snapshotStore.hasTriedReading ? "现在无法检查" : "正在检查..."
         }
         guard let oldest = snapshots.oldest else {
-            return "None on this Mac right now"
+            return "这台 Mac 上现在没有快照"
         }
         let when = Self.dayText(oldest, now: now)
         if snapshots.count == 1 {
-            return "1 on this Mac, from \(when), kept for the next backup"
+            return "这台 Mac 上有 1 个，来自\(when)，保留供下次备份使用"
         }
-        return "\(snapshots.count) on this Mac, the oldest from \(when)"
+        return "这台 Mac 上有 \(snapshots.count) 个，最旧的来自\(when)"
     }
 
     /// "today", "yesterday", or a short date.
     static func dayText(_ date: Date, now: Date) -> String {
         let calendar = Calendar.current
-        if calendar.isDate(date, inSameDayAs: now) { return "today" }
+        if calendar.isDate(date, inSameDayAs: now) { return "今天" }
         if let yesterday = calendar.date(byAdding: .day, value: -1, to: now),
            calendar.isDate(date, inSameDayAs: yesterday) {
-            return "yesterday"
+            return "昨天"
         }
         return date.formatted(.dateTime.month(.abbreviated).day())
     }
@@ -686,26 +686,26 @@ private struct OverviewSnapshotConfirmation: View {
     var body: some View {
         VStack(alignment: .leading, spacing: AppStyle.Spacing.medium) {
             VStack(alignment: .leading, spacing: AppStyle.Spacing.xxSmall) {
-                Text(count == 1 ? "Remove 1 Time Machine snapshot?" : "Remove \(count) Time Machine snapshots?")
+                Text(count == 1 ? "移除 1 个 Time Machine 快照？" : "移除 \(count) 个 Time Machine 快照？")
                     .font(AppStyle.Typography.sectionTitle)
                     .foregroundStyle(AppColors.textPrimary)
-                Text("Snapshots may hold the only copy of files you changed or deleted since your last backup. "
-                    + "Removed snapshots can't be put back. Purge keeps the newest, which Time Machine may need "
-                    + "for your next backup. Backups on your backup disk aren't touched.")
+                Text("快照可能保存了你自上次备份以来修改或删除的文件的唯一副本。"
+                    + "已移除的快照无法恢复。Purge 会保留最新的快照，因为 Time Machine 可能需要它"
+                    + "来完成下次备份。备份磁盘上的备份不会受到影响。")
                     .font(AppStyle.Typography.callout)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
 
             HStack(spacing: AppStyle.Spacing.xSmall) {
-                Button("Open Disk Utility", action: onOpenDiskUtility)
+                Button("打开磁盘工具", action: onOpenDiskUtility)
                     .buttonStyle(.purge(.quiet, size: .small))
-                    .help("In Disk Utility, choose View > Show APFS Snapshots to pick which ones to delete.")
+                    .help("在「磁盘工具」中选择「显示」>「显示 APFS 快照」，即可选择要删除的快照。")
                 Spacer()
-                Button("Cancel", action: onCancel)
+                Button("取消", action: onCancel)
                     .buttonStyle(.purge(.secondary))
                     .keyboardShortcut(.cancelAction)
-                Button("Remove Snapshots", action: onConfirm)
+                Button("移除快照", action: onConfirm)
                     .buttonStyle(.purge(.destructive))
             }
         }
@@ -774,13 +774,13 @@ enum OverviewMotion {
 enum OverviewCategoryStyle {
     static func name(_ category: OverviewCategory) -> String {
         switch category {
-        case .appCaches: return "App Caches"
-        case .devTools: return "Dev Tools"
-        case .largeFiles: return "Large Files"
+        case .appCaches: return "应用缓存"
+        case .devTools: return "开发工具"
+        case .largeFiles: return "大文件"
         // "Installed apps", not "Apps": System Settings has an Applications row that
         // counts only the apps themselves, and this total includes their files.
-        case .apps: return "Installed apps"
-        case .leftovers: return "Leftovers from deleted apps"
+        case .apps: return "已安装的应用"
+        case .leftovers: return "已删除应用的残留"
         }
     }
 
@@ -939,7 +939,7 @@ struct OverviewDiskBar: View {
         segments
             .filter { $0.bytes > 0 }
             .map { "\($0.label) \(formatStorageBytes($0.bytes))" }
-            .joined(separator: ", ")
+            .joined(separator: "，")
     }
 
     nonisolated static func widths(for bytes: [Int64], in totalWidth: CGFloat) -> [CGFloat] {
@@ -966,10 +966,10 @@ struct OverviewScanButton: View {
 
     static func name(for step: ScanStep) -> String {
         switch step {
-        case .cachesAndDevTools: return "App Caches and Dev Tools"
-        case .largeFiles: return "Large Files"
-        case .apps: return "installed apps"
-        case .leftovers: return "leftovers from deleted apps"
+        case .cachesAndDevTools: return "应用缓存和开发工具"
+        case .largeFiles: return "大文件"
+        case .apps: return "已安装的应用"
+        case .leftovers: return "已删除应用的残留"
         }
     }
 
@@ -997,12 +997,12 @@ struct OverviewScanButton: View {
         .buttonStyle(.purge(.secondary))
         .keyboardShortcut("r", modifiers: [.command])
         .disabled(isFinishingCacheScan || store.isDeleting)
-        .help(queue.isRunning ? "Stop scanning" : "Scan App Caches, Dev Tools, Large Files and apps, one after another")
+        .help(queue.isRunning ? "停止扫描" : "依次扫描应用缓存、开发工具、大文件和应用")
     }
 
     private var title: String {
-        if isFinishingCacheScan { return "Scanning..." }
-        return queue.isRunning ? "Stop" : "Scan Everything"
+        if isFinishingCacheScan { return "正在扫描..." }
+        return queue.isRunning ? "停止" : "扫描全部"
     }
 
     private var systemImage: String? {
@@ -1041,7 +1041,7 @@ struct OverviewCleanSafeButton: View {
                 isConfirming = true
             } label: {
                 CleaningButtonLabel(
-                    title: isCleaning ? "Cleaning..." : "Clean Safe Items",
+                    title: isCleaning ? "正在清理..." : "清理安全项目",
                     // The same glyph as Clean Selected and Uninstall on the other tabs.
                     systemImage: isCleaning ? nil : "trash.fill",
                     isCleaning: isCleaning
@@ -1050,8 +1050,8 @@ struct OverviewCleanSafeButton: View {
             .buttonStyle(.purge(.primary))
             .disabled(!isReady || store.isDeleting || isCleaning)
             .help(isReady
-                ? "Move every Safe item in App Caches and Dev Tools to the Trash"
-                : "Waiting for App Caches and Dev Tools to finish scanning")
+                ? "将应用缓存和开发工具中所有安全项目移入废纸篓"
+                : "正在等待应用缓存和开发工具完成扫描")
             .popover(isPresented: $isConfirming, arrowEdge: .bottom) {
                 OverviewCleanSafeConfirmation(
                     breakdown: store.overviewBreakdown(
@@ -1089,10 +1089,10 @@ private struct OverviewCleanSafeConfirmation: View {
     var body: some View {
         VStack(alignment: .leading, spacing: AppStyle.Spacing.medium) {
             VStack(alignment: .leading, spacing: AppStyle.Spacing.xxSmall) {
-                Text("Move \(formatBytes(store.safeRecoverableBytes)) to the Trash?")
+                Text("将 \(formatBytes(store.safeRecoverableBytes)) 移入废纸篓？")
                     .font(AppStyle.Typography.sectionTitle)
                     .foregroundStyle(AppColors.textPrimary)
-                Text("Only items marked Safe. They rebuild when needed, and you can put anything back from the Trash.")
+                Text("仅包含标记为安全的项目。它们会在需要时重建，你随时可以从废纸篓中恢复。")
                     .font(AppStyle.Typography.callout)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -1109,10 +1109,10 @@ private struct OverviewCleanSafeConfirmation: View {
 
             HStack(spacing: AppStyle.Spacing.xSmall) {
                 Spacer()
-                Button("Cancel", action: onCancel)
+                Button("取消", action: onCancel)
                     .buttonStyle(.purge(.secondary))
                     .keyboardShortcut(.cancelAction)
-                Button("Move to Trash", action: onConfirm)
+                Button("移入废纸篓", action: onConfirm)
                     .buttonStyle(.purge(.destructive))
             }
         }
@@ -1133,13 +1133,13 @@ private struct OverviewCleanSafeConfirmation: View {
                 .fixedSize()
             Spacer(minLength: AppStyle.Spacing.small)
             (Text(formatBytes(bytes)).foregroundColor(AppColors.textPrimary)
-                + Text(" of \(formatStorageBytes(breakdown.bytes(for: category)))"))
+                + Text("，共 \(formatStorageBytes(breakdown.bytes(for: category)))"))
                 .font(AppStyle.Typography.body)
                 .foregroundStyle(AppColors.textSecondary)
                 .monospacedDigit()
                 .lineLimit(1)
                 .fixedSize()
-            Button("Review") { onReview(category) }
+            Button("查看") { onReview(category) }
                 .buttonStyle(.purge(.quiet, size: .small))
         }
         .accessibilityElement(children: .contain)

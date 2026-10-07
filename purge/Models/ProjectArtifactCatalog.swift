@@ -170,20 +170,20 @@ nonisolated enum ProjectArtifactCatalog {
         .init(kind: .venv, projectType: .python, folder: "venv",
               rootMarkers: ["requirements.txt", "pyproject.toml"],
               rebuildMarkers: ["requirements.txt", "pyproject.toml"],
-              reinstall: .guidance("Use your usual steps to recreate the Python environment for this folder.")),
+              reinstall: .guidance("按你惯常的步骤重新创建这个文件夹的 Python 环境。")),
         .init(kind: .venv, projectType: .python, folder: ".venv",
               rootMarkers: ["requirements.txt", "pyproject.toml"],
               rebuildMarkers: ["requirements.txt", "pyproject.toml"],
-              reinstall: .guidance("Use your usual steps to recreate the Python environment for this folder.")),
+              reinstall: .guidance("按你惯常的步骤重新创建这个文件夹的 Python 环境。")),
         .init(kind: .pytestCache, projectType: .python, folder: ".pytest_cache",
               rootMarkers: ["requirements.txt", "pyproject.toml"],
-              reinstall: .guidance("Recreated automatically the next time you run your tests.")),
+              reinstall: .guidance("下次运行测试时自动重新生成。")),
         .init(kind: .mypyCache, projectType: .python, folder: ".mypy_cache",
               rootMarkers: ["requirements.txt", "pyproject.toml"],
-              reinstall: .guidance("Recreated automatically the next time you run mypy.")),
+              reinstall: .guidance("下次运行 mypy 时自动重新生成。")),
         .init(kind: .ruffCache, projectType: .python, folder: ".ruff_cache",
               rootMarkers: ["requirements.txt", "pyproject.toml"],
-              reinstall: .guidance("Recreated automatically the next time you run ruff.")),
+              reinstall: .guidance("下次运行 ruff 时自动重新生成。")),
         .init(kind: .toxEnvironments, projectType: .python, folder: ".tox",
               rootMarkers: ["tox.ini"],
               reinstall: .command("cd \"{root}\" && tox")),
@@ -206,7 +206,7 @@ nonisolated enum ProjectArtifactCatalog {
                             "settings.gradle.kts", "android/build.gradle", "android/build.gradle.kts"],
               rebuildMarkers: ["build.gradle", "build.gradle.kts", "settings.gradle",
                                "settings.gradle.kts", "android/build.gradle", "android/build.gradle.kts"],
-              reinstall: .guidance("Run your usual project build so Android or Java tools fetch what they need again.")),
+              reinstall: .guidance("按你惯常的方式构建项目，让 Android 或 Java 工具重新拉取所需内容。")),
 
         // MARK: Xcode / CocoaPods
 
@@ -290,7 +290,7 @@ nonisolated enum ProjectArtifactCatalog {
               reinstall: .command("cd \"{root}\" && dune build")),
         .init(kind: .cmakeBuild, projectType: .cmake, folder: "build",
               rootMarkers: ["CMakeLists.txt"], rebuildMarkers: ["CMakeLists.txt"],
-              reinstall: .guidance("Re-run your usual CMake configure and build steps.")),
+              reinstall: .guidance("重新运行你惯常的 CMake 配置和构建步骤。")),
 
         // MARK: Infrastructure / engines
 
@@ -305,7 +305,7 @@ nonisolated enum ProjectArtifactCatalog {
               level: .medium),
         .init(kind: .godotCache, projectType: .godot, folder: ".godot",
               rootMarkers: ["project.godot"], rebuildMarkers: ["project.godot"],
-              reinstall: .guidance("Rebuilt automatically the next time you open the project in Godot.")),
+              reinstall: .guidance("下次在 Godot 中打开该项目时自动重新生成。")),
 
         // Unity and Unreal rebuild themselves, but a reimport or shader rebuild can
         // cost half an hour on a large project and starts the moment the editor next
@@ -314,19 +314,19 @@ nonisolated enum ProjectArtifactCatalog {
         .init(kind: .unityLibrary, projectType: .unity, folder: "Library",
               rootMarkers: ["ProjectSettings/ProjectVersion.txt"],
               rebuildMarkers: ["ProjectSettings/ProjectVersion.txt"],
-              reinstall: .guidance("Unity reimports the project the next time you open it. On a large project this can take a long time."),
+              reinstall: .guidance("下次在 Unity 中打开该项目时，Unity 会重新导入。对于大项目，这可能要花很长时间。"),
               level: .medium),
         .init(kind: .unityTemp, projectType: .unity, folder: "Temp",
               rootMarkers: ["ProjectSettings/ProjectVersion.txt"],
-              reinstall: .guidance("Recreated automatically the next time you open the project in Unity."),
+              reinstall: .guidance("下次在 Unity 中打开该项目时自动重新生成。"),
               level: .medium),
         .init(kind: .unrealIntermediate, projectType: .unreal, folder: "Intermediate",
               rootMarkers: [], rootMarkerExtensions: ["uproject"], rebuildMarkers: [],
-              reinstall: .guidance("Regenerated the next time you build the project in Unreal."),
+              reinstall: .guidance("下次在 Unreal 中构建该项目时重新生成。"),
               level: .medium),
         .init(kind: .unrealDerivedData, projectType: .unreal, folder: "DerivedDataCache",
               rootMarkers: [], rootMarkerExtensions: ["uproject"], rebuildMarkers: [],
-              reinstall: .guidance("Unreal rebuilds this cache on the next build. Expect a long first build, including shader compilation."),
+              reinstall: .guidance("Unreal 会在下次构建时重建这份缓存。首次构建会很久，包括着色器编译。"),
               level: .medium),
     ]
 

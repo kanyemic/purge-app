@@ -182,52 +182,52 @@ struct ContentView: View {
             value: store.manualDeletionSession != nil
         )
         .alert(
-            "Missing reinstall instructions",
+            "缺少重新安装说明",
             isPresented: $store.showMissingLockfileFriction
         ) {
-            Button("Cancel", role: .cancel) { store.cancelDeletionFrictionFlow() }
-            Button("Delete anyway", role: .destructive) { store.acknowledgeMissingLockfileRisk() }
+            Button("取消", role: .cancel) { store.cancelDeletionFrictionFlow() }
+            Button("仍然删除", role: .destructive) { store.acknowledgeMissingLockfileRisk() }
         } message: {
             Text(
                 """
-                We could not find the file that tells us how to reinstall this folder. Deleting is probably fine, but \
-                when you reinstall later it might download slightly different versions than before.
+                我们找不到说明如何重新安装这个文件夹的文件。删除通常没问题，但\
+                之后重新安装时，下载到的版本可能与之前略有不同。
                 """
             )
         }
         .alert(
-            "You have unsaved code changes nearby",
+            "附近有未保存的代码改动",
             isPresented: $store.showUncommittedGitFriction
         ) {
-            Button("Pause", role: .cancel) { store.cancelDeletionFrictionFlow() }
-            Button("Clean anyway", role: .destructive) { store.acknowledgeUncommittedGitRisk() }
+            Button("暂停", role: .cancel) { store.cancelDeletionFrictionFlow() }
+            Button("仍然清理", role: .destructive) { store.acknowledgeUncommittedGitRisk() }
         } message: {
             Text(
                 """
-                One of your projects has changes that have not been saved to git yet. Make sure your work is backed \
-                up before cleaning. Purge cannot undo deletions.
+                你的某个项目有尚未保存到 git 的改动。清理前请确认工作已备份。\
+                Purge 无法撤销删除。
                 """
             )
         }
         .alert(
-            "Permanently delete these items?",
+            "要永久删除这些项目吗？",
             isPresented: $store.showHighRiskDeletionSecondConfirm
         ) {
-            Button("Cancel", role: .cancel) { store.cancelHighRiskDeletionSecondStep() }
-            Button("Delete permanently", role: .destructive) { store.confirmHighRiskDeletionSecondStep() }
+            Button("取消", role: .cancel) { store.cancelHighRiskDeletionSecondStep() }
+            Button("永久删除", role: .destructive) { store.confirmHighRiskDeletionSecondStep() }
         } message: {
             Text(
                 """
-                This includes folders marked Not Sure. They will be moved to Trash. \
-                Only continue if you understand the risk.
+                这包括标记为「不确定」的文件夹。它们会被移入废纸篓。\
+                只有在你了解风险时才继续。
                 """
             )
         }
-        .alert("Something went wrong", isPresented: Binding(
+        .alert("出错了", isPresented: Binding(
             get: { store.errorMessage != nil },
             set: { if !$0 { store.errorMessage = nil } }
         )) {
-            Button("OK") { store.errorMessage = nil }
+            Button("好") { store.errorMessage = nil }
         } message: {
             Text(store.errorMessage ?? "")
         }
@@ -335,9 +335,9 @@ struct ContentView: View {
 
                 VStack(alignment: .leading, spacing: 2) {
                     navRow(.overview)
-                    sidebarSectionLabel("Clean")
+                    sidebarSectionLabel("清理")
                     ForEach(PurgeStore.Tab.cleanTabs) { navRow($0) }
-                    sidebarSectionLabel("Review")
+                    sidebarSectionLabel("查看")
                     ForEach(PurgeStore.Tab.reviewTabs) { navRow($0) }
                 }
             }
@@ -367,7 +367,7 @@ struct ContentView: View {
 
     private func navRow(_ tab: PurgeStore.Tab) -> some View {
         AppNavRow(
-            title: tab.rawValue,
+            title: tab.displayName,
             systemImage: tab.icon,
             isSelected: store.selectedTab == tab,
             accessory: navAccessory(for: tab),
@@ -477,7 +477,7 @@ struct ContentView: View {
         Group {
             if #available(macOS 26.0, *) {
                 settingsScrollView
-                    .detailPageScrollEdge(title: "Settings")
+                    .detailPageScrollEdge(title: "设置")
             } else {
                 settingsScrollView
                     .underDetailPageHeader(includesSubtitle: false)
@@ -580,7 +580,7 @@ struct ContentView: View {
         Group {
             if #available(macOS 26.0, *) {
                 overviewScrollView
-                    .detailPageScrollEdge(title: "Overview", includesSubtitle: true)
+                    .detailPageScrollEdge(title: "总览", includesSubtitle: true)
             } else {
                 overviewScrollView
                     .underDetailPageHeader(includesSubtitle: true)
@@ -602,7 +602,7 @@ struct ContentView: View {
         Group {
             if #available(macOS 26.0, *) {
                 aboutScrollView
-                    .detailPageScrollEdge(title: "About")
+                    .detailPageScrollEdge(title: "关于")
             } else {
                 aboutScrollView
                     .underDetailPageHeader(includesSubtitle: false)
@@ -627,7 +627,7 @@ struct ContentView: View {
     }
 
     private func pageHeader(now: Date) -> some View {
-        AppSectionPageHeader(title: store.selectedTab.rawValue, subtitle: selectedPageSubtitle(now: now)) {
+        AppSectionPageHeader(title: store.selectedTab.displayName, subtitle: selectedPageSubtitle(now: now)) {
             if store.selectedTab == .overview {
                 HStack(spacing: AppStyle.Spacing.xSmall) {
                     if !store.hasFullDiskAccess {
@@ -679,18 +679,17 @@ struct ContentView: View {
         if let active = store.scanQueue.active {
             let waiting = store.scanQueue.pending.count
             let name = OverviewScanButton.name(for: active)
-            return waiting > 0 ? "Scanning \(name), then \(waiting) more…" : "Scanning \(name)…"
+            return waiting > 0 ? "正在扫描 \(name)，还有 \(waiting) 项…" : "正在扫描 \(name)…"
         }
         if store.isScanningAll {
-            return "Scanning \(OverviewScanButton.name(for: .cachesAndDevTools))…"
+            return "正在扫描 \(OverviewScanButton.name(for: .cachesAndDevTools))…"
         }
         guard let latest = store.scanRecords.values.map(\.completedAt).max() else { return nil }
-        return "Scanned \(compactAgoText(from: latest, to: now))"
+        return "扫描于 \(compactAgoText(from: latest, to: now))"
     }
 
     private func pageSubtitle(count: Int, bytes: Int64) -> String {
-        let itemLabel = count == 1 ? "item" : "items"
-        return "\(count) \(itemLabel) · \(formatBytes(bytes)) recoverable"
+        "\(count) 个项目 · 可释放 \(formatBytes(bytes))"
     }
 
     /// Mirrors the filtering `LargeFilesView` applies to its list, so the subtitle
@@ -711,8 +710,7 @@ struct ContentView: View {
     private var largeFilesPageSubtitle: String {
         let files = largeFilesVisibleForSubtitle
         let bytes = files.reduce(Int64(0)) { $0 + $1.sizeBytes }
-        let fileLabel = files.count == 1 ? "file" : "files"
-        return "\(files.count) \(fileLabel) · \(formatBytes(bytes)) to review"
+        return "\(files.count) 个文件 · \(formatBytes(bytes)) 待清理"
     }
 
     /// Follows the active segment, with one shared shape so the two read the same:
@@ -724,7 +722,7 @@ struct ContentView: View {
             guard !items.isEmpty else { return nil }
             return uninstallSubtitle(
                 count: items.count,
-                unit: ("item", "items"),
+                unit: "项目",
                 totalBytes: items.reduce(Int64(0)) { $0 + $1.sizeBytes },
                 selectedCount: store.selectedOrphanCount,
                 selectedBytes: store.selectedOrphanBytes,
@@ -735,7 +733,7 @@ struct ContentView: View {
         guard !store.installedApps.isEmpty else { return nil }
         return uninstallSubtitle(
             count: store.installedApps.count,
-            unit: ("app", "apps"),
+            unit: "应用",
             totalBytes: store.installedApps.reduce(Int64(0)) { $0 + store.removableBytes(for: $1) },
             selectedCount: store.selectedAppIDs.count,
             selectedBytes: store.selectedAppsRemovableBytes,
@@ -747,18 +745,18 @@ struct ContentView: View {
 
     private func uninstallSubtitle(
         count: Int,
-        unit: (singular: String, plural: String),
+        unit: String,
         totalBytes: Int64,
         selectedCount: Int,
         selectedBytes: Int64,
         measuring: Bool
     ) -> String {
-        let base = "\(count) \(count == 1 ? unit.singular : unit.plural)"
+        let base = "\(count) 个\(unit)"
         if selectedCount > 0 {
-            return "\(base) · \(selectedCount) selected · \(formatBytes(selectedBytes))"
+            return "\(base) · 已选中 \(selectedCount) 项 · \(formatBytes(selectedBytes))"
         }
         if measuring {
-            return "\(base) · measuring space…"
+            return "\(base) · 正在测量空间…"
         }
         return "\(base) · \(formatBytes(totalBytes))"
     }
@@ -945,18 +943,18 @@ struct SidebarSummaryView: View {
             // The spinner holds the number's place, so the sentence does not jump.
             HStack(spacing: 4) {
                 trashLoadingIndicator
-                Text("in Trash").foregroundStyle(AppColors.textSecondary)
+                Text("在废纸篓中").foregroundStyle(AppColors.textSecondary)
             }
-            .accessibilityLabel("Measuring the Trash")
+            .accessibilityLabel("正在测量废纸篓")
         case .unreadable:
             // No Full Disk Access: the size is genuinely unknown, and a zero would
             // read as an empty Trash.
-            Text("Trash size unavailable").foregroundStyle(AppColors.textSecondary)
+            Text("无法获取废纸篓大小").foregroundStyle(AppColors.textSecondary)
         case .readable where trashStore.trashBytes <= 0:
-            Text("Trash is empty").foregroundStyle(AppColors.textSecondary)
+            Text("废纸篓是空的").foregroundStyle(AppColors.textSecondary)
         case .readable:
             (Text(formatBytes(trashStore.trashBytes)).foregroundColor(AppColors.textPrimary).fontWeight(.semibold)
-                + Text(" in Trash").foregroundColor(AppColors.textSecondary))
+                + Text(" 在废纸篓中").foregroundColor(AppColors.textSecondary))
                 .monospacedDigit()
                 .contentTransition(reduceMotion ? .identity : .numericText())
                 .animation(reduceMotion ? nil : .easeInOut(duration: 0.45), value: trashStore.trashBytes)

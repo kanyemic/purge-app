@@ -9,14 +9,14 @@ nonisolated enum DeletionSafetyDecision: Equatable {
     case allow
     /// On the never-delete list. Skip silently and drop from any selection.
     case blockedNeverDelete
-    /// Not on the whitelist. Skip and surface "This file was skipped for safety".
+    /// Not on the whitelist. Skip and surface "为安全起见跳过了此文件".
     case blockedNotWhitelisted
 
     var skipReason: String? {
         switch self {
         case .allow: return nil
-        case .blockedNeverDelete: return "Protected location — not eligible for deletion."
-        case .blockedNotWhitelisted: return "This file was skipped for safety"
+        case .blockedNeverDelete: return "受保护的位置 — 不符合删除条件。"
+        case .blockedNotWhitelisted: return "为安全起见跳过了此文件"
         }
     }
 

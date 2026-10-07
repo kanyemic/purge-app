@@ -35,7 +35,7 @@ struct SettingsView: View {
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: showsPageHeader ? 28 : 0) {
                 if showsPageHeader {
-                    Text("Settings")
+                    Text("设置")
                         .font(AppStyle.Typography.pageTitle)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -77,11 +77,11 @@ struct SettingsView: View {
             CleanupHistoryDetailView(entry: entry)
         }
         .confirmationDialog(
-            "Clear cleaning history?",
+            "清空清理历史记录？",
             isPresented: $showClearHistoryConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Clear history", role: .destructive) {
+            Button("清空历史记录", role: .destructive) {
                 history.clear()
                 CleanupLedgerStore.shared.clear(
                     keepingTotal: store.totalMovedToTrashBytes,
@@ -89,22 +89,22 @@ struct SettingsView: View {
                 )
                 isCleaningHistoryExpanded = false
             }
-            Button("Cancel", role: .cancel) {}
+            Button("取消", role: .cancel) {}
         } message: {
-            Text("This removes all saved cleanup records from this Mac. It cannot be undone.")
+            Text("这会删除这台 Mac 上所有已保存的清理记录，且无法撤销。")
         }
         .onChange(of: devToolsStalenessThresholdRaw) { _ in
             // Through the queue, so it waits its turn behind a running scan.
             store.requestScan(.cachesAndDevTools)
         }
         .alert(
-            "Scheduled clean",
+            "计划清理",
             isPresented: Binding(
                 get: { scheduledCleanNowMessage != nil },
                 set: { if !$0 { scheduledCleanNowMessage = nil } }
             )
         ) {
-            Button("OK") { scheduledCleanNowMessage = nil }
+            Button("好") { scheduledCleanNowMessage = nil }
         } message: {
             Text(scheduledCleanNowMessage ?? "")
         }
@@ -128,12 +128,12 @@ struct SettingsView: View {
     }
 
     private var protectedAppRemovalSection: some View {
-        settingsSection("Protected App Removal") {
+        settingsSection("受保护的应用移除") {
             // A switch, like every other setting, so the control never changes shape
             // between states. Turning it on registers the helper (which then waits on
             // approval in System Settings); turning it off unregisters it.
             settingsToggleRow(
-                title: "Remove admin-locked apps without a password",
+                title: "无需密码移除管理员锁定的应用",
                 caption: helperCaption,
                 isOn: helperEnabledBinding
             )
@@ -150,9 +150,7 @@ struct SettingsView: View {
 
     private var helperCaption: String {
         """
-        Some apps are installed under an administrator and can't be moved to the Trash on their \
-        own. Purge asks you to enable its secure removal helper only when an app needs it. Items \
-        still go to the Trash, and you can turn it off here at any time.
+        某些应用安装在管理员账户下，无法自行移入废纸篓。只有在应用需要时，Purge 才会请你启用它的安全移除辅助工具。项目仍会移入废纸篓，你也可以随时在这里关闭。
         """
     }
 
@@ -210,13 +208,13 @@ struct SettingsView: View {
     private var helperStatusMessage: String {
         switch helperPhase {
         case .on:
-            return "On. Admin-locked apps can be moved to the Trash without a password."
+            return "已开启。管理员锁定的应用无需密码即可移入废纸篓。"
         case .awaitingApproval:
-            return "Approval is still needed in System Settings."
+            return "仍需在「系统设置」中批准。"
         case .failed:
-            return "Setup didn't complete. Turn it on again to retry."
+            return "设置未完成。请再次开启以重试。"
         case .off:
-            return "Off. Purge will ask for approval the first time an app needs it."
+            return "已关闭。首次需要时，Purge 会请求批准。"
         }
     }
 
@@ -226,17 +224,17 @@ struct SettingsView: View {
     private var helperStatusAction: (title: String, perform: () -> Void)? {
         switch helperPhase {
         case .awaitingApproval:
-            return ("Open System Settings", { helper.openLoginItemsSettings() })
+            return ("打开系统设置", { helper.openLoginItemsSettings() })
         case .on, .failed, .off:
             return nil
         }
     }
 
     private var appearanceSection: some View {
-        settingsSection("Appearance") {
+        settingsSection("外观") {
             settingsControlRow(
-                title: "Theme",
-                caption: "Choose a light or dark look, or match your system setting."
+                title: "主题",
+                caption: "选择浅色或深色外观，或跟随系统设置。"
             ) {
                 appearanceOptions
             }
@@ -261,9 +259,9 @@ struct SettingsView: View {
     }
 
     private var startupSection: some View {
-        settingsSection("Startup") {
+        settingsSection("启动") {
             settingsToggleRow(
-                title: "Keep Purge in the menu bar",
+                title: "在菜单栏中保留 Purge",
                 caption: menuBarModeCaption,
                 captionAnimatesTextChanges: true,
                 isOn: Binding(
@@ -283,8 +281,8 @@ struct SettingsView: View {
                     settingsSectionDivider
 
                     settingsToggleRow(
-                        title: "Launch Purge at login",
-                        caption: "Purge starts with your Mac and waits in the menu bar. No window opens until you click the icon.",
+                        title: "登录时启动 Purge",
+                        caption: "Purge 随 Mac 启动并在菜单栏中待命。在你点击图标前不会打开窗口。",
                         warning: loginItemFailure?.message,
                         isOn: launchAtLoginBinding
                     )
@@ -292,11 +290,10 @@ struct SettingsView: View {
                     settingsSectionDivider
 
                     settingsToggleRow(
-                        title: "Hide Dock icon",
+                        title: "隐藏程序坞图标",
                         caption: """
-                            Purge runs from the menu bar only. Click the menu bar icon to open \
-                            this window again. The app menu is gone while the Dock icon is \
-                            hidden, so ⌘Q won't quit. Use Quit in the menu bar dropdown.
+                            Purge 仅从菜单栏运行。点击菜单栏图标可重新打开这个窗口。\
+                            隐藏程序坞图标后应用菜单也会消失，因此 ⌘Q 不会退出。请使用菜单栏下拉菜单中的「退出」。
                             """,
                         isOn: hideDockIconBinding
                     )
@@ -309,8 +306,8 @@ struct SettingsView: View {
 
     private var menuBarModeCaption: String {
         startup.showsMenuBarIcon
-            ? "Purge keeps running after you close the window, so you can scan and clean from the menu bar."
-            : "Purge opens when you need it and quits when you close the window."
+            ? "关闭窗口后 Purge 仍会运行，你可以从菜单栏进行扫描和清理。"
+            : "Purge 在你需要时打开，关闭窗口时退出。"
     }
 
     private var launchAtLoginBinding: Binding<Bool> {
@@ -344,9 +341,9 @@ struct SettingsView: View {
     }
 
     private var deletedAppsSection: some View {
-        settingsSection("Deleted Apps") {
+        settingsSection("已删除的应用") {
             settingsToggleRow(
-                title: "Review leftovers when an app is deleted",
+                title: "应用被删除时检查残留",
                 caption: deletedAppsCaption,
                 isOn: Binding(
                     get: { removedApps.isEnabled },
@@ -367,10 +364,7 @@ struct SettingsView: View {
 
     private var deletedAppsCaption: String {
         """
-        When an app leaves Applications, like dragging it to the Trash in Finder, \
-        Purge opens with the files it left behind, even if Purge was quit. Nothing \
-        moves until you confirm. A small background watcher stays on while this is \
-        enabled; you can turn it off here at any time.
+        当应用从「应用程序」中消失时（例如在访达中拖入废纸篓），Purge 会展示它留下的文件，即使 Purge 已退出。在你确认之前不会移动任何内容。启用时，一个小的后台监控进程会保持运行；你可以随时在这里关闭它。
         """
     }
 
@@ -399,7 +393,7 @@ struct SettingsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             if let fixTitle = health.fixTitle {
-                Button(removedApps.isRestartingWatcher ? "Restarting…" : fixTitle) {
+                Button(removedApps.isRestartingWatcher ? "正在重启…" : fixTitle) {
                     removedApps.fixWatcher()
                 }
                 .buttonStyle(.purge(.secondary, size: .small))
@@ -429,25 +423,25 @@ struct SettingsView: View {
     private func deletedAppsStatusMessage(_ health: WatcherHealth) -> String {
         switch health {
         case .off:
-            return "Off. Apps deleted outside Purge are not noticed."
+            return "已关闭。在 Purge 之外删除的应用不会被发现。"
         case .checking:
-            return "Checking the background watcher."
+            return "正在检查后台监控进程。"
         case .running:
-            return "On. Purge is watching for deleted apps."
+            return "已开启。Purge 正在监控被删除的应用。"
         case .notRunning:
             // A restart that does not stick means something outside Purge stops
             // the watcher, so point at the switch macOS keeps for it.
             return (health.problemMessage ?? "")
-                + " If it stops again, check that Purge is switched on under Login Items in System Settings."
+                + " 如果它再次停止，请检查「系统设置」>「登录项」中 Purge 是否已开启。"
         case .needsApproval, .failedToStart:
             return health.problemMessage ?? ""
         }
     }
 
     private var cleaningScheduleSection: some View {
-        settingsSection("Cleaning Schedule") {
+        settingsSection("清理计划") {
             settingsToggleRow(
-                title: "Run automatic cleaning",
+                title: "运行自动清理",
                 caption: scheduleSummary,
                 captionAnimatesTextChanges: true,
                 isOn: autoCleanEnabledBinding
@@ -456,7 +450,7 @@ struct SettingsView: View {
             settingsSectionDivider
 
             settingsPickerRow(
-                title: "How often",
+                title: "频率",
                 selection: frequencySelectionBinding,
                 options: ScheduledCleaningFrequency.allCases,
                 optionLabel: \.displayName
@@ -497,9 +491,9 @@ struct SettingsView: View {
     }
 
     private var updatesSection: some View {
-        settingsSection("Updates") {
+        settingsSection("更新") {
             settingsToggleRow(
-                title: "Check for updates automatically",
+                title: "自动检查更新",
                 caption: updatesSummary,
                 isOn: automaticUpdateChecksBinding
             )
@@ -508,8 +502,7 @@ struct SettingsView: View {
 
     private var updatesSummary: String {
         """
-        Purge checks once a day and shows the update window when a new version is available. \
-        Nothing is installed without your confirmation, and every download is signature-checked.
+        Purge 每天检查一次，并在有新版本时显示更新窗口。未经你确认不会安装任何内容，且每次下载都会验证签名。
         """
     }
 
@@ -525,10 +518,9 @@ struct SettingsView: View {
     /// interval to confirm automatic cleaning works.
     private var runScheduledCleanNowRow: some View {
         settingsControlRow(
-            title: "Test the schedule",
+            title: "测试计划",
             caption: """
-                Run a scheduled clean right now to confirm it works. It uses the same safe \
-                rules above and counts as this period's clean.
+                立即运行一次计划清理以确认它正常工作。它使用上方相同的安全规则，并计入本周期的一次清理。
                 """
         ) {
             runScheduledCleanNowButton
@@ -542,7 +534,7 @@ struct SettingsView: View {
                     ProgressView()
                         .controlSize(.small)
                 }
-                Text(isRunningScheduledCleanNow ? "Cleaning…" : "Run now")
+                Text(isRunningScheduledCleanNow ? "正在清理…" : "立即运行")
             }
         }
         .buttonStyle(.purge(.secondary))
@@ -563,16 +555,14 @@ struct SettingsView: View {
         for summary: PurgeStore.ScheduledCleaningSummary?
     ) -> String {
         guard let summary else {
-            return "Auto-clean is off, so nothing ran. Turn it on and try again."
+            return "自动清理已关闭，因此没有运行。请先开启再重试。"
         }
         if summary.deletedCount == 0 {
             return """
-            Nothing matched your safe settings right now — the schedule is working, there just \
-            wasn't anything safe to clean yet.
+            当前没有内容符合你的安全设置——计划本身是正常的，只是暂时没有可安全清理的内容。
             """
         }
-        let noun = summary.deletedCount == 1 ? "item" : "items"
-        return "Moved \(summary.deletedCount) \(noun) to Trash, about \(formatBytes(summary.bytesMovedToTrash)). Empty the trash to reclaim the space."
+        return "已将 \(summary.deletedCount) 个项目移入废纸篓，约 \(formatBytes(summary.bytesMovedToTrash))。清空废纸篓即可释放空间。"
     }
 
     /// Recent cleanup activity, so scheduled cleans are visible in the app instead
@@ -580,10 +570,10 @@ struct SettingsView: View {
     private var cleaningHistorySection: some View {
         // The only header-level control in Settings: it acts on the whole list
         // below, not on a single setting, so it can't live on a row.
-        settingsSection("Cleaning History") {
+        settingsSection("清理历史记录") {
             // Quiet: it sits in a section header and asks for confirmation before
             // anything happens, so it shouldn't pull the eye like a row's control.
-            Button("Clear history") {
+            Button("清空历史记录") {
                 showClearHistoryConfirmation = true
             }
             .buttonStyle(.purge(.quiet, size: .small))
@@ -591,7 +581,7 @@ struct SettingsView: View {
         } content: {
             Group {
                 if displayedHistoryEntries.isEmpty {
-                    Text("No cleans recorded yet. Automatic and manual cleans will show up here.")
+                    Text("尚未记录任何清理。自动和手动清理会显示在这里。")
                         .font(scheduleStatusSecondaryFont)
                         .foregroundStyle(AppColors.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -642,7 +632,7 @@ struct SettingsView: View {
 
     private var cleaningHistoryExpandRow: some View {
         HStack(spacing: 10) {
-            Text(isCleaningHistoryExpanded ? "Show less" : "Show all")
+            Text(isCleaningHistoryExpanded ? "收起" : "显示全部")
                 .font(AppStyle.Typography.body)
                 .foregroundStyle(AppColors.textPrimary)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -658,9 +648,9 @@ struct SettingsView: View {
     }
 
     private var devToolsSection: some View {
-        settingsSection("Developer Projects") {
+        settingsSection("开发者项目") {
             settingsPickerRow(
-                title: "Consider stale after",
+                title: "视为陈旧的期限",
                 caption: currentDevToolsStalenessOption.description,
                 selection: devToolsStalenessSelectionBinding,
                 options: DevToolsStalenessOption.allCases,
@@ -672,13 +662,13 @@ struct SettingsView: View {
     /// Settings section for scan exclusions. Purely subtractive: un-excluding only restores
     /// eligibility when the path still passes the normal allowlist gate.
     private var excludedAppsSection: some View {
-        settingsSection("Excluded from scans") {
+        settingsSection("从扫描中排除") {
             settingsControlRow(
-                title: "Excluded paths",
-                caption: "Scans skip these files and folders and everything inside them. Add a folder here, or right-click any scan result and choose Exclude from scans."
+                title: "已排除的路径",
+                caption: "扫描会跳过这些文件和文件夹及其中的所有内容。在此添加文件夹，或右键点击任意扫描结果并选择「从扫描中排除」。"
             ) {
                 Button(action: chooseFoldersToExclude) {
-                    Label("Add folder\u{2026}", systemImage: "folder.badge.plus")
+                    Label("添加文件夹\u{2026}", systemImage: "folder.badge.plus")
                 }
                 .buttonStyle(.purge(.secondary))
             }
@@ -688,7 +678,7 @@ struct SettingsView: View {
             if entries.isEmpty {
                 settingsSectionDivider
 
-                Text("Nothing excluded")
+                Text("未排除任何内容")
                     .font(scheduleStatusPrimaryFont)
                     .foregroundStyle(AppColors.textSecondary)
                     .padding(16)
@@ -733,12 +723,12 @@ struct SettingsView: View {
             Button {
                 removeExclusion(entry: entry)
             } label: {
-                Label("Remove \(entry.displayName)", systemImage: "xmark")
+                Label("移除 \(entry.displayName)", systemImage: "xmark")
                     .labelStyle(.iconOnly)
                     .imageScale(.small)
             }
             .buttonStyle(.purge(.secondary, size: .small, width: .square))
-            .help("Remove from exclusions. \(entry.displayName) is scanned again next time.")
+            .help("从排除列表中移除。下次扫描时 \(entry.displayName) 会重新被扫描。")
         }
         .padding(16)
         .task(id: entry.path) {
@@ -752,10 +742,10 @@ struct SettingsView: View {
         case .measured(let bytes):
             excludedSizeText(formatBytes(bytes))
         case .missing:
-            excludedSizeText("Not found")
+            excludedSizeText("未找到")
         case .unmeasurable:
-            excludedSizeText("Can\u{2019}t measure")
-                .help("Purge couldn\u{2019}t read this folder to measure it. It\u{2019}s still excluded.")
+            excludedSizeText("无法测量")
+                .help("Purge 无法读取这个文件夹来测量它。它仍会被排除。")
         case nil:
             SkeletonBar(width: 56, height: 12)
                 .shimmering()
@@ -771,7 +761,7 @@ struct SettingsView: View {
 
     private func excludedTotalRow(entries: [ExcludedPathEntry]) -> some View {
         HStack(alignment: .center, spacing: 12) {
-            Text("Total")
+            Text("总计")
                 .font(scheduleStatusPrimaryFont)
                 .foregroundStyle(AppColors.textSecondary)
 
@@ -780,7 +770,7 @@ struct SettingsView: View {
             let total = ExcludedPathsTotal.compute(paths: entries.map(\.path), sizes: excludedPathSizes)
             if total.isComplete {
                 // A folder `du` couldn't read makes the sum a floor, not a total.
-                Text(total.hasUnmeasured ? "At least \(formatBytes(total.bytes))" : formatBytes(total.bytes))
+                Text(total.hasUnmeasured ? "至少 \(formatBytes(total.bytes))" : formatBytes(total.bytes))
                     .font(scheduleStatusPrimaryFont)
                     .foregroundStyle(AppColors.textPrimary)
                     .monospacedDigit()
@@ -817,8 +807,8 @@ struct SettingsView: View {
         panel.allowsMultipleSelection = true
         panel.canCreateDirectories = false
         panel.directoryURL = FileManager.default.homeDirectoryForCurrentUser
-        panel.prompt = "Exclude"
-        panel.message = "Purge won\u{2019}t scan or clean anything inside the folders you choose."
+        panel.prompt = "排除"
+        panel.message = "Purge 不会扫描或清理你所选文件夹中的任何内容。"
         panel.begin { response in
             guard response == .OK else { return }
             store.excludeFoldersFromScans(panel.urls)
@@ -956,12 +946,12 @@ struct SettingsView: View {
 
     private var autoCleanDisabledStatus: some View {
         HStack(alignment: .firstTextBaseline, spacing: AppStyle.Spacing.xSmall) {
-            Text("Auto-clean is off. Turn it on to keep your Mac clean automatically.")
+            Text("自动清理已关闭。开启后可自动保持你的 Mac 整洁。")
                 .font(scheduleStatusSecondaryFont)
                 .foregroundStyle(AppColors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Button("Enable", action: enableAutoClean)
+            Button("开启", action: enableAutoClean)
                 .buttonStyle(.purge(.secondary, size: .small))
         }
     }
@@ -981,7 +971,7 @@ struct SettingsView: View {
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 4) {
-                    scheduleStatusLabel("Next clean", showsDueDot: isDueToday)
+                    scheduleStatusLabel("下次清理", showsDueDot: isDueToday)
 
                     Text(display.primary)
                         .font(scheduleStatusPrimaryFont)
@@ -1010,13 +1000,13 @@ struct SettingsView: View {
 
     private func lastCleanSummaryText(referenceDate: Date) -> String {
         guard let outcome = registrar.lastOutcome else {
-            return "Last clean: no scheduled clean has run yet."
+            return "上次清理：尚未运行过计划清理。"
         }
         let relative = relativeDateText(for: outcome.date, referenceDate: referenceDate)
         guard outcome.deletedCount > 0 else {
-            return "Last clean: nothing safe to clean, \(relative)."
+            return "上次清理：没有可安全清理的内容，\(relative)。"
         }
-        return "Last clean: \(formatBytes(outcome.bytesMovedToTrash)) moved to trash, \(relative)."
+        return "上次清理：已将 \(formatBytes(outcome.bytesMovedToTrash)) 移入废纸篓，\(relative)。"
     }
 
     private func scheduleStatusLabel(_ title: String, showsDueDot: Bool = false) -> some View {
@@ -1089,9 +1079,7 @@ struct SettingsView: View {
 
     private var scheduleSummary: String {
         """
-        Every \(prefs.frequency.summaryPhrase(customAmount: prefs.customIntervalAmount, customUnit: prefs.customIntervalUnit)), we will quietly clean the same safe items as the \
-        Clean Safe Items button - safe caches and stale developer artifacts. Your actual work is \
-        never deleted.
+        每\(prefs.frequency.summaryPhrase(customAmount: prefs.customIntervalAmount, customUnit: prefs.customIntervalUnit))，我们会静默清理与「清理安全项目」按钮相同的安全项目——安全缓存和陈旧的开发产物。你的实际工作内容绝不会被删除。
         """
     }
 
@@ -1293,7 +1281,7 @@ private struct AppearanceOptionButton: View {
         }
         .buttonStyle(.plain)
         .animation(reduceMotion ? nil : .easeOut(duration: 0.15), value: isSelected)
-        .accessibilityLabel("\(mode.displayName) appearance")
+        .accessibilityLabel("\(mode.displayName) 外观")
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
@@ -1362,11 +1350,11 @@ private extension ScheduledCleaningFrequency {
     func summaryPhrase(customAmount: Int, customUnit: CustomCleaningIntervalUnit) -> String {
         switch self {
         case .weekly:
-            return "week"
+            return "一周"
         case .monthly:
-            return "month"
+            return "一个月"
         case .quarterly:
-            return "3 months"
+            return "三个月"
         case .custom:
             return customUnit.phrase(amount: customAmount)
         }
@@ -1381,8 +1369,8 @@ private enum LoginItemFailure {
 
     var message: String {
         switch self {
-        case .enable: "Couldn't turn this on. Check Login Items in System Settings."
-        case .disable: "Couldn't turn this off. Check Login Items in System Settings."
+        case .enable: "无法开启。请检查「系统设置」中的「登录项」。"
+        case .disable: "无法关闭。请检查「系统设置」中的「登录项」。"
         }
     }
 }

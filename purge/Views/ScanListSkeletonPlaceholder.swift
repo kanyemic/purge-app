@@ -130,14 +130,14 @@ struct ScanListSkeletonPlaceholder: View {
         .scrollContentBackground(.hidden)
         .background(AppColors.surfaceBase)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Loading results")
+        .accessibilityLabel("正在载入结果")
     }
 }
 
 // MARK: - Deletion overlay
 
 struct CleaningOverlay: View {
-    var message: String = "Cleaning…"
+    var message: String = "正在清理…"
 
     var body: some View {
         ZStack {

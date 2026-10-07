@@ -179,7 +179,7 @@ struct LargeFilesView: View {
     private var standardBody: some View {
         VStack(spacing: 0) {
             if showsPageHeader {
-                AppSectionPageHeader(title: "Large Files", subtitle: pageSubtitle) {
+                AppSectionPageHeader(title: "大文件", subtitle: pageSubtitle) {
                     headerActions
                 }
             }
@@ -204,7 +204,7 @@ struct LargeFilesView: View {
         HStack(spacing: AppStyle.Spacing.xSmall) {
             Button(action: onScan) {
                 CleaningButtonLabel(
-                    title: isLoading ? "Scanning..." : "Scan",
+                    title: isLoading ? "正在扫描..." : "扫描",
                     systemImage: isLoading ? nil : "arrow.clockwise",
                     isCleaning: isLoading
                 )
@@ -234,7 +234,7 @@ struct LargeFilesView: View {
                     // active instead of advertising rows the query already hid.
                     categoryChip(
                         id: LargeFileCategoryFilter.all,
-                        title: "All",
+                        title: "全部",
                         systemImage: "square.grid.2x2",
                         count: searchMatches.count
                     )
@@ -245,7 +245,7 @@ struct LargeFilesView: View {
                     if !duplicateIndex.isEmpty {
                         categoryChip(
                             id: Self.duplicatesFilterID,
-                            title: "Duplicates",
+                            title: "重复文件",
                             systemImage: "square.on.square",
                             // The count of *removable* copies — one keeper per
                             // group excluded — so it answers "what here is
@@ -297,7 +297,7 @@ struct LargeFilesView: View {
         }
         .buttonStyle(.plain)
         .fixedSize()
-        .accessibilityLabel("Size filter")
+        .accessibilityLabel("文件大小筛选")
         .accessibilityValue(sizeThreshold.menuButtonLabel)
     }
 
@@ -319,7 +319,7 @@ struct LargeFilesView: View {
         }
         .buttonStyle(.plain)
         .fixedSize()
-        .accessibilityLabel("Last used filter")
+        .accessibilityLabel("上次使用时间筛选")
         .accessibilityValue(ageThreshold.menuButtonLabel)
     }
 
@@ -499,9 +499,9 @@ struct LargeFilesView: View {
             Image(systemName: "tray.full")
                 .font(.system(size: 38))
                 .foregroundStyle(AppColors.textSecondary)
-            Text("No Large Files Found")
+            Text("未找到大文件")
                 .font(AppStyle.Typography.sectionTitle.weight(.regular))
-            Text("Try a lower size threshold or a shorter last-used window.")
+            Text("试试调低文件大小阈值，或缩短“上次使用”的时间范围。")
                 .foregroundStyle(AppColors.textSecondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -509,24 +509,24 @@ struct LargeFilesView: View {
 
     private var emptyFilterState: some View {
         VStack(spacing: 4) {
-            Text("Nothing here.")
+            Text("这里没有内容。")
                 .font(AppStyle.Typography.headline)
             // Name the query when there is one: with a search field in the chrome the
             // generic "this filter" leaves the user guessing whether it was the query,
             // the category, or the size threshold that emptied the list.
             if hasActiveQuery {
-                Text("No files match \"\(searchQuery)\".")
+                Text("没有文件匹配“\(searchQuery)”。")
                     .foregroundStyle(AppColors.textSecondary)
                     .lineLimit(2)
                     .truncationMode(.middle)
                     .multilineTextAlignment(.center)
-                Button("Clear Search") {
+                Button("清除搜索") {
                     searchQuery = ""
                 }
                 .buttonStyle(.purge(.secondary, size: .small))
                 .padding(.top, AppStyle.Spacing.xxSmall)
             } else {
-                Text("No files match this filter.")
+                Text("没有文件匹配当前筛选条件。")
                     .foregroundStyle(AppColors.textSecondary)
             }
         }
@@ -538,7 +538,7 @@ struct LargeFilesView: View {
         Color.clear
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Scanning large files")
+            .accessibilityLabel("正在扫描大文件")
     }
 
     private func toggleSelection(forFileID id: String) {
@@ -559,8 +559,7 @@ struct LargeFilesView: View {
     private var pageSubtitle: String {
         let count = visibleFiles.count
         let bytes = visibleFiles.reduce(Int64(0)) { $0 + $1.sizeBytes }
-        let itemLabel = count == 1 ? "file" : "files"
-        return "\(count) \(itemLabel) · \(formatBytes(bytes)) to review"
+        return "\(count) 个文件 · \(formatBytes(bytes)) 待清理"
     }
 
 }
@@ -603,8 +602,8 @@ private struct LargeFileDeleteButton: View {
             store.presentLargeFileDeletionSheet()
         } label: {
             AnimatedDeleteActionLabel(
-                inactiveTitle: "Delete Selected",
-                activeTitle: "Delete Selected",
+                inactiveTitle: "删除所选",
+                activeTitle: "删除所选",
                 selectedCount: store.selectedLargeFileCount,
                 selectedBytes: store.selectedLargeFileBytes
             )
@@ -633,7 +632,7 @@ private struct LargeFileDuplicateStatus: View {
                         .controlSize(.small)
                         .scaleEffect(0.7)
                         .frame(width: 12, height: 12)
-                    Text("Checking for duplicates…")
+                    Text("正在检查重复文件…")
                         .font(AppStyle.Typography.callout)
                         .foregroundStyle(AppColors.textTertiary)
                         .lineLimit(1)
@@ -669,7 +668,7 @@ private struct LargeFileSelectAllBar: View {
 
     var body: some View {
         HStack(alignment: .bottom) {
-            TriStateCheckbox(title: "Select All", state: state) {
+            TriStateCheckbox(title: "全选", state: state) {
                 onToggleAll()
             }
             .fixedSize()
@@ -685,12 +684,12 @@ private struct LargeFileSelectAllBar: View {
                 // not inside it, so it can't trigger the scroll-to-clicked-row jump
                 // the rows guard against.
                 Button(action: onKeepOneOfEach) {
-                    Label("Delete extra copies", systemImage: "trash")
+                    Label("删除多余副本", systemImage: "trash")
                         .labelStyle(.titleAndIcon)
                 }
                 .buttonStyle(.purge(.secondary))
                 .fixedSize()
-                .help("Keep one copy of each set and review the rest before deleting")
+                .help("每组保留一份，删除前先确认其余副本")
             }
 
             // Always present, even under Duplicates where it reorders whole groups
@@ -730,13 +729,13 @@ private struct LargeFileSearchField: View {
                 .frame(width: 14, height: 14)
                 .accessibilityHidden(true)
 
-            TextField("Search", text: $query)
+            TextField("搜索", text: $query)
                 .textFieldStyle(.plain)
                 .font(AppStyle.Typography.body)
                 .foregroundStyle(AppColors.textPrimary)
                 .focused($isFocused)
                 .focusEffectDisabledIfAvailable()
-                .accessibilityLabel("Search large files by name")
+                .accessibilityLabel("按名称搜索大文件")
                 // Escape clears rather than just unfocusing: an emptied field is the
                 // state the user wants back, and it's the one AppKit search fields
                 // give them.
@@ -762,8 +761,8 @@ private struct LargeFileSearchField: View {
                 }
                 .buttonStyle(.plain)
                 .contentShape(Rectangle())
-                .help("Clear search")
-                .accessibilityLabel("Clear search")
+                .help("清除搜索")
+                .accessibilityLabel("清除搜索")
                 .transition(.opacity)
             }
         }
@@ -889,7 +888,7 @@ private struct DuplicateGroupCard: View {
                 .strokeBorder(AppColors.borderSubtle, lineWidth: 1)
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("\(section.displayedCopyCount) identical copies")
+        .accessibilityLabel("\(section.displayedCopyCount) 份完全相同的副本")
     }
 
     private var header: some View {
@@ -905,7 +904,7 @@ private struct DuplicateGroupCard: View {
             // No size here. Every copy is the same size and each row already shows
             // it, so a "9.4 MB each" and a "free 9.4 MB" on the header just repeated
             // the one number the rows carry — three sizes for a two-copy set.
-            Text("\(section.displayedCopyCount) identical copies")
+            Text("\(section.displayedCopyCount) 份完全相同的副本")
                 .foregroundStyle(AppColors.textSecondary)
 
             Spacer(minLength: 0)
@@ -950,9 +949,9 @@ private struct LargeFileRow: View {
 
     /// Built on right-click, not during `body` — see `ScanRowContextMenu.entries`.
     private func contextMenuEntries() -> [ScanRowMenuEntry] {
-        var entries: [ScanRowMenuEntry] = [.action(title: "Exclude from scans", handler: onExclude)]
+        var entries: [ScanRowMenuEntry] = [.action(title: "从扫描中排除", handler: onExclude)]
         if canExcludeFolder {
-            entries.append(.action(title: "Exclude folder \u{201C}\(folderName)\u{201D} from scans", handler: onExcludeFolder))
+            entries.append(.action(title: "从扫描中排除文件夹“\(folderName)”", handler: onExcludeFolder))
         }
         entries.append(.separator)
         entries.append(contentsOf: FinderReveal.menuEntries(for: [ScanRowLocation(url: fileURL)]))
@@ -1039,7 +1038,7 @@ private struct LargeFileRow: View {
             ScanRowContextMenu(isMenuActive: $isContextMenuActive, entries: contextMenuEntries)
         }
         .animation(.easeOut(duration: 0.12), value: isContextMenuActive)
-        .accessibilityValue(isSelected ? "Selected" : "Not selected")
+        .accessibilityValue(isSelected ? "已选中" : "未选中")
         .accessibilityAddTraits(isSelected ? .isSelected : [])
         .accessibilityAction {
             onToggle()
@@ -1047,7 +1046,7 @@ private struct LargeFileRow: View {
         // The overlay only answers a secondary click; these give VoiceOver and the
         // keyboard the same exclusion actions. Show in Finder already has one on
         // the location label.
-        .accessibilityAction(named: Text("Exclude from scans"), onExclude)
+        .accessibilityAction(named: Text("从扫描中排除"), onExclude)
         .modifier(ExcludeFolderAccessibilityAction(isAvailable: canExcludeFolder, handler: onExcludeFolder))
     }
 
@@ -1079,8 +1078,8 @@ private struct LargeFileRow: View {
                         NSCursor.pop()
                     }
                 }
-                .help("Quick Look")
-                .accessibilityLabel("Quick Look \(file.displayName)")
+                .help("快速查看")
+                .accessibilityLabel("快速查看 \(file.displayName)")
                 .accessibilityAddTraits(.isButton)
                 .accessibilityAction(.default, quickLook)
 
@@ -1100,23 +1099,22 @@ private struct LargeFileRow: View {
                         .contentShape(Rectangle())
                         .onTapGesture(perform: revealInFinder)
                         .onHover { isHoveringLocation = $0 }
-                        .help("Show in Finder\n\(parentFolderPath)")
-                        .accessibilityLabel("Reveal in Finder, \(file.locationLabel)")
+                        .help("在访达中显示\n\(parentFolderPath)")
+                        .accessibilityLabel("在访达中显示，\(file.locationLabel)")
                         .accessibilityAddTraits(.isButton)
                         .accessibilityAction(.default, revealInFinder)
 
                     Text("·")
                         .foregroundStyle(AppColors.textSecondary)
-                    Text("Last used \(dateText)")
+                    Text("上次使用 \(dateText)")
                         .foregroundStyle(AppColors.textSecondary)
                         .layoutPriority(-1)
 
                     if let otherCopyCount {
-                        let noun = otherCopyCount == 1 ? "copy" : "copies"
-                        AppBadge(text: "\(otherCopyCount) other \(noun)", tone: .warning)
+                        AppBadge(text: "另有 \(otherCopyCount) 份副本", tone: .warning)
                             .fixedSize()
-                            .help("\(otherCopyCount + 1) files in this scan have identical contents, including this one.")
-                            .accessibilityLabel("\(otherCopyCount) other identical \(noun) found")
+                            .help("\(otherCopyCount + 1) 个文件在本次扫描中内容完全相同，包括这一个。")
+                            .accessibilityLabel("另有 \(otherCopyCount) 份内容相同的副本")
                     }
                 }
                 .font(AppStyle.Typography.metadata)
@@ -1133,7 +1131,7 @@ private struct ExcludeFolderAccessibilityAction: ViewModifier {
 
     func body(content: Content) -> some View {
         if isAvailable {
-            content.accessibilityAction(named: Text("Exclude folder from scans"), handler)
+            content.accessibilityAction(named: Text("从扫描中排除文件夹"), handler)
         } else {
             content
         }
@@ -1246,7 +1244,7 @@ struct LargeFilesHeaderActions: View {
 
     private var scanTitle: String {
         if isQueued { return ScanQueueLabels.queued }
-        return store.isScanningLargeFiles ? "Scanning..." : "Scan"
+        return store.isScanningLargeFiles ? "正在扫描..." : "扫描"
     }
 
     var body: some View {
@@ -1289,7 +1287,7 @@ struct LargeFileDeletionConfirmSheet: View {
     private func groupLabel(_ group: DuplicateGroup) -> String {
         guard let fileID = group.fileIDs.first,
               let file = files.first(where: { $0.id == fileID }) else {
-            return "these files"
+            return "这些文件"
         }
         return file.displayName
     }
@@ -1301,11 +1299,11 @@ struct LargeFileDeletionConfirmSheet: View {
     var body: some View {
         VStack(alignment: .leading, spacing: AppStyle.Spacing.medium) {
             VStack(alignment: .leading, spacing: AppStyle.Spacing.xSmall) {
-                Text("Move selected files to Trash?")
+                Text("将所选文件移入废纸篓？")
                     .font(AppStyle.Typography.pageTitle)
                     .foregroundStyle(AppColors.textPrimary)
 
-                Text("These are your own files. Purge moves only the ones you picked to Trash, and you can put them back if you change your mind.")
+                Text("这些是你自己的文件。Purge 只会将你选中的文件移入废纸篓，改变主意后你可以放回。")
                     .font(AppStyle.Typography.callout)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -1326,17 +1324,17 @@ struct LargeFileDeletionConfirmSheet: View {
             }
 
             HStack(spacing: AppStyle.Spacing.small) {
-                Text("Freeing \(formatBytes(totalBytes))")
+                Text("释放 \(formatBytes(totalBytes))")
                     .font(AppStyle.Typography.metadataEmphasis)
                     .foregroundStyle(AppColors.textSecondary)
 
                 Spacer()
 
-                Button("Cancel", action: onCancel)
+                Button("取消", action: onCancel)
                     .buttonStyle(.purge(.secondary))
                     .keyboardShortcut(.cancelAction)
 
-                Button("Move \(files.count) to Trash") {
+                Button("将 \(files.count) 项移入废纸篓") {
                     onConfirm()
                 }
                 .buttonStyle(.purge(.destructive))
@@ -1414,12 +1412,12 @@ struct LargeFileDeletionConfirmSheet: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 ForEach(namedConsumedGroups) { group in
-                    Text("You're deleting all \(group.copyCount) copies of \(groupLabel(group)). No copy will remain.")
+                    Text("你将会删除 \(groupLabel(group)) 的全部 \(group.copyCount) 份副本。将不会保留任何副本。")
                         .lineLimit(2)
                         .truncationMode(.middle)
                 }
                 if remainingConsumedGroupCount > 0 {
-                    Text("…and \(remainingConsumedGroupCount) more sets where every copy is selected.")
+                    Text("…另有 \(remainingConsumedGroupCount) 组的所有副本都被选中。")
                 }
             }
             .font(AppStyle.Typography.metadata)
@@ -1482,11 +1480,11 @@ struct DuplicateCleanupSheet: View {
     var body: some View {
         VStack(alignment: .leading, spacing: AppStyle.Spacing.medium) {
             VStack(alignment: .leading, spacing: AppStyle.Spacing.xSmall) {
-                Text("Delete extra copies")
+                Text("删除多余副本")
                     .font(AppStyle.Typography.pageTitle)
                     .foregroundStyle(AppColors.textPrimary)
 
-                Text("Every copy is identical, so keeping any one is safe. Purge keeps the copy in a real folder over one in Downloads, a cache, or a build folder, and prefers the original name. The rest go to Trash. Tap a copy to keep it instead.")
+                Text("每份副本都完全相同，保留任意一份都是安全的。Purge 会优先保留位于真实文件夹中的副本（而不是下载、缓存或构建文件夹里的），并优先保留原始名称。其余副本会移入废纸篓。点击某份副本即可改为保留它。")
                     .font(AppStyle.Typography.callout)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -1503,17 +1501,17 @@ struct DuplicateCleanupSheet: View {
             .frame(minHeight: 280)
 
             HStack(spacing: AppStyle.Spacing.small) {
-                Text("Keeping \(request.sets.count), freeing \(formatBytes(reclaimedBytes))")
+                Text("保留 \(request.sets.count) 组，释放 \(formatBytes(reclaimedBytes))")
                     .font(AppStyle.Typography.metadataEmphasis)
                     .foregroundStyle(AppColors.textSecondary)
 
                 Spacer()
 
-                Button("Cancel", action: onCancel)
+                Button("取消", action: onCancel)
                     .buttonStyle(.purge(.secondary))
                     .keyboardShortcut(.cancelAction)
 
-                Button("Move \(deleteCount) to Trash") {
+                Button("将 \(deleteCount) 项移入废纸篓") {
                     onConfirm(keeperByGroup)
                 }
                 .buttonStyle(.purge(.destructive))
@@ -1530,13 +1528,13 @@ struct DuplicateCleanupSheet: View {
     private func setCard(_ set: DuplicateCopySet) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: AppStyle.Spacing.xSmall) {
-                Text(set.copies.first?.displayName ?? "Duplicate set")
+                Text(set.copies.first?.displayName ?? "重复文件组")
                     .font(AppStyle.Typography.rowTitle)
                     .foregroundStyle(AppColors.textPrimary)
                     .lineLimit(1)
                     .truncationMode(.middle)
                 Spacer(minLength: AppStyle.Spacing.xSmall)
-                Text("\(formatBytes(set.copies.first?.sizeBytes ?? 0)) each")
+                Text("每份 \(formatBytes(set.copies.first?.sizeBytes ?? 0))")
                     .font(AppStyle.Typography.metadata)
                     .foregroundStyle(AppColors.textSecondary)
             }
@@ -1586,14 +1584,14 @@ struct DuplicateCleanupSheet: View {
         .onTapGesture { keeperByGroup[set.id] = file.id }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(file.path.deletingLastPathComponent().path)
-        .accessibilityValue(isKeeper ? "Keeping" : "Moving to Trash")
+        .accessibilityValue(isKeeper ? "保留" : "移入废纸篓")
         .accessibilityAddTraits(isKeeper ? [.isSelected] : [])
     }
 
     /// Reuses the app's tag palette: green for the copy that stays, red for the
     /// ones headed to Trash, so the plan reads at a glance.
     private func statusTag(isKeeper: Bool) -> some View {
-        Text(isKeeper ? "Keep" : "Trash")
+        Text(isKeeper ? "保留" : "废纸篓")
             .font(AppStyle.Typography.metadataEmphasis)
             .foregroundStyle(isKeeper ? AppColors.statusSafeText : AppColors.statusDangerText)
             .padding(.horizontal, AppStyle.Spacing.xSmall)

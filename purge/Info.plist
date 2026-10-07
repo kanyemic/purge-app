@@ -13,13 +13,14 @@
 			</array>
 		</dict>
 	</array>
+	<!-- 汉化版：停用 Sparkle 自动更新，避免被上游英文版覆盖。 -->
 	<key>SUEnableAutomaticChecks</key>
-	<true/>
+	<false/>
 	<key>SUFeedURL</key>
-	<string>https://raw.githubusercontent.com/jithin-sabu/purge-app/main/appcast.xml</string>
+	<string></string>
 	<key>SUPublicEDKey</key>
 	<string>rkjBm25Uagl/vCfXNQ5DtKZSBhO8EDt29ucUJhF98qI=</string>
 	<key>SUScheduledCheckInterval</key>
-	<integer>86400</integer>
+	<integer>0</integer>
 </dict>
 </plist>

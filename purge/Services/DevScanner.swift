@@ -145,7 +145,7 @@ nonisolated final class DevScanner {
                     continuation.finish()
                     return
                 }
-                continuation.yield(.status("Scanning Developer Projects..."))
+                continuation.yield(.status("正在扫描开发项目…"))
                 _ = await self.discoverProjects(access: access, continuation: continuation)
                 continuation.finish()
             }
@@ -157,7 +157,7 @@ nonisolated final class DevScanner {
         access: ScanAccess,
         continuation: AsyncStream<DeveloperScanEvent>.Continuation
     ) async {
-        continuation.yield(.status("Scanning Dev Tools..."))
+        continuation.yield(.status("正在扫描开发工具…"))
         let globalDiscoveryStart = Date()
         let (tools, toolSizeJobs) = scanGlobalCachePlaceholders(access: access)
         ScanPhaseTiming.finish(
@@ -175,7 +175,7 @@ nonisolated final class DevScanner {
 
         await withTaskGroup(of: Void.self) { group in
             group.addTask { [toolSizeJobs] in
-                continuation.yield(.status("Calculating Dev Tool sizes..."))
+                continuation.yield(.status("正在计算开发工具大小…"))
                 let sizingStart = Date()
                 await self.runDevToolSizeJobs(toolSizeJobs, continuation: continuation)
                 let pathCount = toolSizeJobs.reduce(0) { $0 + $1.paths.count }
@@ -188,7 +188,7 @@ nonisolated final class DevScanner {
 
             group.addTask {
                 if Task.isCancelled { return }
-                continuation.yield(.status("Scanning iOS Simulators..."))
+                continuation.yield(.status("正在扫描 iOS 模拟器…"))
                 let simDiscoveryStart = Date()
                 let simulators = await self.discoverShutdownSimulatorsWithoutSizes(access: access)
                 ScanPhaseTiming.finish(
@@ -260,7 +260,7 @@ nonisolated final class DevScanner {
                 let stateString = dict["state"] as? String ?? ""
                 if stateString == "Booted" { continue }
 
-                let name = dict["name"] as? String ?? "Simulator"
+                let name = dict["name"] as? String ?? "模拟器"
                 let isAvailable = (dict["isAvailable"] as? Bool) ?? true
 
                 let lastBootedAt: Date?
@@ -343,7 +343,7 @@ nonisolated final class DevScanner {
             if let stateNum = plist["state"] as? Int, stateNum == 3 { continue }
             if let stateStr = plist["state"] as? String, stateStr == "Booted" { continue }
 
-            let name = plist["name"] as? String ?? "Simulator"
+            let name = plist["name"] as? String ?? "模拟器"
             let runtimeKey = plist["runtime"] as? String ?? ""
             let runtimeVersion = Self.runtimeVersionLabel(from: runtimeKey)
 
@@ -356,14 +356,14 @@ nonisolated final class DevScanner {
                 isAvailable: isAvailable,
                 lastBootedAt: lastBootedAt,
                 deviceName: name,
-                runtimeVersion: runtimeVersion.isEmpty ? "Unknown runtime" : runtimeVersion
+                runtimeVersion: runtimeVersion.isEmpty ? "未知运行时" : runtimeVersion
             )
 
             built.append(
                 SimulatorDevice(
                     id: id,
                     deviceName: name,
-                    runtimeVersion: runtimeVersion.isEmpty ? "Unknown runtime" : runtimeVersion,
+                    runtimeVersion: runtimeVersion.isEmpty ? "未知运行时" : runtimeVersion,
                     isAvailable: isAvailable,
                     lastBootedAt: lastBootedAt,
                     sizeOnDisk: nil,
@@ -388,7 +388,7 @@ nonisolated final class DevScanner {
     }
 
     private nonisolated static func runtimeVersionLabel(from runtimeKey: String) -> String {
-        guard !runtimeKey.isEmpty else { return "Unknown runtime" }
+        guard !runtimeKey.isEmpty else { return "未知运行时" }
         guard let range = runtimeKey.range(of: "SimRuntime.") else {
             return runtimeKey.replacingOccurrences(of: "-", with: " ")
         }

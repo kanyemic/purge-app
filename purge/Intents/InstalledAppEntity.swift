@@ -5,7 +5,7 @@ import AppKit
 /// the same value as `InstalledApp.id`, so it drops straight into the
 /// uninstaller's selection.
 struct InstalledAppEntity: AppEntity {
-    static let typeDisplayRepresentation: TypeDisplayRepresentation = "App"
+    static let typeDisplayRepresentation: TypeDisplayRepresentation = "应用"
     static let defaultQuery = InstalledAppQuery()
 
     let id: String

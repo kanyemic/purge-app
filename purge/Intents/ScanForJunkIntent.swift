@@ -4,20 +4,20 @@ import Foundation
 /// Named for what it finds: "Scan My Mac" read like a virus scan, and the
 /// answer covers only App Caches and Dev Tools.
 struct ScanForJunkIntent: AppIntent {
-    static let title: LocalizedStringResource = "Scan for Junk"
+    static let title: LocalizedStringResource = "扫描垃圾"
     /// One action for every way of asking about junk and space: Spotlight
     /// matches typed words against the title, the App Shortcut phrases and
     /// these keywords, so "free up space", "storage full" or "how much can I
     /// free" all find it.
     static let description = IntentDescription(
-        "Opens Purge on the Overview, scans for junk, and says how much is safe to clean in App Caches and Dev Tools. Nothing is cleaned until you confirm in Purge.",
+        "打开 Purge 的总览页并扫描垃圾，告诉你应用缓存和开发工具中有多少可以安全清理。在你于 Purge 中确认之前，不会清理任何内容。",
         searchKeywords: [
             // Cleaning words go to Clean Safe Junk; this keeps the ones that
             // only ask how things stand.
-            "junk", "scan", "scan my mac", "check junk", "find junk",
-            "free space", "free up space", "space", "storage", "storage full", "disk full",
-            "disk space", "mac is full", "low on space", "how much can i free",
-            "what's taking space", "cache", "caches",
+            "垃圾", "扫描", "扫描我的 Mac", "查看垃圾", "查找垃圾",
+            "释放空间", "清出空间", "空间", "存储", "存储空间不足", "磁盘已满",
+            "磁盘空间", "Mac 已满", "空间不足", "能释放多少",
+            "什么占用了空间", "缓存",
         ]
     )
 
@@ -41,21 +41,21 @@ extension IntentRouter.ScanOutcome {
         guard case .scanned(let bytes) = self, bytes > 0 else { return AttributedString(dialog) }
         var size = AttributedString(formatBytes(bytes))
         size.inlinePresentationIntent = .stronglyEmphasized
-        return AttributedString("Found ") + size + AttributedString(" of junk that's safe to clean.")
+        return AttributedString("发现 ") + size + AttributedString(" 可安全清理的垃圾。")
     }
 
     var dialog: String {
         switch self {
         case .needsSetup:
-            return "Finish setting up Purge first."
+            return "请先完成 Purge 的初始设置。"
         case .busyCleaning:
-            return "Purge is cleaning right now. Scan again when it's done."
+            return "Purge 正在清理，请稍后再扫描。"
         case .scanned(let bytes) where bytes > 0:
-            return "Found \(formatBytes(bytes)) of junk that's safe to clean."
+            return "发现 \(formatBytes(bytes)) 可安全清理的垃圾。"
         case .scanned:
-            return "No junk to clean right now."
+            return "目前没有可清理的垃圾。"
         case .stopped:
-            return "The scan stopped before it finished."
+            return "扫描尚未完成就停止了。"
         }
     }
 }

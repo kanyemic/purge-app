@@ -12,7 +12,7 @@ struct OnboardingWelcomeStep: View {
         .accessibilityHidden(true)
 
       VStack(spacing: -4) {
-        Text("Welcome to")
+        Text("欢迎使用")
           .font(AppStyle.Typography.sectionTitle.weight(.medium))
           .foregroundStyle(AppColors.textPrimary.opacity(0.8))
           .tracking(0.2)
@@ -23,7 +23,7 @@ struct OnboardingWelcomeStep: View {
       }
       .multilineTextAlignment(.center)
       .accessibilityElement(children: .combine)
-      .accessibilityLabel("Welcome to Purge")
+      .accessibilityLabel("欢迎使用 Purge")
     }
     .frame(maxWidth: OnboardingLayout.contentMaxWidth, maxHeight: .infinity)
   }

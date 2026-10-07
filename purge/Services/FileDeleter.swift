@@ -38,7 +38,7 @@ nonisolated struct SkippedDeletionItem: Identifiable, Hashable {
     let path: String
     let displayName: String
     let reason: String
-    /// `true` when the user should see a "skipped for safety" notice.
+    /// `true` when the user should see a "为安全起见已跳过" notice.
     /// `false` for silent never-delete blocks.
     let isUserVisible: Bool
 
@@ -134,7 +134,7 @@ nonisolated final class FileDeleter: Sendable {
                     skippedItems.append(SkippedDeletionItem(
                         path: url.path,
                         displayName: friendlyTitle,
-                        reason: "This file was skipped for safety",
+                        reason: "为安全起见跳过了此文件",
                         isUserVisible: true
                     ))
                     continue
@@ -216,7 +216,7 @@ nonisolated final class FileDeleter: Sendable {
                         skippedItems.append(SkippedDeletionItem(
                             path: url.path,
                             displayName: friendlyTitle,
-                            reason: "This file was skipped for safety",
+                            reason: "为安全起见跳过了此文件",
                             isUserVisible: true
                         ))
                         continue
@@ -238,7 +238,7 @@ nonisolated final class FileDeleter: Sendable {
                 }
 
             case .blockedNeverDelete, .blockedNotWhitelisted:
-                let reason = decision.skipReason ?? "Skipped for safety"
+                let reason = decision.skipReason ?? "为安全起见已跳过"
                 skippedItems.append(
                     SkippedDeletionItem(
                         path: url.path,
@@ -296,7 +296,7 @@ nonisolated final class FileDeleter: Sendable {
                 skippedItems.append(SkippedDeletionItem(
                     path: url.path,
                     displayName: friendlyTitle,
-                    reason: "This file was skipped for safety",
+                    reason: "为安全起见跳过了此文件",
                     isUserVisible: true
                 ))
                 continue

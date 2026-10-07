@@ -191,7 +191,7 @@ struct PurgeCommands: Commands {
             SettingsMenuItem(store: store)
         }
         CommandGroup(after: .newItem) {
-            Button("Scan Everything") {
+            Button("扫描全部") {
                 store.scanEverything()
             }
             .keyboardShortcut("r", modifiers: [.command, .shift])
@@ -205,7 +205,7 @@ struct PurgeCommands: Commands {
         // launch scan does, many times a second) SwiftUI resets the menu, the
         // alternate goes, and the open menu is left with a blank row at the bottom.
         CommandGroup(replacing: .appTermination) {
-            Button("Quit Purge") { NSApp.terminate(nil) }
+            Button("退出 Purge") { NSApp.terminate(nil) }
                 .keyboardShortcut("q", modifiers: .command)
         }
     }
@@ -222,7 +222,7 @@ private struct SettingsMenuItem: View {
     @AppStorage(FirstRunGate.onboardingCompletedKey) private var hasCompletedOnboarding = false
 
     var body: some View {
-        Button("Settings…") {
+        Button("设置…") {
             IntentRouter.revealWindow()
             store.selectedTab = .settings
         }
@@ -237,7 +237,7 @@ private struct CheckForUpdatesMenuItem: View {
     @ObservedObject var updater: PurgeUpdater
 
     var body: some View {
-        Button("Check for Updates…") {
+        Button("检查更新…") {
             updater.checkForUpdates()
         }
         .disabled(!updater.canCheckForUpdates)

@@ -182,9 +182,9 @@ final class ScheduledCleaningRegistrar: ObservableObject {
         _ = await ScheduledCleanupNotifier.requestAuthorizationIfNeeded()
 
         let content = UNMutableNotificationContent()
-        content.title = "Scheduled cleanup due"
+        content.title = "计划清理已到期"
         content.body = """
-        Open Purge when you’re ready — safe items clear automatically soon after launch.
+        方便时打开 Purge —— 安全项目会在启动后不久自动清理。
         """
         content.sound = .default
 

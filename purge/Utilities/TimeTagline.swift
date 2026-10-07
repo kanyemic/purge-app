@@ -27,7 +27,7 @@ enum TimeTagline {
         if pick == lastShown, let reroll = options.randomElement() {
             pick = reroll
         }
-        let fact = "done in \(timeText(for: seconds))"
+        let fact = "用时 \(timeText(for: seconds))"
         return Selection(line: "\(fact) · \(pick)", factPart: fact, quip: pick)
     }
 
@@ -37,41 +37,43 @@ enum TimeTagline {
 
     static func timeText(for seconds: Double) -> String {
         if seconds < 1 {
-            return String(format: "%.1f seconds", max(0.1, seconds))
+            return String(format: "%.1f 秒", max(0.1, seconds))
         }
         let whole = Int(seconds.rounded())
         if whole < 60 {
-            return whole == 1 ? "1 second" : "\(whole) seconds"
+            // Chinese has no plural form; the branch stays so a single second and
+            // several still share one formatting site.
+            return whole == 1 ? "1 秒" : "\(whole) 秒"
         }
-        return "\(whole / 60)m \(whole % 60)s"
+        return "\(whole / 60)分\(whole % 60)秒"
     }
 
     static func quips(for seconds: Double) -> [String] {
         switch seconds {
         case ..<3:
             return [
-                "blink and you missed it",
-                "that was quick",
-                "barely broke a sweat",
-                "faster than your coffee order"
+                "快到你没看清",
+                "真够快的",
+                "一气呵成",
+                "比等咖啡还快"
             ]
         case ..<15:
             return [
-                "nice and snappy",
-                "smooth operator",
-                "in and out"
+                "干脆利落",
+                "行云流水",
+                "来了就清完了"
             ]
         case ..<60:
             return [
-                "worth the wait",
-                "that was a proper clean",
-                "deep clean, done"
+                "等得值",
+                "这次清得干净",
+                "深度清理，完成"
             ]
         default:
             return [
-                "that was a big one",
-                "heavy lifting, handled",
-                "your mac says thanks"
+                "这次清得真不少",
+                "繁重的活，交给它了",
+                "你的 Mac 说谢谢"
             ]
         }
     }

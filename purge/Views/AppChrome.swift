@@ -260,7 +260,7 @@ private struct AnimatedPageTitle: View {
 
 enum ScanQueueLabels {
     /// A scan button whose scan is waiting behind another one.
-    static let queued = "Up next..."
+    static let queued = "排队中..."
 }
 
 /// Scan and Clean Selected — top-trailing actions on App Caches / Dev Tools pages.
@@ -292,11 +292,11 @@ struct AppScanButton: View {
         if isQueued { return ScanQueueLabels.queued }
         switch scanPhase {
         case .cancelling:
-            return "Cancelling..."
+            return "正在取消..."
         case .scanning:
-            return "Scanning..."
+            return "正在扫描..."
         case .idle, .completed:
-            return "Scan"
+            return "扫描"
         }
     }
 
@@ -325,8 +325,8 @@ struct AppCleanSelectedButton: View {
                 store.showDeletionSheet = true
             } label: {
                 AnimatedDeleteActionLabel(
-                    inactiveTitle: "Clean Selected",
-                    activeTitle: "Clean Selected",
+                    inactiveTitle: "清理所选",
+                    activeTitle: "清理所选",
                     selectedCount: store.selectedCount,
                     selectedBytes: store.selectedTotalBytes
                 )
@@ -395,9 +395,9 @@ struct AnimatedDeleteActionLabel: View {
     private var accessibilityTitle: String {
         guard hasSelection else { return inactiveTitle }
         if let selectedBytes {
-            return "\(activeTitle), \(formatBytes(selectedBytes)) selected"
+            return "\(activeTitle)，已选中 \(formatBytes(selectedBytes))"
         }
-        return "\(activeTitle), \(selectedCount) selected"
+        return "\(activeTitle)，已选中 \(selectedCount) 项"
     }
 
     var body: some View {
@@ -496,7 +496,7 @@ private struct AnimatedDeleteActionWidthReader: View {
 struct SafeCleanupCelebrationOverlay: View {
     @ObservedObject var session: DeletionSession
     /// Onboarding says "Continue" when another step follows.
-    var doneTitle = "Done"
+    var doneTitle = "完成"
     /// Onboarding passes `false`: that screen is still part of setup.
     var allowsSupportNudge = true
     let onDone: () -> Void
@@ -536,7 +536,7 @@ struct SafeCleanupCelebrationOverlay: View {
 
     init(
         session: DeletionSession,
-        doneTitle: String = "Done",
+        doneTitle: String = "完成",
         allowsSupportNudge: Bool = true,
         onDone: @escaping () -> Void
     ) {
@@ -663,7 +663,7 @@ struct SafeCleanupCelebrationOverlay: View {
                     if reservesTrashDisclaimerSpace {
                         HStack(spacing: 5) {
                             Image(systemName: "trash")
-                            Text("Empty your Trash to reclaim this space.")
+                            Text("清空废纸篓即可释放这部分空间。")
                         }
                         .font(AppStyle.Typography.body.weight(.medium))
                         .foregroundStyle(AppColors.textTertiary)
@@ -675,7 +675,7 @@ struct SafeCleanupCelebrationOverlay: View {
                     if session.phase == .complete, session.trashOwnershipWarning {
                         HStack(spacing: 5) {
                             Image(systemName: "key")
-                            Text("Emptying the Trash may ask for your password.")
+                            Text("清空废纸篓时可能会要求输入密码。")
                         }
                         .font(AppStyle.Typography.body.weight(.medium))
                         .foregroundStyle(AppColors.textTertiary)
@@ -751,18 +751,18 @@ struct SafeCleanupCelebrationOverlay: View {
                 .truncationMode(.middle)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Cleaning, \(formatBytes(displayedBytes)) of \(formatBytes(session.totalBytes))")
+        .accessibilityLabel("正在清理，\(formatBytes(displayedBytes))／\(formatBytes(session.totalBytes))")
     }
 
     /// The completion line states what happened and what has not happened yet. The
     /// files are in the trash and still on the volume; nothing is reclaimed until the
     /// trash is emptied, so this must never read as an achievement.
     private var subtitleText: String {
-        subtitleShowsComplete ? "moved to trash, not yet reclaimed" : "of \(formatBytes(session.totalBytes))"
+        subtitleShowsComplete ? "已移入废纸篓，尚未释放空间" : "共 \(formatBytes(session.totalBytes))"
     }
 
     private var currentItemText: String {
-        session.currentItemName.map { "Cleaning \($0)…" } ?? "Cleaning…"
+        session.currentItemName.map { "正在清理 \($0)…" } ?? "正在清理…"
     }
 
     private func retryFailure(_ item: CleanFailureItem) {
@@ -1018,7 +1018,7 @@ private struct SupportNudgeCard: View {
                 .foregroundStyle(AppColors.textSecondary)
                 .accessibilityHidden(true)
 
-            Text("Over \(formatBytes(milestoneBytes)) cleaned up with Purge")
+            Text("使用 Purge 已清理超过 \(formatBytes(milestoneBytes))")
                 .font(AppStyle.Typography.rowTitle)
                 .foregroundStyle(AppColors.textPrimary)
 
@@ -1028,13 +1028,13 @@ private struct SupportNudgeCard: View {
                 .accessibilityHidden(true)
 
             if linkOpened {
-                Text("Thanks, that means a lot.")
+                Text("谢谢，这对我意义很大。")
                     .font(AppStyle.Typography.rowTitle)
                     .foregroundStyle(AppColors.textSecondary)
                     .padding(.trailing, 6)
             } else {
                 Button(action: onOpenLink) {
-                    Label("Buy me a coffee", systemImage: "cup.and.saucer")
+                    Label("请我喝杯咖啡", systemImage: "cup.and.saucer")
                 }
                 .buttonStyle(.purge(.secondary, size: .small))
             }
@@ -1073,7 +1073,7 @@ private struct SupportFooterLink: View {
     var body: some View {
         Group {
             if linkOpened {
-                Text("Thanks, that means a lot.")
+                Text("谢谢，这对我意义很大。")
             } else {
                 Text(text)
                     .environment(\.openURL, OpenURLAction { _ in
@@ -1110,7 +1110,7 @@ private struct CompletionTimeTagline: View {
             }
 
             HStack(spacing: 0) {
-                Text("done in ")
+                Text("用时 ")
                     .fontWeight(.regular)
                     .foregroundStyle(AppColors.textSecondary)
                 Text(timeText)
@@ -1232,8 +1232,8 @@ private struct CleanFailureDisclosure: View {
 
     private var summaryText: String {
         failures.count == 1
-            ? "1 item couldn't be cleaned"
-            : "\(failures.count) items couldn't be cleaned"
+            ? "有 1 个项目无法清理"
+            : "有 \(failures.count) 个项目无法清理"
     }
 
     private var visibleFailures: [CleanFailureItem] {
@@ -1274,7 +1274,7 @@ private struct CleanFailureDisclosure: View {
                     }
 
                     if hiddenCount > 0 {
-                        Text("+\(hiddenCount) more")
+                        Text("另有 +\(hiddenCount) 项")
                             .font(AppStyle.Typography.metadata)
                             .foregroundStyle(AppColors.textTertiary)
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -1303,7 +1303,7 @@ private struct NeedsAdministratorPanel: View {
     private var isSingle: Bool { items.count == 1 }
 
     private var title: String {
-        "macOS needs your permission"
+        "macOS 需要你的授权"
     }
 
     /// Only when several are held: name them so the count isn't a mystery.
@@ -1311,30 +1311,30 @@ private struct NeedsAdministratorPanel: View {
         guard !isSingle else { return nil }
         let names = items.map(\.displayName)
         switch names.count {
-        case 2: return "\(names[0]) and \(names[1])"
-        case 3: return "\(names[0]), \(names[1]), and \(names[2])"
-        default: return "\(names[0]), \(names[1]), and \(names.count - 2) more"
+        case 2: return "\(names[0]) 和 \(names[1])"
+        case 3: return "\(names[0])、\(names[1]) 和 \(names[2])"
+        default: return "\(names[0])、\(names[1]) 等 \(names.count) 个"
         }
     }
 
     private var explanation: String {
         isSingle
-            ? "An administrator installed \(items[0].displayName), so macOS needs your permission before it can move to the Trash."
-            : "An administrator installed them, so macOS needs your permission before they can move to the Trash."
+            ? "\(items[0].displayName) 由管理员安装，因此 macOS 需要你的授权才能将其移入废纸篓。"
+            : "它们由管理员安装，因此 macOS 需要你的授权才能将它们移入废纸篓。"
     }
 
     private var trustLine: String {
         isSingle
-            ? "Moved to the Trash, not deleted. Restore it anytime."
-            : "Moved to the Trash, not deleted. Restore them anytime."
+            ? "已移入废纸篓，而非删除。随时可以恢复。"
+            : "已移入废纸篓，而非删除。随时可以恢复。"
     }
 
     private var primaryTitle: String {
         // Approval pending: the button's job is to reopen Settings, so say so rather
         // than "Set up," which reads as if setup hasn't started.
-        if needsApproval { return "Open System Settings" }
-        if !isHelperEnabled { return "Set up secure removal" }
-        return isSingle ? "Remove \(items[0].displayName)" : "Remove \(items.count) apps"
+        if needsApproval { return "打开系统设置" }
+        if !isHelperEnabled { return "设置安全移除" }
+        return isSingle ? "移除 \(items[0].displayName)" : "移除 \(items.count) 个应用"
     }
 
     var body: some View {
@@ -1380,7 +1380,7 @@ private struct NeedsAdministratorPanel: View {
                 .disabled(isWorking)
 
                 if isSingle {
-                    Button("Remove in Finder instead", action: onRevealInFinder)
+                    Button("改为在访达中移除", action: onRevealInFinder)
                         .buttonStyle(.purge(.secondary, size: .large, width: .fill))
                 }
 
@@ -1406,11 +1406,11 @@ private struct NeedsAdministratorPanel: View {
     @ViewBuilder
     private var statusLine: some View {
         if isHelperEnabled {
-            Label("Secure removal is on", systemImage: "checkmark.seal.fill")
+            Label("安全移除已开启", systemImage: "checkmark.seal.fill")
                 .font(AppStyle.Typography.rowTitle)
                 .foregroundStyle(AppColors.statusSafeText)
         } else if needsApproval {
-            Text("In System Settings ▸ Login Items, switch Purge on under \"Background App Activity,\" then come back.")
+            Text("在「系统设置」▸「登录项」中开启「后台应用活动」下的 Purge，然后返回。")
                 .font(AppStyle.Typography.body)
                 .foregroundStyle(AppColors.textSecondary)
                 .multilineTextAlignment(.center)
@@ -1448,7 +1448,7 @@ private struct CleanFailureRow: View {
                 if failure.reason.showsOpenSettings || failure.reason.showsRetry {
                     HStack(spacing: 10) {
                         if failure.reason.showsOpenSettings {
-                            Button("Open Settings", action: onOpenSettings)
+                            Button("打开设置", action: onOpenSettings)
                                 .buttonStyle(.purge(.quiet, size: .small))
                         }
                         if failure.reason.showsRetry {
@@ -1785,7 +1785,7 @@ struct AppNavRow: View {
                 .controlSize(.small)
                 .scaleEffect(0.5)
                 .frame(width: 12, height: 12)
-                .accessibilityLabel("Scanning")
+                .accessibilityLabel("正在扫描")
         }
     }
 
@@ -1815,7 +1815,7 @@ struct AppSortMenu: View {
         }
         .buttonStyle(.purge(.secondary))
         .fixedSize()
-        .accessibilityLabel("Sort by \(selection.displayName)")
+        .accessibilityLabel("按 \(selection.displayName) 排序")
     }
 }
 
@@ -1838,11 +1838,11 @@ enum CleaningQuitGuard {
     /// Returns `true` when the user chooses to interrupt the clean anyway.
     static func confirmInterruption() -> Bool {
         let alert = NSAlert()
-        alert.messageText = "Purge is still cleaning"
-        alert.informativeText = "Purge is still cleaning. Quitting now may leave some items partially removed."
+        alert.messageText = "Purge 仍在清理中"
+        alert.informativeText = "Purge 仍在清理中。现在退出可能导致部分项目只被移除一部分。"
         alert.alertStyle = .warning
-        alert.addButton(withTitle: "Quit Anyway")
-        alert.addButton(withTitle: "Keep Cleaning")
+        alert.addButton(withTitle: "仍然退出")
+        alert.addButton(withTitle: "继续清理")
         return alert.runModal() == .alertFirstButtonReturn
     }
 

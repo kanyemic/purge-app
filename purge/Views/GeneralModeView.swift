@@ -157,7 +157,7 @@ struct AppCachesView<PageHeader: View>: View {
     private func pageSubtitle(plan: ListPlan) -> String {
         let count = currentSafetyFilter == .all ? plan.displayableCount : plan.visibleCount
         let bytes = currentSafetyFilter == .all ? plan.displayableTotalBytes : plan.visibleTotalBytes
-        return "\(count) \(count == 1 ? "item" : "items") · \(formatBytes(bytes)) recoverable"
+        return "\(count) 个项目 · 可释放 \(formatBytes(bytes))"
     }
 
     var body: some View {
@@ -175,7 +175,7 @@ struct AppCachesView<PageHeader: View>: View {
     private func standardBody(plan: ListPlan) -> some View {
         VStack(spacing: 0) {
             if showsPageHeader {
-                AppSectionPageHeader(title: "App Caches", subtitle: pageSubtitle(plan: plan)) {
+                AppSectionPageHeader(title: "应用缓存", subtitle: pageSubtitle(plan: plan)) {
                     AppScanCleanActions(onScan: onScan, scanPhase: scanPhase)
                 }
             }
@@ -389,9 +389,9 @@ struct AppCachesView<PageHeader: View>: View {
 
     private var emptyFilterState: some View {
         VStack(spacing: 4) {
-            Text("Nothing here.")
+            Text("这里暂无内容。")
                 .font(AppStyle.Typography.headline)
-            Text("No items match this filter.")
+            Text("没有项目符合此筛选条件。")
                 .foregroundStyle(AppColors.textSecondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -402,9 +402,9 @@ struct AppCachesView<PageHeader: View>: View {
             Image(systemName: "externaldrive.badge.checkmark")
                 .font(.system(size: 38))
                 .foregroundStyle(AppColors.textSecondary)
-            Text(scanPhase == .completed ? "Your Mac is looking clean." : "No Caches Found")
+            Text(scanPhase == .completed ? "你的 Mac 看起来很干净。" : "未找到缓存")
                 .font(AppStyle.Typography.sectionTitle.weight(.regular))
-            Text(scanPhase == .completed ? "Check back later." : "Run a scan to inspect recoverable application caches.")
+            Text(scanPhase == .completed ? "稍后再来看看。" : "运行扫描以检查可释放的应用缓存。")
                 .foregroundStyle(AppColors.textSecondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -414,7 +414,7 @@ struct AppCachesView<PageHeader: View>: View {
         Color.clear
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Scanning app caches")
+            .accessibilityLabel("正在扫描应用缓存")
     }
 
 }

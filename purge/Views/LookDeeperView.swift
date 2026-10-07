@@ -71,15 +71,15 @@ struct LookDeeperView: View {
 
   @ViewBuilder
   private var promises: some View {
-    LookDeeperPromise(symbol: "eye", text: "Only cleans when you say")
-    LookDeeperPromise(symbol: "icloud.slash", text: "Nothing leaves your Mac")
-    LookDeeperPromise(symbol: "trash", text: "Everything goes to the Trash")
+    LookDeeperPromise(symbol: "eye", text: "只在你同意时才清理")
+    LookDeeperPromise(symbol: "icloud.slash", text: "不会离开你的 Mac")
+    LookDeeperPromise(symbol: "trash", text: "所有内容都会移入废纸篓")
   }
 
   private var askingBody: some View {
     VStack(spacing: AppStyle.Spacing.large) {
       VStack(spacing: AppStyle.Spacing.small) {
-        OnboardingStepTitle(text: "Want Purge to look deeper?")
+        OnboardingStepTitle(text: "想让 Purge 深入查看吗？")
           .onboardingBlurIn(index: 0)
 
         Text(leadText)
@@ -94,9 +94,9 @@ struct LookDeeperView: View {
       // Each promise is something Purge does, not a limit on the permission:
       // Full Disk Access itself can read and write, so "can't" would not be true.
       HStack(spacing: AppStyle.Spacing.small) {
-        LookDeeperTile(symbol: "square.stack.3d.up", text: "App Store app caches")
-        LookDeeperTile(symbol: "doc.text.magnifyingglass", text: "Big forgotten files")
-        LookDeeperTile(symbol: "shippingbox", text: "Deleted apps' leftovers")
+        LookDeeperTile(symbol: "square.stack.3d.up", text: "App Store 应用缓存")
+        LookDeeperTile(symbol: "doc.text.magnifyingglass", text: "被遗忘的大文件")
+        LookDeeperTile(symbol: "shippingbox", text: "已删除应用的残留")
       }
       .onboardingBlurIn(index: 2)
 
@@ -107,7 +107,7 @@ struct LookDeeperView: View {
           VStack(alignment: .leading, spacing: AppStyle.Spacing.xSmall) { promises }
         }
 
-        Text("macOS calls this Full Disk Access. Turn it off anytime in System Settings.")
+        Text("macOS 称其为「完全磁盘访问权限」。你可以随时在「系统设置」中关闭它。")
           .font(AppStyle.Typography.metadata)
           .foregroundStyle(AppColors.textTertiary)
           .multilineTextAlignment(.center)
@@ -116,12 +116,12 @@ struct LookDeeperView: View {
       .onboardingBlurIn(index: 3)
 
       VStack(spacing: AppStyle.Spacing.small) {
-        OnboardingPrimaryButton(title: "Let Purge in", systemImage: "arrow.up.forward", action: letPurgeIn)
-        OnboardingSecondaryButton(title: "Not now", action: onNotNow)
+        OnboardingPrimaryButton(title: "允许 Purge 访问", systemImage: "arrow.up.forward", action: letPurgeIn)
+        OnboardingSecondaryButton(title: "暂不", action: onNotNow)
           .keyboardShortcut(.cancelAction)
 
         if didOpenSettings {
-          Text("Turn on Purge in System Settings, then come back. If macOS offers to reopen Purge, go ahead.")
+          Text("在「系统设置」中为 Purge 打开权限，然后返回。如果 macOS 提示重新打开 Purge，请照做。")
             .font(AppStyle.Typography.metadata)
             .foregroundStyle(AppColors.textSecondary)
             .multilineTextAlignment(.center)
@@ -136,8 +136,8 @@ struct LookDeeperView: View {
 
   private var scanningBody: some View {
     VStack(spacing: AppStyle.Spacing.small) {
-      OnboardingLoadingStepTitle(baseText: "Looking deeper")
-      Text("Checking the places that were locked.")
+      OnboardingLoadingStepTitle(baseText: "正在深入查看")
+      Text("正在检查之前被锁定的位置。")
         .font(AppStyle.Typography.sectionTitle.weight(.regular))
         .foregroundStyle(AppColors.textSecondary)
     }
@@ -152,7 +152,7 @@ struct LookDeeperView: View {
           Text(formatBytes(findings.bytes))
             .font(AppStyle.Typography.display)
             .monospacedDigit()
-          Text("more to clean, from places that were locked")
+          Text("更多可清理内容，来自之前被锁定的位置")
             .font(AppStyle.Typography.sectionTitle.weight(.medium))
             .foregroundStyle(AppColors.textSecondary)
             .multilineTextAlignment(.center)
@@ -172,12 +172,12 @@ struct LookDeeperView: View {
         }
         .frame(maxWidth: 300)
 
-        Text("Large Files and the uninstaller are open now too.")
+        Text("「大文件」和卸载器现在也已解锁。")
           .font(AppStyle.Typography.callout)
           .foregroundStyle(AppColors.textSecondary)
           .onboardingBlurIn(index: findings.categories.count + 1)
       } else {
-        OnboardingStepTitle(text: "Purge can see everything now")
+        OnboardingStepTitle(text: "Purge 现在可以看到全部内容了")
           .onboardingBlurIn(index: 0)
         Text(Self.smallFindingsMessage(findings))
           .font(AppStyle.Typography.sectionTitle.weight(.regular))
@@ -187,7 +187,7 @@ struct LookDeeperView: View {
           .onboardingBlurIn(index: 1)
       }
 
-      OnboardingPrimaryButton(title: findings.isWorthLeadingWith ? "Show me" : "Continue") {
+      OnboardingPrimaryButton(title: findings.isWorthLeadingWith ? "带我去看" : "继续") {
         finish(with: findings)
       }
       .padding(.top, AppStyle.Spacing.small)
@@ -197,19 +197,19 @@ struct LookDeeperView: View {
 
   static func smallFindingsMessage(_ findings: LockedPlacesFindings) -> String {
     if findings.isPartial {
-      return "Large Files and the uninstaller are ready. Purge is still checking your projects, so more may turn up."
+      return "「大文件」和卸载器已就绪。Purge 仍在检查你的项目，可能会有更多发现。"
     }
     return findings.bytes > 0
-      ? "Large Files and the uninstaller are ready, and Purge found a little more to clean too."
-      : "Large Files and the uninstaller are ready. Nothing big was hiding in the locked folders."
+      ? "「大文件」和卸载器已就绪，Purge 还发现了一些可清理的内容。"
+      : "「大文件」和卸载器已就绪。被锁定的文件夹里没有藏着大文件。"
   }
 
   private var leadText: String {
     switch context {
     case .onboarding(didClean: true):
-      return "That was the easy part. More clutter hides in folders macOS keeps locked."
+      return "刚才只是简单的部分。更多杂物藏在 macOS 锁定的文件夹里。"
     case .onboarding(didClean: false), .sheet:
-      return "Some clutter hides in folders macOS keeps locked."
+      return "有些杂物藏在 macOS 锁定的文件夹里。"
     }
   }
 

@@ -42,39 +42,39 @@ enum SizeComparisonCatalog {
   static let anchors: [Anchor] = [
     Anchor(
       bytes: 2 * mb, symbol: "camera.viewfinder",
-      phrasing: .counted(one: "one more screenshot", many: "more screenshots")
+      phrasing: .counted(one: "一张截图", many: "张截图")
     ),
     Anchor(
       bytes: 500 * mb, symbol: "bubble.left.and.bubble.right.fill",
-      phrasing: .timesOver(one: "Slack", name: "Slack")
+      phrasing: .timesOver(one: "一份 Slack", name: "Slack")
     ),
     Anchor(
       bytes: (12 * gb) / 10, symbol: "globe",
-      phrasing: .counted(one: "a copy of Chrome", many: "copies of Chrome")
+      phrasing: .counted(one: "一份 Chrome", many: "份 Chrome")
     ),
     Anchor(
       bytes: 5 * gb, symbol: "paintbrush.fill",
-      phrasing: .timesOver(one: "Photoshop", name: "Photoshop")
+      phrasing: .timesOver(one: "一份 Photoshop", name: "Photoshop")
     ),
     Anchor(
       bytes: 12 * gb, symbol: "apple.logo",
-      phrasing: .counted(one: "the next macOS update", many: "macOS updates")
+      phrasing: .counted(one: "一次 macOS 更新", many: "次 macOS 更新")
     ),
     Anchor(
       bytes: 12 * gb, symbol: "hammer.fill",
-      phrasing: .counted(one: "a fresh copy of Xcode", many: "copies of Xcode")
+      phrasing: .counted(one: "一份全新的 Xcode", many: "份 Xcode")
     ),
     Anchor(
       bytes: 70 * gb, symbol: "pianokeys",
-      phrasing: .timesOver(one: "Logic Pro and every sound pack", name: "full Logic Pro")
+      phrasing: .timesOver(one: "一整套 Logic Pro", name: "Logic Pro")
     ),
     Anchor(
       bytes: 105 * gb, symbol: "gamecontroller.fill",
-      phrasing: .timesOver(one: "all of GTA V", name: "GTA V")
+      phrasing: .timesOver(one: "一整个 GTA V", name: "GTA V")
     ),
     Anchor(
       bytes: 256 * gb, symbol: "laptopcomputer",
-      phrasing: .counted(one: "a full base MacBook Air", many: "full base MacBook Airs")
+      phrasing: .counted(one: "一台基础款 MacBook Air", many: "台基础款 MacBook Air")
     ),
   ]
 
@@ -116,15 +116,21 @@ enum SizeComparisonCatalog {
     case let .counted(one, many):
       return count == 1 ? one : "\(formatCount(count)) \(many)"
     case let .timesOver(one, name):
-      return count == 1 ? one : "\(name), \(timesOver(count))"
+      return count == 1 ? one : "\(timesOver(count)) \(name)"
     }
   }
 
   private static func timesOver(_ count: Int) -> String {
-    if count == 2 { return "twice over" }
-    guard count < 10 else { return "\(formatCount(count)) times over" }
-    let words = NumberFormatter.localizedString(from: NSNumber(value: count), number: .spellOut)
-    return "\(words) times over"
+    if count == 2 { return "两份" }
+    guard count < 10 else { return "\(formatCount(count)) 份" }
+    return "\(numeral(count)) 份"
+  }
+
+  /// Small counts read better as words ("四份"); `\.spellOut` follows the device
+  /// locale, which would say "4 份" for counts the rest of the line spells out.
+  private static func numeral(_ count: Int) -> String {
+    let words = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
+    return count >= 0 && count < words.count ? words[count] : formatCount(count)
   }
 
   /// Swift's `Hasher` is seeded per process, so the same size would pick a

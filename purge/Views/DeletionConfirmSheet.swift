@@ -56,11 +56,11 @@ struct DeletionConfirmSheet: View {
     private var standardLayout: some View {
         VStack(alignment: .leading, spacing: AppStyle.Spacing.medium) {
             VStack(alignment: .leading, spacing: AppStyle.Spacing.xSmall) {
-                Text("Move selected items to Trash?")
+                Text("将选中的项目移入废纸篓？")
                     .font(AppStyle.Typography.pageTitle)
                     .foregroundStyle(AppColors.textPrimary)
 
-                Text("Purge moves these to Trash. You can put anything back if you change your mind.")
+                Text("Purge 会将这些项目移入废纸篓。如果你改变主意，可以随时恢复。")
                     .font(AppStyle.Typography.callout)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -82,7 +82,7 @@ struct DeletionConfirmSheet: View {
             }
             .frame(minHeight: 260)
 
-            footer(primaryTitle: "Move \(candidates.count) to Trash")
+            footer(primaryTitle: "将 \(candidates.count) 项移入废纸篓")
         }
     }
 
@@ -96,7 +96,7 @@ struct DeletionConfirmSheet: View {
                 LazyVStack(alignment: .leading, spacing: AppStyle.Spacing.small) {
                     if !unknownCandidates.isEmpty {
                         sectionHeader(SafetyLevel.unknown.displayName)
-                        Text("Purge couldn't work out what these folders are. Only continue if you know what they hold.")
+                        Text("Purge 无法分辨这些文件夹是什么。只有在你清楚其中内容时才继续。")
                             .font(AppStyle.Typography.metadata)
                             .foregroundStyle(AppColors.textSecondary)
                             .fixedSize(horizontal: false, vertical: true)
@@ -106,7 +106,7 @@ struct DeletionConfirmSheet: View {
                     }
 
                     if !benignCandidates.isEmpty {
-                        sectionHeader("Also in this cleanup")
+                        sectionHeader("本次清理中还包含")
                         ForEach(benignCandidates) { item in
                             candidateCard(item)
                         }
@@ -116,7 +116,7 @@ struct DeletionConfirmSheet: View {
             }
             .frame(minHeight: 260)
 
-            footer(primaryTitle: "Continue")
+            footer(primaryTitle: "继续")
         }
     }
 
@@ -127,10 +127,10 @@ struct DeletionConfirmSheet: View {
                 .foregroundStyle(AppColors.statusCheckText)
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: AppStyle.Spacing.xxSmall) {
-                Text("Some of these aren't identified")
+                Text("其中一些无法识别")
                     .font(AppStyle.Typography.pageTitle)
                     .foregroundStyle(AppColors.textPrimary)
-                Text("Purge couldn't identify every folder you picked. Only continue if you know it's safe to remove. You'll confirm once more before anything moves.")
+                Text("Purge 无法识别你选择的每一个文件夹。只有在你确定可以安全删除时才继续。在实际移动之前，你会再确认一次。")
                     .font(AppStyle.Typography.callout)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -147,8 +147,8 @@ struct DeletionConfirmSheet: View {
                 .foregroundStyle(AppColors.statusCheckText)
                 .accessibilityHidden(true)
             Text(count == 1
-                ? "This one may hold something you'd miss. If you're not sure about it, cancel and untick it."
-                : "These may hold something you'd miss. If you're not sure about one, cancel and untick it.")
+                ? "这一项可能包含你之后会用到的东西。如果不确定，请取消并取消勾选它。"
+                : "这些项目可能包含你之后会用到的东西。如果对其中某一项不确定，请取消并取消勾选它。")
                 .font(AppStyle.Typography.metadata)
                 .foregroundStyle(AppColors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -230,15 +230,15 @@ struct DeletionConfirmSheet: View {
         let bg: Color
         switch level {
         case .safe:
-            text = "Safe"
+            text = "安全"
             fg = AppColors.statusSafeText
             bg = AppColors.statusSafeFill
         case .medium:
-            text = "Check first"
+            text = "先确认"
             fg = AppColors.statusCheckText
             bg = AppColors.statusCheckFill
         case .unknown:
-            text = "Not sure"
+            text = "不确定"
             fg = AppColors.statusDangerText
             bg = AppColors.statusDangerFill
         }
@@ -252,13 +252,13 @@ struct DeletionConfirmSheet: View {
 
     private func footer(primaryTitle: String) -> some View {
         HStack(spacing: AppStyle.Spacing.small) {
-            Text("Freeing \(formatBytes(totalBytes))")
+            Text("释放 \(formatBytes(totalBytes))")
                 .font(AppStyle.Typography.metadataEmphasis)
                 .foregroundStyle(AppColors.textSecondary)
 
             Spacer()
 
-            Button("Cancel", action: onCancel)
+            Button("取消", action: onCancel)
                 .buttonStyle(.purge(.secondary))
                 .keyboardShortcut(.cancelAction)
 

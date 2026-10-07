@@ -7,7 +7,7 @@ import Foundation
 /// read. They outranked the reviewed list, so a guess could mark a folder Safe that
 /// the bundled data never vetted, and only on Macs that ran an early build.
 enum ExplanationResolver {
-    nonisolated static let unsureExplanation = "We could not identify this folder. We recommend leaving it alone."
+    nonisolated static let unsureExplanation = "我们无法识别这个文件夹。建议保持原样。"
 
     /// Resolution order:
     /// 1. `user_overrides.json` keyed by exact path (when provided)
@@ -42,9 +42,9 @@ enum ExplanationResolver {
         let explanation: String
         switch level {
         case .safe:
-            explanation = "This is a known cache folder that apps or developer tools recreate automatically."
+            explanation = "这是已知的缓存文件夹，应用或开发工具会自动重新生成。"
         case .medium:
-            explanation = "This folder may involve synced or user-facing app data. Deleting it can be safe, but it may cause inconvenience."
+            explanation = "这个文件夹可能涉及同步数据或面向用户的应用数据。删除通常是安全的，但可能带来不便。"
         case .unknown:
             explanation = unsureExplanation
         }

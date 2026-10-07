@@ -1,0 +1,79 @@
+name: Build 汉化版
+
+# 中文汉化分支的构建工作流。
+#
+# 与上游 build.yml 的区别：
+#   - 只做“能编译”的验证，不发布、不创建 Release、不推送任何 Appcast。
+#   - 额外把编译出来的 Purge.app 打包成 artifact，方便直接下载试用。
+#   - ad-hoc 签名，不需要 Apple 开发者账号或任何仓库密钥。
+#
+# 注意：使用本工作流意味着把代码推到 GitHub 并消耗该仓库的 Actions 额度。
+# 若只想本地使用，直接用 scripts/build-localized.sh 即可，无需本文件。
+
+on:
+  workflow_dispatch:        # 只在手动点击时触发，避免每次 push 都跑
+  push:
+    branches: [localized]
+
+jobs:
+  build:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 显示 Xcode 版本
+        run: xcodebuild -version
+
+      - name: 设计 token 检查
+        run: node scripts/lint-design-tokens.mjs
+
+      - name: 解析 Swift Package 依赖
+        run: |
+          xcodebuild -resolvePackageDependencies \
+            -project purge.xcodeproj \
+            -scheme purge
+
+      - name: 编译（ad-hoc 签名）
+        run: |
+          xcodebuild clean build \
+            -project purge.xcodeproj \
+            -scheme purge \
+            -configuration Release \
+            -destination 'platform=macOS' \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=YES \
+            CODE_SIGN_STYLE=Manual \
+            DEVELOPMENT_TEAM=""
+
+      - name: 校验汉化与更新隔离
+        run: |
+          APP="build/Build/Products/Release/Purge.app"
+          test -d "$APP" || { echo "没有找到 Purge.app"; exit 1; }
+          echo "自动更新开关：$(defaults read "$APP/Contents/Info" SUEnableAutomaticChecks)"
+          echo "更新源：'$(defaults read "$APP/Contents/Info" SUFeedURL)'"
+          # 更新必须处于关闭状态，否则中文版会被上游英文版覆盖。
+          test "$(defaults read "$APP/Contents/Info" SUEnableAutomaticChecks)" = "0" \
+            || { echo "自动更新没有被关闭"; exit 1; }
+          # 汉化必须真的落进二进制，抽查一个只出现在中文里的规则名。
+          if ! grep -Rq "可以安全" "$APP/Contents/Resources"; then
+            echo "警告：在 Resources 里没有找到中文文案，请确认 explanations.json 已汉化"
+          fi
+
+      - name: 打包 Purge.app
+        run: |
+          APP="build/Build/Products/Release/Purge.app"
+          VERSION="$(defaults read "$APP/Contents/Info" CFBundleShortVersionString)"
+          mkdir -p dist
+          ditto -c -k --sequesterRsrc --keepParent "$APP" "dist/Purge-汉化版-${VERSION}.zip"
+          ls -lh dist
+
+      - name: 显示构建环境
+        run: sw_vers
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Purge-汉化版
+          path: dist/*.zip
+          if-no-files-found: error

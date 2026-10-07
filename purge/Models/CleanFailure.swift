@@ -47,19 +47,19 @@ nonisolated enum CleanFailureReason: Equatable, Error {
     var explanation: String {
         switch self {
         case .needsFullDiskAccess:
-            "Purge needs Full Disk Access to remove this."
+            "Purge 需要「完全磁盘访问权限」才能移除这一项。"
         case .needsAdministrator:
-            "This app was installed by an administrator, so macOS won't let it be moved on its own. Set up secure removal once and Purge can finish it."
+            "这个应用由管理员安装，macOS 不允许 Purge 自行移动它。完成一次安全移除设置后，Purge 就能清理它。"
         case .inUse:
-            "An app is still using this. Quit it and clean again."
+            "仍有应用在使用这一项。退出该应用后重新清理。"
         case .systemProtected:
-            "macOS protects this one and won't let it be removed."
+            "macOS 保护这一项，不允许移除。"
         case .safetySkipped:
-            "Purge left this one alone to stay on the safe side."
+            "为稳妥起见，Purge 没有处理这一项。"
         case .keptForOtherApp:
-            "Another app you still have installed uses this too, so Purge kept it."
+            "你仍安装着的另一个应用也在使用它，因此 Purge 保留了它。"
         case .unknown:
-            "This one couldn't be removed. Try again."
+            "这一项无法移除。请重试。"
         }
     }
 
@@ -94,7 +94,7 @@ nonisolated enum CleanFailureReason: Equatable, Error {
     /// summon the password prompt — rather than the bare "Retry" that fits the
     /// transient failures.
     var retryTitle: String {
-        self == .needsAdministrator ? "Set Up Secure Removal" : "Retry"
+        self == .needsAdministrator ? "设置安全移除" : "重试"
     }
 
     /// Returns `nil` for file-not-found / already-gone errors that should be dropped silently.

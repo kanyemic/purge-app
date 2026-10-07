@@ -40,7 +40,7 @@ struct SafeFirstSelectAll<Key: Hashable> {
     }
 
     var title: String {
-        isSafeFirst && state != .all ? "Select All Safe" : "Select All"
+        isSafeFirst && state != .all ? "全选安全项" : "全选"
     }
 
     /// Off when a click could do nothing: an empty list, or a list with only Check
@@ -74,10 +74,12 @@ struct SafeFirstSelectAll<Key: Hashable> {
         let rows = unselectedCheckFirst
         guard !rows.isEmpty else { return nil }
         let bytes = rows.reduce(Int64(0)) { $0 + $1.bytes }
-        let noun = rows.count == 1 ? "item" : "items"
-        let verb = safeEntries.isEmpty ? "Select" : "Also select"
+        // Chinese has no plural form, but the branch stays so the two quantities
+        // still read from one place if the wording ever needs to differ.
+        let noun = rows.count == 1 ? "个「先确认」项目" : "个「先确认」项目"
+        let verb = safeEntries.isEmpty ? "选择" : "同时选择"
         return (
-            "\(verb) \(rows.count) Check First \(noun) (\(formatBytes(bytes)))",
+            "\(verb) \(rows.count) \(noun)（\(formatBytes(bytes))）",
             Change(select: rows.map(\.key))
         )
     }

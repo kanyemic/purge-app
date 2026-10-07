@@ -18,19 +18,19 @@ enum AppSortOption: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .largest: return "Size (largest first)"
-        case .smallest: return "Size (smallest first)"
-        case .nameAZ: return "Name (A to Z)"
-        case .recentlyUsed: return "Recently used"
+        case .largest: return "大小（从大到小）"
+        case .smallest: return "大小（从小到大）"
+        case .nameAZ: return "名称（A 到 Z）"
+        case .recentlyUsed: return "最近使用"
         }
     }
 
     var shortDisplayName: String {
         switch self {
-        case .largest: return "Largest"
-        case .smallest: return "Smallest"
-        case .nameAZ: return "Name"
-        case .recentlyUsed: return "Used"
+        case .largest: return "最大"
+        case .smallest: return "最小"
+        case .nameAZ: return "名称"
+        case .recentlyUsed: return "已用"
         }
     }
 
@@ -47,8 +47,8 @@ enum AppSortOption: String, CaseIterable, Identifiable {
     func activityLabel(for app: InstalledApp, now: Date) -> String? {
         switch self {
         case .recentlyUsed:
-            guard let opened = app.lastOpened else { return "Not opened" }
-            return "Opened \(Self.lowercasedLead(relativeDateText(for: opened, referenceDate: now)))"
+            guard let opened = app.lastOpened else { return "未打开过" }
+            return "打开于 \(Self.lowercasedLead(relativeDateText(for: opened, referenceDate: now)))"
         case .largest, .smallest, .nameAZ:
             return nil
         }
@@ -92,8 +92,8 @@ private enum UninstallAppViewMode: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .list: return "List"
-        case .grid: return "Grid"
+        case .list: return "列表"
+        case .grid: return "网格"
         }
     }
 
@@ -263,7 +263,7 @@ struct UninstallView: View {
 
     private var leftoversToolbar: some View {
         HStack(alignment: .bottom) {
-            TriStateCheckbox(title: "Select All", state: leftoversSelectAllState) {
+            TriStateCheckbox(title: "全选", state: leftoversSelectAllState) {
                 let ids = store.orphanLeftovers.map(\.id)
                 store.setAllOrphansSelected(leftoversSelectAllState != .all, ids: ids)
             }
@@ -365,7 +365,7 @@ struct UninstallView: View {
                 }
                 .buttonStyle(.plain)
                 .fixedSize()
-                .accessibilityLabel("Sort apps")
+                .accessibilityLabel("排序应用")
                 .accessibilityValue(currentSort.displayName)
 
                 Spacer(minLength: 8)
@@ -406,7 +406,7 @@ struct UninstallView: View {
             )
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(count.map { "\(target.label), \($0) items" } ?? target.label)
+        .accessibilityLabel(count.map { "\(target.label)，\($0) 个项目" } ?? target.label)
         .accessibilityAddTraits(isOn ? .isSelected : [])
     }
 
@@ -425,8 +425,8 @@ struct UninstallView: View {
         if store.installedApps.isEmpty && !store.isScanningInstalledApps {
             emptyState(
                 symbol: "app.badge",
-                title: "No apps found",
-                detail: "Purge looks in Applications and your home Applications folder."
+                title: "未找到应用",
+                detail: "Purge 会查找「应用程序」文件夹和你个人目录下的「应用程序」文件夹。"
             )
         } else {
             // Crossfade the skeleton into the real collection instead of swapping view
@@ -447,8 +447,8 @@ struct UninstallView: View {
         } else if filteredApps.isEmpty {
             emptyState(
                 symbol: "magnifyingglass",
-                title: "Nothing matches",
-                detail: "No installed app matches \"\(appSearchQuery)\"."
+                title: "没有匹配项",
+                detail: "没有已安装的应用匹配“\(appSearchQuery)”。"
             )
         } else {
             switch viewMode {
@@ -577,7 +577,7 @@ struct UninstallView: View {
         .scrollContentBackground(.hidden)
         .background(AppColors.surfaceBase)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Finding leftovers from deleted apps")
+        .accessibilityLabel("正在查找已删除应用的残留")
     }
 
     private var skeletonList: some View {
@@ -594,7 +594,7 @@ struct UninstallView: View {
         .scrollContentBackground(.hidden)
         .background(AppColors.surfaceBase)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Finding installed apps")
+        .accessibilityLabel("正在查找已安装的应用")
     }
 
     /// Shown while the first scan discovers app bundles. It normally lasts only
@@ -613,7 +613,7 @@ struct UninstallView: View {
         .scrollContentBackground(.hidden)
         .background(AppColors.surfaceBase)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Finding installed apps")
+        .accessibilityLabel("正在查找已安装的应用")
     }
 
     // MARK: Shared bits
@@ -661,7 +661,7 @@ private struct UninstallViewModeSwitcher: View {
                 .strokeBorder(AppColors.borderSubtle, lineWidth: 1)
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("App view")
+        .accessibilityLabel("应用视图")
     }
 
     private func segment(_ mode: UninstallAppViewMode) -> some View {
@@ -734,7 +734,7 @@ private struct UninstallItemRow: View {
                     .lineLimit(1)
                     .truncationMode(.middle)
                 if let keptForApp = item.keptForApp {
-                    Text("Kept, still used by \(keptForApp)")
+                    Text("已保留，仍被 \(keptForApp) 使用")
                         .font(AppStyle.Typography.metadata)
                         .foregroundStyle(AppColors.statusCheckText)
                         .lineLimit(1)
@@ -862,9 +862,9 @@ private struct AppListRow: View {
         .help(app.name)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(
-            "\(app.name), \(isSizePending ? "calculating size" : formatBytes(totalBytes))\(activityLabel.map { ", \($0)" } ?? "")"
+            "\(app.name)，\(isSizePending ? "正在计算大小" : formatBytes(totalBytes))\(activityLabel.map { "，\($0)" } ?? "")"
         )
-        .accessibilityValue(isSelected ? "Selected" : "Not selected")
+        .accessibilityValue(isSelected ? "已选中" : "未选中")
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
         .accessibilityAction(.default, onToggle)
         .finderRevealMenu(isMenuActive: $isContextMenuActive) {
@@ -992,9 +992,9 @@ private struct AppTile: View {
         .help(activityLabel.map { "\(app.name), \($0)" } ?? app.name)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(
-            "\(app.name), \(isSizePending ? "calculating size" : formatBytes(totalBytes))\(activityLabel.map { ", \($0)" } ?? "")"
+            "\(app.name)，\(isSizePending ? "正在计算大小" : formatBytes(totalBytes))\(activityLabel.map { "，\($0)" } ?? "")"
         )
-        .accessibilityValue(isSelected ? "Selected" : "Not selected")
+        .accessibilityValue(isSelected ? "已选中" : "未选中")
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
         .accessibilityAction(.default, onToggle)
         .finderRevealMenu(isMenuActive: $isContextMenuActive) {
@@ -1073,7 +1073,7 @@ struct UninstallHeaderActions: View {
                 store.requestScan(.apps, .leftovers)
             } label: {
                 CleaningButtonLabel(
-                    title: isQueued ? ScanQueueLabels.queued : (isScanning ? "Scanning..." : "Rescan"),
+                    title: isQueued ? ScanQueueLabels.queued : (isScanning ? "正在扫描..." : "重新扫描"),
                     systemImage: isScanning || isQueued ? nil : "arrow.clockwise",
                     isCleaning: isScanning || isQueued
                 )
@@ -1107,14 +1107,14 @@ struct UninstallHeaderActions: View {
             Group {
                 if store.isBuildingUninstallPlan {
                     CleaningButtonLabel(
-                        title: "Preparing...",
+                        title: "正在准备...",
                         systemImage: nil,
                         isCleaning: true
                     )
                 } else {
                     AnimatedDeleteActionLabel(
-                        inactiveTitle: "Uninstall",
-                        activeTitle: "Uninstall",
+                        inactiveTitle: "卸载",
+                        activeTitle: "卸载",
                         selectedCount: store.selectedApps.count,
                         selectedBytes: nil
                     )
@@ -1131,8 +1131,8 @@ struct UninstallHeaderActions: View {
             store.requestOrphanCleanup()
         } label: {
             AnimatedDeleteActionLabel(
-                inactiveTitle: "Remove",
-                activeTitle: "Remove",
+                inactiveTitle: "移除",
+                activeTitle: "移除",
                 selectedCount: store.selectedOrphanCount,
                 selectedBytes: store.selectedOrphanBytes
             )
@@ -1187,7 +1187,7 @@ struct UninstallReviewSheet: View {
                 .font(AppStyle.Typography.pageTitle)
                 .foregroundStyle(AppColors.textPrimary)
 
-            Text("Purge moves each app and the items you keep ticked to the Trash. Nothing is deleted for good, so you can put anything back if you change your mind.")
+            Text("Purge 会将每个应用以及你勾选的保留项一并移入废纸篓。不会永久删除任何内容，所以改变主意后你都可以恢复。")
                 .font(AppStyle.Typography.callout)
                 .foregroundStyle(AppColors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -1196,8 +1196,8 @@ struct UninstallReviewSheet: View {
 
     private var titleText: String {
         let count = plan.apps.count
-        if count == 1 { return "Uninstall \(plan.apps[0].app.name)?" }
-        return "Uninstall \(count) apps?"
+        if count == 1 { return "卸载 \(plan.apps[0].app.name)？" }
+        return "卸载 \(count) 个应用？"
     }
 
     private func appSection(_ appPlan: Binding<UninstallAppPlan>) -> some View {
@@ -1210,7 +1210,7 @@ struct UninstallReviewSheet: View {
                     action: { toggleAll(appPlan) }
                 )
                 .fixedSize()
-                .accessibilityLabel("Select all \(app.name) items")
+                .accessibilityLabel("全选 \(app.name) 的项目")
 
                 Image(nsImage: BrandIconService.shared.installedAppIcon(at: app.bundleURL))
                     .resizable()
@@ -1218,7 +1218,7 @@ struct UninstallReviewSheet: View {
                 Text(app.name)
                     .font(AppStyle.Typography.rowTitle)
                 if app.isRunning {
-                    Text("will be quit first")
+                    Text("将先退出")
                         .font(AppStyle.Typography.metadata)
                         .foregroundStyle(AppColors.statusCheckText)
                 }
@@ -1265,17 +1265,17 @@ struct UninstallReviewSheet: View {
 
     private var footer: some View {
         HStack(spacing: AppStyle.Spacing.small) {
-            Text("Freeing \(formatBytes(plan.totalSelectedBytes))")
+            Text("释放 \(formatBytes(plan.totalSelectedBytes))")
                 .font(AppStyle.Typography.metadataEmphasis)
                 .foregroundStyle(AppColors.textSecondary)
 
             Spacer()
 
-            Button("Cancel", action: onCancel)
+            Button("取消", action: onCancel)
                 .buttonStyle(.purge(.secondary))
                 .keyboardShortcut(.cancelAction)
 
-            Button("Move \(plan.totalSelectedItems) to Trash") {
+            Button("将 \(plan.totalSelectedItems) 项移入废纸篓") {
                 onConfirm(plan)
             }
             .buttonStyle(.purge(.destructive))
@@ -1328,10 +1328,10 @@ struct OrphanReviewSheet: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: AppStyle.Spacing.xSmall) {
-            Text("Remove leftovers from removed apps?")
+            Text("移除已卸载应用留下的残留？")
                 .font(AppStyle.Typography.pageTitle)
                 .foregroundStyle(AppColors.textPrimary)
-            Text("These folders belong to apps you no longer have installed. This is app data, not a rebuildable cache, so it will not come back on its own. Everything moves to the Trash, so you can put it back until you empty it.")
+            Text("这些文件夹属于你已不再安装的应用。这是应用数据，而不是可重建的缓存，因此不会自行恢复。所有内容都会移入废纸篓，所以在清空之前你都可以放回。")
                 .font(AppStyle.Typography.callout)
                 .foregroundStyle(AppColors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -1340,17 +1340,17 @@ struct OrphanReviewSheet: View {
 
     private var footer: some View {
         HStack(spacing: AppStyle.Spacing.small) {
-            Text("Freeing \(formatBytes(plan.totalSelectedBytes))")
+            Text("释放 \(formatBytes(plan.totalSelectedBytes))")
                 .font(AppStyle.Typography.metadataEmphasis)
                 .foregroundStyle(AppColors.textSecondary)
 
             Spacer()
 
-            Button("Cancel", action: onCancel)
+            Button("取消", action: onCancel)
                 .buttonStyle(.purge(.secondary))
                 .keyboardShortcut(.cancelAction)
 
-            Button("Move \(plan.totalSelectedItems) to Trash") {
+            Button("将 \(plan.totalSelectedItems) 项移入废纸篓") {
                 onConfirm(plan)
             }
             .buttonStyle(.purge(.destructive))
@@ -1418,10 +1418,10 @@ struct RemovedAppLeftoverSheet: View {
                 .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: AppStyle.Spacing.xSmall) {
-                Text("\(plan.app.name) left files behind")
+                Text("\(plan.app.name) 留下了文件")
                     .font(AppStyle.Typography.pageTitle)
                     .foregroundStyle(AppColors.textPrimary)
-                Text("\(plan.app.name) was removed from Applications, but these files are still on your Mac. Anything you keep ticked moves to the Trash, so you can put it back until you empty it.")
+                Text("\(plan.app.name) 已从「应用程序」中移除，但这些文件仍留在你的 Mac 上。你勾选的任何内容都会移入废纸篓，所以在清空之前你都可以放回。")
                     .font(AppStyle.Typography.callout)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -1431,17 +1431,17 @@ struct RemovedAppLeftoverSheet: View {
 
     private var footer: some View {
         HStack(spacing: AppStyle.Spacing.small) {
-            Text("Freeing \(formatBytes(plan.totalSelectedBytes))")
+            Text("释放 \(formatBytes(plan.totalSelectedBytes))")
                 .font(AppStyle.Typography.metadataEmphasis)
                 .foregroundStyle(AppColors.textSecondary)
 
             Spacer()
 
-            Button("Keep Files", action: onCancel)
+            Button("保留文件", action: onCancel)
                 .buttonStyle(.purge(.secondary))
                 .keyboardShortcut(.cancelAction)
 
-            Button("Move \(plan.totalSelectedItems) to Trash") {
+            Button("将 \(plan.totalSelectedItems) 项移入废纸篓") {
                 onConfirm(plan)
             }
             .buttonStyle(.purge(.destructive))
@@ -1471,13 +1471,13 @@ private struct UninstallSearchField: View {
                 .frame(width: 14, height: 14)
                 .accessibilityHidden(true)
 
-            TextField("Search apps", text: $query)
+            TextField("搜索应用", text: $query)
                 .textFieldStyle(.plain)
                 .font(AppStyle.Typography.body)
                 .foregroundStyle(AppColors.textPrimary)
                 .focused($isFocused)
                 .focusEffectDisabledIfAvailable()
-                .accessibilityLabel("Search apps by name")
+                .accessibilityLabel("按名称搜索应用")
                 .onExitCommand {
                     if hasText { query = "" } else { isFocused = false }
                 }
@@ -1493,8 +1493,8 @@ private struct UninstallSearchField: View {
                 }
                 .buttonStyle(.plain)
                 .contentShape(Rectangle())
-                .help("Clear search")
-                .accessibilityLabel("Clear search")
+                .help("清除搜索")
+                .accessibilityLabel("清除搜索")
                 .transition(.opacity)
             }
         }

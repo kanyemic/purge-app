@@ -31,7 +31,7 @@ struct UnknownDeleteConfirmSheet: View {
                     .foregroundStyle(AppColors.textPrimary)
 
                 if candidates.count > 1 {
-                    Text("\(candidates.count) locations will be removed.")
+                    Text("\(candidates.count) 个位置将被删除。")
                         .font(AppStyle.Typography.metadata)
                         .foregroundStyle(AppColors.textSecondary)
                 }
@@ -50,17 +50,17 @@ struct UnknownDeleteConfirmSheet: View {
             explanationCard
 
             HStack(spacing: AppStyle.Spacing.small) {
-                Text("Freeing \(formatBytes(totalBytes))")
+                Text("释放 \(formatBytes(totalBytes))")
                     .font(AppStyle.Typography.metadataEmphasis)
                     .foregroundStyle(AppColors.textSecondary)
 
                 Spacer()
 
-                Button("Cancel", action: onCancel)
+                Button("取消", action: onCancel)
                     .buttonStyle(.purge(.secondary))
                     .keyboardShortcut(.cancelAction)
 
-                Button("Continue") {
+                Button("继续") {
                     onConfirm()
                 }
                 .buttonStyle(.purge(.destructive))
@@ -79,10 +79,10 @@ struct UnknownDeleteConfirmSheet: View {
                 .foregroundStyle(AppColors.statusCheckText)
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: AppStyle.Spacing.xxSmall) {
-                Text("We're not sure what this is")
+                Text("我们不确定这个文件是什么")
                     .font(AppStyle.Typography.pageTitle)
                     .foregroundStyle(AppColors.textPrimary)
-                Text("Purge couldn't identify this file. Only delete it if you know what it is. It can't be put back afterward.")
+                Text("Purge 无法识别这个文件。只有在你确定它是什么时才删除。删除后无法恢复。")
                     .font(AppStyle.Typography.callout)
                     .foregroundStyle(AppColors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)

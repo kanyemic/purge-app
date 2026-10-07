@@ -10,10 +10,10 @@ enum ScheduledCleaningFrequency: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .weekly: return "Weekly"
-        case .monthly: return "Monthly"
-        case .quarterly: return "Every 3 months"
-        case .custom: return "Custom"
+        case .weekly: return "每周"
+        case .monthly: return "每月"
+        case .quarterly: return "每 3 个月"
+        case .custom: return "自定义"
         }
     }
 
@@ -39,25 +39,25 @@ enum CustomCleaningIntervalUnit: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .day: return "Days"
-        case .week: return "Weeks"
-        case .month: return "Months"
+        case .day: return "天"
+        case .week: return "周"
+        case .month: return "个月"
         }
     }
 
     var singularDisplayName: String {
         switch self {
-        case .day: return "Day"
-        case .week: return "Week"
-        case .month: return "Month"
+        case .day: return "天"
+        case .week: return "周"
+        case .month: return "个月"
         }
     }
 
-    /// "every X" phrase for this unit at the given amount, e.g. "day" or "2 weeks".
+    /// "every X" phrase for this unit at the given amount, e.g. "天" or "2 周".
     func phrase(amount: Int) -> String {
         amount == 1
-            ? singularDisplayName.lowercased()
-            : "\(amount) \(displayName.lowercased())"
+            ? singularDisplayName
+            : "\(amount) \(displayName)"
     }
 
     var seconds: TimeInterval {
@@ -84,21 +84,21 @@ enum DevToolsStalenessOption: Int, Codable, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .oneMonth: return "1 month"
-        case .threeMonths: return "3 months"
-        case .sixMonths: return "6 months"
-        case .twelveMonths: return "12 months"
-        case .twoYears: return "2 years"
-        case .showAll: return "Show all"
+        case .oneMonth: return "1 个月"
+        case .threeMonths: return "3 个月"
+        case .sixMonths: return "6 个月"
+        case .twelveMonths: return "12 个月"
+        case .twoYears: return "2 年"
+        case .showAll: return "显示全部"
         }
     }
 
     var description: String {
         switch self {
         case .showAll:
-            return "All detected projects appear in Developer Projects regardless of when they were last used, except ones in use right now."
+            return "所有检测到的项目都会出现在开发者项目中，不管上次使用是什么时候，正在使用中的除外。"
         case .oneMonth, .threeMonths, .sixMonths, .twelveMonths, .twoYears:
-            return "Projects you have not worked on within this period appear in Developer Projects for cleanup. Editing any file or using git in a project counts as working on it, and a project in use right now never appears. Choose Show all to see every detected project regardless of age."
+            return "在这段时间内没有动过的项目会出现在开发者项目中供清理。编辑项目中的任何文件或在项目中执行 git 操作都算作动过，正在使用中的项目永远不会出现。选择「显示全部」可以忽略时间显示所有检测到的项目。"
         }
     }
 

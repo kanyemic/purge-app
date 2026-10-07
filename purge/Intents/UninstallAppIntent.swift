@@ -1,21 +1,21 @@
 import AppIntents
 
 struct UninstallAppIntent: AppIntent {
-    static let title: LocalizedStringResource = "Uninstall an App"
+    static let title: LocalizedStringResource = "卸载应用"
     static let description = IntentDescription(
-        "Opens Purge's uninstall review for this app, listing the app and everything it leaves behind. Nothing is removed until you confirm in Purge.",
+        "在 Purge 中打开这个应用的卸载确认，列出应用本身以及它遗留的全部内容。在你于 Purge 中确认之前，不会删除任何内容。",
         searchKeywords: [
-            "uninstall", "remove", "delete", "get rid of", "trash", "uninstall app",
-            "remove app", "delete app", "app", "apps", "leftovers",
+            "卸载", "移除", "删除", "清掉", "清理", "卸载应用",
+            "移除应用", "删除应用", "应用", "应用程序", "残留",
         ]
     )
     static let openAppWhenRun = true
 
-    @Parameter(title: "App")
+    @Parameter(title: "应用")
     var app: InstalledAppEntity
 
     static var parameterSummary: some ParameterSummary {
-        Summary("Uninstall \(\.$app) with Purge")
+        Summary("用 Purge 卸载 \(\.$app)")
     }
 
     init() {}

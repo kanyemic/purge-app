@@ -120,7 +120,7 @@ struct MenuBarContentView: View {
 
             case .clear(let lastScanned):
                 HStack(spacing: 8) {
-                    Text("You're all clear")
+                    Text("没有可清理的内容")
                         .font(AppStyle.Typography.headline)
                         .foregroundStyle(AppColors.textPrimary)
                     Spacer(minLength: 0)
@@ -135,7 +135,7 @@ struct MenuBarContentView: View {
                         Text(menuBytes(bytes))
                             .font(AppStyle.Typography.sectionTitle)
                             .foregroundStyle(AppColors.textPrimary)
-                        Text(" to clean")
+                        Text(" 可清理")
                             .font(AppStyle.Typography.body)
                             .foregroundStyle(AppColors.textSecondary)
                     }
@@ -146,14 +146,14 @@ struct MenuBarContentView: View {
 
             case .cleaning(let cleaned, let total):
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Cleaning…")
+                    Text("正在清理…")
                         .font(AppStyle.Typography.headline)
                         .foregroundStyle(AppColors.textPrimary)
                     MenuStorageBar(
                         fraction: total > 0 ? Double(cleaned) / Double(total) : 0,
                         tint: AppColors.actionPrimary
                     )
-                    Text("Moved \(menuBytes(cleaned)) of \(menuBytes(total)) to trash")
+                    Text("已将 \(menuBytes(cleaned)) 移入废纸篓（共 \(menuBytes(total))）")
                         .font(AppStyle.Typography.metadata)
                         .foregroundStyle(AppColors.textSecondary)
                 }
@@ -164,7 +164,7 @@ struct MenuBarContentView: View {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 16))
                         .foregroundStyle(AppColors.statusSafeText)
-                    Text("Moved \(menuBytes(bytes)) to trash")
+                    Text("已将 \(menuBytes(bytes)) 移入废纸篓")
                         .font(AppStyle.Typography.headline)
                         .foregroundStyle(AppColors.textPrimary)
                     Spacer(minLength: 0)
@@ -180,19 +180,19 @@ struct MenuBarContentView: View {
 
     private var menuActionRows: some View {
         VStack(spacing: 0) {
-            MenuTextRow(title: "Clean Safe Files", isEnabled: canClean) {
+            MenuTextRow(title: "清理安全项目", isEnabled: canClean) {
                 model.clean()
             }
             // Refreshes the safe-to-clean figure this menu shows. Scan Everything in the
             // window covers Large Files and apps too, so this says what it scans.
-            MenuTextRow(title: "Scan Caches & Dev Tools", isEnabled: canScan) {
+            MenuTextRow(title: "扫描应用缓存和开发工具", isEnabled: canScan) {
                 model.scanNow()
             }
-            MenuTextRow(title: "Open Purge") {
+            MenuTextRow(title: "打开 Purge") {
                 openPurge()
             }
             CheckForUpdatesRow(updater: updater)
-            MenuTextRow(title: "Quit") {
+            MenuTextRow(title: "退出") {
                 NSApplication.shared.terminate(nil)
             }
         }
@@ -313,14 +313,14 @@ private struct CheckingStatusLine: View {
     let isPanelVisible: Bool
 
     private static let words = [
-        "Pondering…",
-        "Rummaging…",
-        "Snooping around…",
-        "Dusting shelves…",
-        "Sifting…",
-        "Counting crumbs…",
-        "Peeking in caches…",
-        "Lifting the rug…",
+        "正在琢磨…",
+        "正在翻找…",
+        "四处查看…",
+        "清扫架子…",
+        "细细筛选…",
+        "清点碎屑…",
+        "翻看缓存…",
+        "掀开地毯…",
     ]
 
     @State private var index = Int.random(in: 0 ..< CheckingStatusLine.words.count)
@@ -391,7 +391,7 @@ private struct CheckForUpdatesRow: View {
     @ObservedObject var updater: PurgeUpdater
 
     var body: some View {
-        MenuTextRow(title: "Check for Updates…", isEnabled: updater.canCheckForUpdates) {
+        MenuTextRow(title: "检查更新…", isEnabled: updater.canCheckForUpdates) {
             updater.checkForUpdates()
         }
     }

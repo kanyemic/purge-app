@@ -11,30 +11,30 @@ nonisolated struct PurgeAppShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: ScanForJunkIntent(),
             phrases: [
-                "Scan for junk with \(.applicationName)",
-                "Find junk with \(.applicationName)",
-                "Free up space with \(.applicationName)",
-                "Clean up my Mac with \(.applicationName)",
-                "How much can \(.applicationName) free",
-                "How much space can \(.applicationName) free up",
-                "Check my storage with \(.applicationName)",
-                "Scan my Mac with \(.applicationName)",
-                "\(.applicationName) scan",
+                "用 \(.applicationName) 扫描垃圾",
+                "用 \(.applicationName) 查找垃圾",
+                "用 \(.applicationName) 释放空间",
+                "用 \(.applicationName) 清理我的 Mac",
+                "\(.applicationName) 能释放多少空间",
+                "\(.applicationName) 能清出多少空间",
+                "用 \(.applicationName) 检查存储空间",
+                "用 \(.applicationName) 扫描我的 Mac",
+                "\(.applicationName) 扫描",
             ],
-            shortTitle: "Scan for Junk",
+            shortTitle: "扫描垃圾",
             systemImageName: "magnifyingglass"
         )
         AppShortcut(
             intent: CleanSafeJunkIntent(),
             phrases: [
-                "Clean junk with \(.applicationName)",
-                "Clean safe junk with \(.applicationName)",
-                "Clear junk with \(.applicationName)",
-                "Clear caches with \(.applicationName)",
-                "Delete junk with \(.applicationName)",
-                "\(.applicationName) clean",
+                "用 \(.applicationName) 清理垃圾",
+                "用 \(.applicationName) 清理安全垃圾",
+                "用 \(.applicationName) 清除垃圾",
+                "用 \(.applicationName) 清除缓存",
+                "用 \(.applicationName) 删除垃圾",
+                "\(.applicationName) 清理",
             ],
-            shortTitle: "Clean Safe Junk",
+            shortTitle: "清理安全垃圾",
             systemImageName: "trash.fill"
         )
         AppShortcut(
@@ -42,14 +42,14 @@ nonisolated struct PurgeAppShortcuts: AppShortcutsProvider {
             phrases: [
                 // Phrases with the app expand once per installed app, and the
                 // system caps the total, so only two of them name the app.
-                "Uninstall \(\.$app) with \(.applicationName)",
-                "Remove \(\.$app) with \(.applicationName)",
-                "Uninstall an app with \(.applicationName)",
-                "Remove an app with \(.applicationName)",
-                "Delete an app with \(.applicationName)",
-                "Get rid of an app with \(.applicationName)",
+                "用 \(.applicationName) 卸载 \(\.$app)",
+                "用 \(.applicationName) 移除 \(\.$app)",
+                "用 \(.applicationName) 卸载应用",
+                "用 \(.applicationName) 移除应用",
+                "用 \(.applicationName) 删除应用",
+                "用 \(.applicationName) 清掉应用",
             ],
-            shortTitle: "Uninstall an App",
+            shortTitle: "卸载应用",
             systemImageName: "trash"
         )
     }

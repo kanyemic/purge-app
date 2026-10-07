@@ -54,7 +54,7 @@ nonisolated final class CacheScanner {
         // appearing under App Caches and later being pulled out when the dev scan runs.
         var collectedPaths = DevScanner.claimedGlobalCachePaths()
 
-        continuation.yield(.status("Scanning App Caches..."))
+        continuation.yield(.status("正在扫描应用缓存…"))
         let contents: [URL]
         do {
             contents = try FileManager.default.contentsOfDirectory(
@@ -85,7 +85,7 @@ nonisolated final class CacheScanner {
         // Chromium browsers, Electron apps and Adobe keep their biggest caches, so
         // it belongs in the limited scan. The sensitive roots under it are already
         // skipped by `excludedApplicationSupportRoots`.
-        continuation.yield(.status("Scanning Application Support caches..."))
+        continuation.yield(.status("正在扫描应用支持缓存…"))
         let appSupportItems = applicationSupportCacheItems(home: home, access: access, collectedPaths: &collectedPaths)
         for item in appSupportItems {
             if Task.isCancelled {
@@ -141,7 +141,7 @@ nonisolated final class CacheScanner {
                 sizeJobs.append(contentsOf: item.locations.map { SizeJob(path: $0.path.standardizedFileURL) })
             }
 
-            continuation.yield(.status("Scanning sandboxed app caches..."))
+            continuation.yield(.status("正在扫描沙盒应用缓存…"))
             let containerItems = allContainerCacheItems(home: home, access: access, collectedPaths: &collectedPaths)
             for item in containerItems {
                 if Task.isCancelled {
@@ -153,7 +153,7 @@ nonisolated final class CacheScanner {
             }
         }
 
-        continuation.yield(.status("Scanning browser app bundles..."))
+        continuation.yield(.status("正在扫描浏览器应用包…"))
         let staleFrameworkItems = staleChromiumFrameworkItems(access: access, collectedPaths: &collectedPaths)
         for item in staleFrameworkItems {
             if Task.isCancelled {
@@ -164,7 +164,7 @@ nonisolated final class CacheScanner {
             sizeJobs.append(contentsOf: item.locations.map { SizeJob(path: $0.path.standardizedFileURL) })
         }
 
-        continuation.yield(.status("Scanning System Junk..."))
+        continuation.yield(.status("正在扫描系统垃圾…"))
         for item in applicationLogItems(home: home, access: access, collectedPaths: &collectedPaths) {
             if Task.isCancelled {
                 continuation.finish()
@@ -221,7 +221,7 @@ nonisolated final class CacheScanner {
             detail: "\(sizeJobs.count) cache locations queued, \(collectedPaths.count) unique paths"
         )
 
-        continuation.yield(.status("Calculating sizes..."))
+        continuation.yield(.status("正在计算大小…"))
         let sizingStart = Date()
         await runSizeJobs(sizeJobs, access: access, continuation: continuation)
         ScanPhaseTiming.finish(
@@ -423,7 +423,7 @@ nonisolated final class CacheScanner {
                 .lastPathComponent
                 .replacingOccurrences(of: ".app", with: "")
             let version = frameworkVersionURL.lastPathComponent
-            let headline = "\(appName) Old Version \(version)"
+            let headline = "\(appName) 旧版本 \(version)"
             let pathKey = frameworkVersionURL.standardizedFileURL.path
             guard DeletionSafetyPolicy.isOfferedForCleanup(frameworkVersionURL) else { continue }
             guard !ExcludedPathsStore.isExcluded(frameworkVersionURL) else { continue }
@@ -433,8 +433,8 @@ nonisolated final class CacheScanner {
             let safety = SafetyInfo(
                 level: .medium,
                 headline: headline,
-                explanation: "A leftover Chromium framework inside \(appName) that no running process is using. Quit and relaunch \(appName) before an older version still loaded by the running browser can be cleaned; those copies stay hidden until then. \(appName) also deletes leftover versions itself on relaunch.",
-                recoverySteps: "Quit and relaunch \(appName). If it still fails to open, reinstall it from the vendor.",
+                explanation: "\(appName) 中残留的 Chromium 框架，当前没有进程在使用。请退出并重新启动 \(appName)，之后才能清理仍被运行中的浏览器加载的旧版本；在那之前这些副本会保持隐藏。\(appName) 在重新启动时也会自行删除残留版本。",
+                recoverySteps: "退出并重新启动 \(appName)。如果仍然无法打开，请从厂商处重新安装。",
                 reinstallCommand: nil
             )
             items.append(
@@ -510,7 +510,7 @@ nonisolated final class CacheScanner {
         where child.lastPathComponent != Self.crashReportsFolderName {
             guard let item = cacheItemAtDiscoveredPath(
                 child,
-                headline: "Application Logs",
+                headline: "应用日志",
                 folderName: "Logs",
                 access: access,
                 collectedPaths: &collectedPaths
@@ -546,10 +546,10 @@ nonisolated final class CacheScanner {
             return "\(displayApp) Cache"
         }
         if cacheURL.path.contains("Service Worker/CacheStorage") {
-            return "\(displayApp) Service Worker Cache"
+            return "\(displayApp) Service Worker 缓存"
         }
         if cacheURL.path.contains("Service Worker/ScriptCache") {
-            return "\(displayApp) Service Worker Script Cache"
+            return "\(displayApp) Service Worker 脚本缓存"
         }
         return "\(displayApp) \(cacheLeaf)"
     }
@@ -637,14 +637,14 @@ nonisolated final class CacheScanner {
         // the Crash Reports folder inside it is never sized or cleaned twice.
         [
             (
-                "Crash Reports",
+                "崩溃报告",
                 home.appendingPathComponent(
                     "Library/Logs/DiagnosticReports",
                     isDirectory: true
                 )
             ),
             (
-                "Font Cache",
+                "字体缓存",
                 home.appendingPathComponent("Library/Caches/com.apple.ATS", isDirectory: true)
             )
         ]

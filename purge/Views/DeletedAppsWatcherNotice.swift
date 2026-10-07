@@ -53,7 +53,7 @@ struct DeletedAppsWatcherNoticeCard: View {
                 // does not fit beside a second button at sidebar width.
                 Button(action: onFix) {
                     CleaningButtonLabel(
-                        title: isRestarting ? "Restarting…" : fixTitle,
+                        title: isRestarting ? "正在重启…" : fixTitle,
                         systemImage: nil,
                         isCleaning: isRestarting
                     )
@@ -63,11 +63,11 @@ struct DeletedAppsWatcherNoticeCard: View {
                 .disabled(isRestarting)
                 .padding(.top, AppStyle.Spacing.small)
 
-                Button("Turn Off", action: onTurnOff)
+                Button("关闭", action: onTurnOff)
                     .buttonStyle(.purge(.quiet, size: .small))
                     .frame(maxWidth: .infinity)
                     .padding(.top, AppStyle.Spacing.xxSmall)
-                    .help("Stop reviewing leftovers when an app is deleted")
+                    .help("停止在应用被删除时检查残留文件")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(AppStyle.Spacing.small)

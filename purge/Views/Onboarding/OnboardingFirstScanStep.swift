@@ -17,7 +17,7 @@ struct OnboardingFirstScanStep: View {
 
   var body: some View {
     VStack(alignment: .center, spacing: AppStyle.Spacing.medium) {
-      OnboardingLoadingStepTitle(baseText: "Running your first scan")
+      OnboardingLoadingStepTitle(baseText: "正在首次扫描")
 
       OnboardingProgressBar(progress: combinedProgress)
         .padding(.bottom, AppStyle.Spacing.xSmall)
@@ -41,7 +41,7 @@ struct OnboardingFirstScanStep: View {
         }
         .padding(.bottom, AppStyle.Spacing.xSmall)
       }
-      .accessibilityLabel("Items found, \(revealController.revealedItems.count)")
+      .accessibilityLabel("找到的项目，\(revealController.revealedItems.count)")
     }
     .frame(maxWidth: OnboardingLayout.contentMaxWidth, maxHeight: .infinity, alignment: .top)
     .onAppear {

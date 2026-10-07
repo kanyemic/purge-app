@@ -13,7 +13,7 @@ struct OnboardingCleaningStep: View {
 
   var body: some View {
     VStack(alignment: .center, spacing: AppStyle.Spacing.medium) {
-      OnboardingStepTitle(text: "Cleaning safe items…")
+      OnboardingStepTitle(text: "正在清理安全项目…")
 
       OnboardingProgressBar(progress: cleaningProgress)
         .padding(.bottom, AppStyle.Spacing.xSmall)
@@ -36,7 +36,7 @@ struct OnboardingCleaningStep: View {
         .padding(.bottom, AppStyle.Spacing.xSmall)
         .animation(.easeInOut(duration: 0.45), value: visibleItems.count)
       }
-      .accessibilityLabel("Items being cleaned, \(visibleItems.count)")
+      .accessibilityLabel("正在清理的项目，\(visibleItems.count)")
     }
     .frame(maxWidth: OnboardingLayout.contentMaxWidth, maxHeight: .infinity, alignment: .top)
     .onAppear {

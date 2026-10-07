@@ -12,9 +12,9 @@ enum SafetyFilter: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .all: return "All"
-        case .safe: return "Safe to Clean"
-        case .checkFirst: return "Check First"
+        case .all: return "全部"
+        case .safe: return "可安全清理"
+        case .checkFirst: return "先确认"
         }
     }
 
@@ -41,9 +41,9 @@ enum SafetyFilter: String, CaseIterable, Identifiable {
     func tooltipHint(extra: String = "") -> String {
         let suffix = extra.isEmpty ? "" : " \(extra)"
         switch self {
-        case .all: return "Show all items\(suffix) (Cmd+1)"
-        case .safe: return "Show safe items\(suffix) (Cmd+2)"
-        case .checkFirst: return "Show check-first items\(suffix) (Cmd+3)"
+        case .all: return "显示全部项目\(suffix) (Cmd+1)"
+        case .safe: return "显示安全项目\(suffix) (Cmd+2)"
+        case .checkFirst: return "显示需先确认的项目\(suffix) (Cmd+3)"
         }
     }
 
@@ -67,21 +67,21 @@ enum SortOption: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .sizeDesc: return "Size (largest first)"
-        case .sizeAsc: return "Size (smallest first)"
-        case .dateNewest: return "Date modified (newest first)"
-        case .dateOldest: return "Date modified (oldest first)"
-        case .nameAZ: return "Name (A to Z)"
+        case .sizeDesc: return "大小（从大到小）"
+        case .sizeAsc: return "大小（从小到大）"
+        case .dateNewest: return "修改日期（从新到旧）"
+        case .dateOldest: return "修改日期（从旧到新）"
+        case .nameAZ: return "名称（A 到 Z）"
         }
     }
 
     var shortDisplayName: String {
         switch self {
-        case .sizeDesc: return "Largest"
-        case .sizeAsc: return "Smallest"
-        case .dateNewest: return "Newest"
-        case .dateOldest: return "Oldest"
-        case .nameAZ: return "Name"
+        case .sizeDesc: return "最大"
+        case .sizeAsc: return "最小"
+        case .dateNewest: return "最新"
+        case .dateOldest: return "最旧"
+        case .nameAZ: return "名称"
         }
     }
 }
@@ -162,7 +162,7 @@ struct SafeFirstSelectAllControl<Key: Hashable>: View {
                     apply(link.change)
                 }
                 .buttonStyle(.purge(.quiet, size: .small))
-                .help("Check First items may hold something you'd miss. Look them over before cleaning.")
+                .help("「先确认」项目可能包含你之后会用到的东西。清理前请先检查。")
                 .transition(.opacity)
             }
         }
@@ -193,7 +193,7 @@ struct FilterSortToolbar: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var bulkTitle: String? {
-        "Clean Selected"
+        "清理所选"
     }
 
     private var bulkDisabled: Bool {
@@ -293,7 +293,7 @@ struct FilterSortToolbar: View {
             .animation(reduceMotion ? nil : .easeInOut(duration: 0.15), value: isOn)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("\(filter.displayName), \(count) items")
+        .accessibilityLabel("\(filter.displayName)，\(count) 个项目")
         .accessibilityAddTraits(isOn ? .isSelected : [])
         .help(filter.tooltipHint())
         .keyboardShortcut(KeyEquivalent(filter.shortcutDigit), modifiers: .command)

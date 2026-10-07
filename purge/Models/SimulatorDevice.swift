@@ -13,7 +13,7 @@ nonisolated struct SimulatorDevice: Identifiable, Hashable {
     let safetyInfo: SafetyInfo
 
     var formattedSize: String {
-        guard let sizeOnDisk else { return "Calculating…" }
+        guard let sizeOnDisk else { return "正在计算…" }
         return formatBytes(sizeOnDisk)
     }
 
@@ -27,14 +27,14 @@ nonisolated struct SimulatorDevice: Identifiable, Hashable {
         // The safety badge already says whether it is safe, so the explanation
         // only covers when it was last used and what deleting costs. `simctl
         // delete` removes the device and its apps and data; the runtime stays.
-        let cost = "Deletes its apps and data."
+        let cost = "会删除它的应用和数据。"
         if !isAvailable {
             return SafetyInfo(
                 level: .safe,
                 headline: headline,
                 // CoreSimulator marks a device unavailable for more than one reason
                 // (missing runtime, unsupported device type), so don't name one.
-                explanation: "Xcode can no longer run this device. \(cost)",
+                explanation: "Xcode 已无法运行此设备。\(cost)",
                 recoverySteps: "",
                 reinstallCommand: nil
             )
@@ -47,7 +47,7 @@ nonisolated struct SimulatorDevice: Identifiable, Hashable {
             return SafetyInfo(
                 level: .safe,
                 headline: headline,
-                explanation: "Last use unknown. \(cost)",
+                explanation: "最近使用时间未知。\(cost)",
                 recoverySteps: "",
                 reinstallCommand: nil
             )
@@ -57,9 +57,12 @@ nonisolated struct SimulatorDevice: Identifiable, Hashable {
         let monthsAgo = Calendar.current.dateComponents([.month], from: lastUsed, to: Date()).month ?? 0
         let explanation: String
         if monthsAgo < 1 {
-            explanation = "Used in the last month. \(cost)"
+            explanation = "最近一个月内使用过。\(cost)"
         } else {
-            explanation = "Last used \(monthsAgo) month\(monthsAgo == 1 ? "" : "s") ago. \(cost)"
+            // Chinese has no plural form, but the singular branch stays so the count
+            // still reads from one place and can diverge if the wording changes.
+            let months = monthsAgo == 1 ? "1 个月" : "\(monthsAgo) 个月"
+            explanation = "上次使用是在 \(months)前。\(cost)"
         }
 
         return SafetyInfo(

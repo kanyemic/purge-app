@@ -20,17 +20,17 @@ nonisolated enum UninstallCategory: String, CaseIterable, Identifiable, Hashable
 
     var displayName: String {
         switch self {
-        case .bundle: return "Application"
-        case .applicationSupport: return "Application Support"
-        case .caches: return "Caches"
-        case .preferences: return "Preferences"
-        case .containers: return "Containers"
-        case .groupContainers: return "Group Containers"
-        case .savedState: return "Saved State"
-        case .logs: return "Logs"
-        case .launchAgents: return "Launch Agents"
-        case .launchDaemons: return "Launch Daemons"
-        case .other: return "Other"
+        case .bundle: return "应用本体"
+        case .applicationSupport: return "应用支持"
+        case .caches: return "缓存"
+        case .preferences: return "偏好设置"
+        case .containers: return "容器"
+        case .groupContainers: return "群组容器"
+        case .savedState: return "恢复状态"
+        case .logs: return "日志"
+        case .launchAgents: return "登录项"
+        case .launchDaemons: return "后台服务"
+        case .other: return "其他"
         }
     }
 
@@ -96,10 +96,10 @@ nonisolated enum MatchReason: Hashable {
 
     var rowNote: String {
         switch self {
-        case .appBundle: return "The application itself"
-        case .bundleID: return "Matched by bundle identifier"
-        case .groupID: return "Matched by app group"
-        case .appName: return "Matched by name, check this belongs to the app"
+        case .appBundle: return "应用本体"
+        case .bundleID: return "通过 Bundle ID 匹配"
+        case .groupID: return "通过应用群组匹配"
+        case .appName: return "通过名称匹配，请确认它属于该应用"
         }
     }
 }
@@ -144,8 +144,8 @@ nonisolated enum UninstallSection: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .installedApps: return "Installed Apps"
-        case .leftovers: return "Leftovers"
+        case .installedApps: return "已安装的应用"
+        case .leftovers: return "残留文件"
         }
     }
 

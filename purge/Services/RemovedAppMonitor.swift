@@ -644,16 +644,16 @@ nonisolated enum WatcherHealth: Equatable, Sendable {
         }
     }
 
-    static let problemTitle = "Deleted-app reviews paused"
+    static let problemTitle = "已删除应用的复查已暂停"
 
     var problemMessage: String? {
         switch self {
         case .needsApproval:
-            return "macOS is stopping Purge from running in the background. In System Settings, open Login Items and switch Purge on."
+            return "macOS 正在阻止 Purge 在后台运行。请在「系统设置」中打开「登录项」，并开启 Purge。"
         case .notRunning:
-            return "Purge's background watcher isn't running, so deleted apps go unnoticed."
+            return "Purge 的后台监视器未运行，因此删除的应用不会被发现。"
         case .failedToStart:
-            return "Purge couldn't start its background watcher, so deleted apps go unnoticed."
+            return "Purge 无法启动后台监视器，因此删除的应用不会被发现。"
         case .off, .checking, .running:
             return nil
         }
@@ -662,18 +662,18 @@ nonisolated enum WatcherHealth: Equatable, Sendable {
     /// The same problem in a line, for the sidebar notice.
     var shortMessage: String? {
         switch self {
-        case .needsApproval: return "macOS is blocking Purge's background watcher, so deleted apps go unnoticed."
-        case .notRunning: return "The background watcher isn't running, so deleted apps go unnoticed."
-        case .failedToStart: return "The background watcher couldn't start, so deleted apps go unnoticed."
+        case .needsApproval: return "macOS 正在阻止 Purge 的后台监视器，因此删除的应用不会被发现。"
+        case .notRunning: return "后台监视器未运行，因此删除的应用不会被发现。"
+        case .failedToStart: return "后台监视器无法启动，因此删除的应用不会被发现。"
         case .off, .checking, .running: return nil
         }
     }
 
     var fixTitle: String? {
         switch self {
-        case .needsApproval: return "Open System Settings"
-        case .notRunning: return "Restart Watcher"
-        case .failedToStart: return "Try Again"
+        case .needsApproval: return "打开系统设置"
+        case .notRunning: return "重启监视器"
+        case .failedToStart: return "重试"
         case .off, .checking, .running: return nil
         }
     }

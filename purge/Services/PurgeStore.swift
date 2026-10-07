@@ -113,6 +113,17 @@ final class PurgeStore: ObservableObject {
         case about = "About"
 
         var id: String { rawValue }
+        var displayName: String {
+            switch self {
+            case .overview: return "总览"
+            case .appCaches: return "应用缓存"
+            case .devTools: return "开发工具"
+            case .largeFiles: return "大文件"
+            case .uninstaller: return "应用卸载"
+            case .settings: return "设置"
+            case .about: return "关于"
+            }
+        }
         var icon: String {
             switch self {
             case .overview: return "square.grid.2x2"
@@ -998,8 +1009,8 @@ final class PurgeStore: ObservableObject {
                 manualDeletionSession = nil
             }
             errorMessage = trigger == .scheduled
-                ? "Scheduled cleaning couldn’t finish. Open the app to try manually."
-                : "Unable to clean selected items. Please try again."
+                ? "计划清理未能完成。打开应用手动重试。"
+                : "无法清理所选项目，请重试。"
         }
     }
 
@@ -1648,7 +1659,7 @@ final class PurgeStore: ObservableObject {
             recordCleanup(report, trigger: .manual, source: .largeFiles)
         } catch {
             manualDeletionSession = nil
-            errorMessage = "Unable to delete the selected files. Please try again."
+            errorMessage = "无法删除所选文件，请重试。"
         }
     }
 
@@ -1925,7 +1936,7 @@ final class PurgeStore: ObservableObject {
         guard removedAppLeftoverPlan?.id == plan.id else { return }
         removedAppLeftoverPlan = nil
         guard let checked else {
-            errorMessage = "\(plan.app.name) is on this Mac again, so its files were kept."
+            errorMessage = "\(plan.app.name) 又出现在了这台 Mac 上，因此保留了它的文件。"
             return
         }
         await performLeftoverCleanup(items: checked.selectedItems)
@@ -2025,7 +2036,7 @@ final class PurgeStore: ObservableObject {
             recordCleanup(report, trigger: .manual, source: .leftovers)
         } catch {
             manualDeletionSession = nil
-            errorMessage = "Unable to remove the selected leftovers. Please try again."
+            errorMessage = "无法移除所选的残留文件，请重试。"
         }
     }
 
@@ -2304,8 +2315,8 @@ final class PurgeStore: ObservableObject {
             } catch {
                 manualDeletionSession = nil
                 let names = bundleRemovingApps.map(\.app.name)
-                let label = names.count == 1 ? names[0] : "the selected apps"
-                errorMessage = "Unable to remove \(label). Please try again."
+                let label = names.count == 1 ? names[0] : "所选应用"
+                errorMessage = "无法移除 \(label)，请重试。"
                 return
             }
         }
@@ -2465,10 +2476,10 @@ final class PurgeStore: ObservableObject {
     private func stillOpenMessage(_ apps: [InstalledApp]) -> String {
         let names = apps.map(\.name)
         if names.count == 1 {
-            return "\(names[0]) is still open, so it was left installed. Quit it and try again."
+            return "\(names[0]) 仍在运行，因此未卸载。请退出后重试。"
         }
         let list = names.joined(separator: ", ")
-        return "These apps are still open, so they were left installed: \(list). Quit them and try again."
+        return "这些应用仍在运行，因此未卸载：\(list)。请退出后重试。"
     }
 
     /// Runs the access probe off the main actor.
@@ -2568,7 +2579,7 @@ final class PurgeStore: ObservableObject {
                       self.scanGeneration == previousGeneration,
                       self.scanTask != nil else { return }
                 self.scanPhase = .cancelling
-                self.scanStatusLine = "Cancelling..."
+                self.scanStatusLine = "正在取消…"
             }
             await previousTask.value
             cancellationIndicator.cancel()
@@ -2833,7 +2844,7 @@ final class PurgeStore: ObservableObject {
         hasSessionCacheScan = true
         stampScanRecords([.appCaches, .devTools], at: completedAt)
         scanPhase = .completed
-        scanStatusLine = "Scan complete"
+        scanStatusLine = "扫描完成"
         scanCompletionHideTask?.cancel()
         scanCompletionHideTask = Task { @MainActor [weak self] in
             try? await Task.sleep(nanoseconds: 2_000_000_000)
@@ -3319,7 +3330,7 @@ final class PurgeStore: ObservableObject {
             if scheduledNotifications {
                 await ScheduledCleanupNotifier.notifyScheduledCleanFailed()
             } else {
-                errorMessage = "Unable to clean safe items. Please try again."
+                errorMessage = "无法清理安全项目，请重试。"
             }
             return ScheduledCleaningSummary(deletedCount: 0, bytesMovedToTrash: 0)
         }
@@ -4436,11 +4447,11 @@ final class PurgeStore: ObservableObject {
     private func manualOverrideExplanation(level: SafetyLevel) -> String {
         switch level {
         case .safe:
-            return "You marked this as Safe to Clean."
+            return "你已将其标记为可安全清理。"
         case .medium:
-            return "You marked this as Check First."
+            return "你已将其标记为先确认。"
         case .unknown:
-            return "You marked this as Not Sure."
+            return "你已将其标记为不确定。"
         }
     }
 }

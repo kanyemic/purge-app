@@ -6,7 +6,7 @@ struct CleanupHistorySummaryRow: View {
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 12) {
             VStack(alignment: .leading, spacing: 3) {
-                Text(entry.trigger == .scheduled ? "Automatic clean" : "Manual clean")
+                Text(entry.trigger == .scheduled ? "自动清理" : "手动清理")
                     .font(scheduleStatusPrimaryFont)
                     .foregroundStyle(AppColors.textPrimary)
 
@@ -34,10 +34,9 @@ struct CleanupHistorySummaryRow: View {
     /// cleans that only trashed files have nothing measured to show, so they stay
     /// described as moved.
     private var detailText: String {
-        let noun = entry.deletedItems.count == 1 ? "item" : "items"
-        let items = "\(entry.deletedItems.count) \(noun) to trash"
+        let items = "\(entry.deletedItems.count) 个项目移入废纸篓"
         guard let reclaimed = entry.bytesReclaimedOnVolume else { return items }
-        return "\(items), \(formatBytes(reclaimed)) reclaimed"
+        return "\(items)，已释放 \(formatBytes(reclaimed))"
     }
 
     static let historyDateFormatter: DateFormatter = {

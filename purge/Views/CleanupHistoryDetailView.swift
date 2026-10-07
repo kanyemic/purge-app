@@ -30,12 +30,12 @@ struct CleanupHistoryDetailView: View {
 
     private var sheetHeader: some View {
         HStack(alignment: .center, spacing: 12) {
-            Text(entry.trigger == .scheduled ? "Automatic clean" : "Manual clean")
+            Text(entry.trigger == .scheduled ? "自动清理" : "手动清理")
                 .font(AppStyle.Typography.headline)
 
             Spacer(minLength: 12)
 
-            Button("Done") {
+            Button("完成") {
                 dismiss()
             }
             .keyboardShortcut(.cancelAction)
@@ -55,7 +55,7 @@ struct CleanupHistoryDetailView: View {
 
     private var movedToTrashSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            sectionLabel("Moved to Trash")
+            sectionLabel("已移入废纸篓")
 
             historySectionCard {
                 ForEach(Array(entry.deletedItems.enumerated()), id: \.element.id) { index, item in
@@ -72,7 +72,7 @@ struct CleanupHistoryDetailView: View {
 
     private var skippedSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            sectionLabel("Skipped")
+            sectionLabel("已跳过")
 
             historySectionCard {
                 ForEach(Array(entry.skippedItems.enumerated()), id: \.element.id) { index, item in

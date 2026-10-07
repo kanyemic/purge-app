@@ -53,11 +53,11 @@ enum FinderReveal {
         var entries: [ScanRowMenuEntry] = []
         if locations.count == 1 {
             let url = locations[0].url
-            entries.append(.action(title: "Show in Finder") { show(url) })
+            entries.append(.action(title: "在访达中显示") { show(url) })
         } else {
             entries.append(
                 .submenu(
-                    title: "Show in Finder",
+                    title: "在访达中显示",
                     entries: locations.map { location in
                         .action(title: menuTitle(for: location)) {
                             show(location.url)
@@ -69,7 +69,7 @@ enum FinderReveal {
 
         let urls = locations.map(\.url)
         entries.append(
-            .action(title: urls.count == 1 ? "Copy Path" : "Copy Paths") {
+            .action(title: urls.count == 1 ? "拷贝路径" : "拷贝所有路径") {
                 copyPaths(urls)
             }
         )

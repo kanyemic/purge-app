@@ -369,8 +369,8 @@ enum OrphanLeftoverScanPolicy {
             // No "leftover from a removed app" suffix here: the section and the
             // review sheet already say so, so on the row it is only noise.
             headline: appName,
-            explanation: "This \(category.displayName.lowercased()) folder belongs to an app that is no longer installed. It is app data, not a rebuildable cache, so it will not come back on its own. Remove it only if you are sure you will not reinstall this app.",
-            recoverySteps: "Removed items go to the Trash, so you can put them back until you empty it. If you reinstall the app, let it recreate its data.",
+            explanation: "这个\(category.displayName)文件夹属于一个已卸载的应用。它是应用数据而非可重建的缓存，不会自行恢复。只有确认不会再重装该应用时才移除它。",
+            recoverySteps: "移除的项目会进入废纸篓，在清空之前都可以恢复。如果重新安装该应用，请让它自行重建数据。",
             reinstallCommand: nil
         )
     }

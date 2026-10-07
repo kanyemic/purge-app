@@ -563,12 +563,8 @@ struct DevToolsView<PageHeader: View>: View {
         currentSafetyFilter == .all ? developerTotalByteSize : developerVisibleByteSize
     }
 
-    private var subtitleItemLabel: String {
-        subtitleItemCount == 1 ? "item" : "items"
-    }
-
     private var pageSubtitle: String {
-        return "\(subtitleItemCount) \(subtitleItemLabel) · \(formatBytes(subtitleTotalSize)) recoverable"
+        "\(subtitleItemCount) 个项目 · 可释放 \(formatBytes(subtitleTotalSize))"
     }
 
     var body: some View {
@@ -585,7 +581,7 @@ struct DevToolsView<PageHeader: View>: View {
     private var standardBody: some View {
         VStack(spacing: 0) {
             if showsPageHeader {
-                AppSectionPageHeader(title: "Dev Tools", subtitle: pageSubtitle) {
+                AppSectionPageHeader(title: "开发工具", subtitle: pageSubtitle) {
                     AppScanCleanActions(onScan: onScan, scanPhase: scanPhase)
                 }
             }
@@ -691,9 +687,9 @@ struct DevToolsView<PageHeader: View>: View {
 
     private var placeholderNoData: some View {
         VStack(spacing: 8) {
-            Text("No dev tool folders surfaced yet.")
+            Text("尚未发现开发工具文件夹。")
                 .font(AppStyle.Typography.headline)
-            Text(scanPhase == .completed ? "Your Mac is looking clean. Check back later." : "Run a scan after adding projects or tool-generated folders.")
+            Text(scanPhase == .completed ? "你的 Mac 看起来很干净。稍后再来看看。" : "添加项目或工具生成的文件夹后，运行扫描。")
                 .foregroundStyle(AppColors.textSecondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -703,7 +699,7 @@ struct DevToolsView<PageHeader: View>: View {
         Color.clear
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Scanning developer folders")
+            .accessibilityLabel("正在扫描开发文件夹")
     }
 
     /// Stable anchor pinned to the very top of the results list so a fresh scan or
@@ -861,7 +857,7 @@ struct DevToolsView<PageHeader: View>: View {
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
 
-                    Text("Finding projects…")
+                    Text("正在查找项目…")
                         .font(AppStyle.Typography.metadata)
                         .foregroundStyle(AppColors.textSecondary)
                         .listRowInsets(ScanListRowInsets.standard)
@@ -912,7 +908,7 @@ struct DevToolsView<PageHeader: View>: View {
 
     private var developerProjectsSectionHeader: some View {
         devToolsSectionHeader {
-            Text("Developer Projects")
+            Text("开发者项目")
                 .font(AppStyle.Typography.metadataEmphasis)
                 .foregroundStyle(AppColors.textSecondary)
         }
@@ -920,7 +916,7 @@ struct DevToolsView<PageHeader: View>: View {
 
     private var iosSimulatorsSectionHeader: some View {
         devToolsSectionHeader {
-            Text("iOS Simulators")
+            Text("iOS 模拟器")
                 .font(AppStyle.Typography.metadataEmphasis)
                 .foregroundStyle(AppColors.textSecondary)
         }
@@ -976,7 +972,7 @@ struct DevToolsView<PageHeader: View>: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(isExpanded ? "Collapse project" : "Expand project")
+                .accessibilityLabel(isExpanded ? "收起项目" : "展开项目")
             }
             .padding(.vertical, 2)
             .padding(.horizontal, AppStyle.Spacing.xSmall)
@@ -986,7 +982,7 @@ struct DevToolsView<PageHeader: View>: View {
             .overlay {
                 ScanRowContextMenu(isMenuActive: .constant(false)) {
                     [
-                        .action(title: "Exclude project from scans") {
+                        .action(title: "从扫描中排除项目") {
                             store.excludeProjectGroupFromScans(groupID: group.id)
                         },
                         .separator,
@@ -995,13 +991,13 @@ struct DevToolsView<PageHeader: View>: View {
             }
             // The overlay only answers a secondary click, which VoiceOver and the
             // keyboard cannot produce.
-            .accessibilityAction(named: Text("Exclude project from scans")) {
+            .accessibilityAction(named: Text("从扫描中排除项目")) {
                 store.excludeProjectGroupFromScans(groupID: group.id)
             }
-            .accessibilityAction(named: Text("Show in Finder")) {
+            .accessibilityAction(named: Text("在访达中显示")) {
                 FinderReveal.show(group.rootPath)
             }
-            .accessibilityAction(named: Text("Copy Path")) {
+            .accessibilityAction(named: Text("拷贝路径")) {
                 FinderReveal.copyPaths([group.rootPath])
             }
 
@@ -1013,8 +1009,8 @@ struct DevToolsView<PageHeader: View>: View {
         .padding(.bottom, isExpanded ? AppStyle.Spacing.xSmall : 0)
         .devToolsGroupCardChrome()
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Project \(group.displayName)")
-        .accessibilityHint("Grouped dev tool cleanup targets")
+        .accessibilityLabel("项目 \(group.displayName)")
+        .accessibilityHint("成组的开发工具清理目标")
         }
     }
 
@@ -1098,9 +1094,9 @@ struct DevToolsView<PageHeader: View>: View {
 
     private var emptyFilterState: some View {
         VStack(spacing: 4) {
-            Text("Nothing here.")
+            Text("这里暂无内容。")
                 .font(AppStyle.Typography.headline)
-            Text("No items match this filter.")
+            Text("没有项目符合此筛选条件。")
                 .foregroundStyle(AppColors.textSecondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -1111,11 +1107,11 @@ struct DevToolsView<PageHeader: View>: View {
     }
 
     private func projectGroupIconAccessibilityLabel(for group: ProjectGroup) -> String {
-        let types = group.inferredTypes.map(\.displayName).joined(separator: ", ")
+        let types = group.inferredTypes.map(\.displayName).joined(separator: "，")
         if types.isEmpty {
-            return "Project"
+            return "项目"
         }
-        return "Project, \(types)"
+        return "项目，\(types)"
     }
 }
 

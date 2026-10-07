@@ -204,32 +204,32 @@ enum AppUninstallScanPolicy {
                 return SafetyInfo(
                     level: .medium,
                     headline: "\(appName)",
-                    explanation: "Removing this app needs administrator rights. macOS will ask for your password when it moves the app to the Trash.",
-                    recoverySteps: "Reinstall \(appName) from its original source if you need it again.",
+                    explanation: "移除这个应用需要管理员权限。将它移到废纸篓时，macOS 会要求你输入密码。",
+                    recoverySteps: "如果之后还需要它，请从原始来源重新安装 \(appName)。",
                     reinstallCommand: nil
                 )
             }
             return SafetyInfo(
                 level: .safe,
                 headline: "\(appName)",
-                explanation: "The application bundle. Moving it to the Trash removes the app itself.",
-                recoverySteps: "Reinstall \(appName) from its original source if you need it again.",
+                explanation: "应用本体。移到废纸篓即可移除这个应用。",
+                recoverySteps: "如果之后还需要它，请从原始来源重新安装 \(appName)。",
                 reinstallCommand: nil
             )
         case .bundleID, .groupID:
             return SafetyInfo(
                 level: .safe,
                 headline: "\(appName) \(category.displayName)",
-                explanation: "A \(category.displayName.lowercased()) file that belongs to \(appName), matched by its identifier. Safe to remove with the app.",
-                recoverySteps: "\(appName) recreates what it needs the next time it runs.",
+                explanation: "属于 \(appName) 的\(category.displayName)文件，通过标识符匹配。可以随应用一起安全移除。",
+                recoverySteps: "\(appName) 下次运行时会重新生成所需内容。",
                 reinstallCommand: nil
             )
         case .appName:
             return SafetyInfo(
                 level: .medium,
                 headline: "\(appName) \(category.displayName)",
-                explanation: "This \(category.displayName.lowercased()) folder is named after \(appName), but was matched by name rather than identifier. Check it belongs to this app before removing.",
-                recoverySteps: "\(appName) recreates what it needs the next time it runs.",
+                explanation: "这个\(category.displayName)文件夹以 \(appName) 命名，但是按名称而非标识符匹配的。移除前请确认它属于该应用。",
+                recoverySteps: "\(appName) 下次运行时会重新生成所需内容。",
                 reinstallCommand: nil
             )
         }

@@ -77,7 +77,7 @@ struct OnboardingFlowView: View {
     if let session = store.interactiveSafeCleanupSession {
       SafeCleanupCelebrationOverlay(
         session: session,
-        doneTitle: store.hasFullDiskAccess ? "Done" : "Continue",
+        doneTitle: store.hasFullDiskAccess ? "完成" : "继续",
         allowsSupportNudge: false
       ) {
         completeResultsCleanupCelebration()
@@ -151,7 +151,7 @@ struct OnboardingFlowView: View {
     VStack(spacing: AppStyle.Spacing.small) {
       switch step {
       case .welcome:
-        OnboardingPrimaryButton(title: "Get started", systemImage: "arrow.forward") {
+        OnboardingPrimaryButton(title: "开始使用", systemImage: "arrow.forward") {
           advance(to: .firstScan)
         }
       case .results:
@@ -159,13 +159,13 @@ struct OnboardingFlowView: View {
         // no caption has to explain it. Emptying the Trash is covered afterwards by
         // the celebration, which is when it matters.
         OnboardingPrimaryButton(
-          title: isResultsCleaning ? "Moving to Trash..." : cleanNowTitle,
+          title: isResultsCleaning ? "正在移入废纸篓…" : cleanNowTitle,
           leadingSystemImage: isResultsCleaning ? nil : "trash",
           isLoading: isResultsCleaning
         ) {
           startResultsCleanup()
         }
-        OnboardingSecondaryButton(title: "Review everything first") {
+        OnboardingSecondaryButton(title: "先逐项查看") {
           exitToReviewPath()
         }
         .disabled(isResultsCleaning)
@@ -179,10 +179,10 @@ struct OnboardingFlowView: View {
   private var cleanNowTitle: String {
     let bytes = resultsSnapshot?.totalBytes ?? store.safeRecoverableBytes
     if bytes > 0 {
-      return "Move \(formatBytes(bytes)) to Trash"
+      return "将 \(formatBytes(bytes)) 移入废纸篓"
     }
     // Nothing to move, so the button only moves the flow on.
-    return "Continue"
+    return "继续"
   }
 
   private func exitToReviewPath() {
